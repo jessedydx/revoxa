@@ -17,10 +17,12 @@ Bu dosya iOS, iPadOS ve macOS App Store gönderimi için hazırlanacak metinleri
 | Support URL | `https://revoxa.app/support` |
 | User Privacy Choices URL | Opsiyonel: `https://revoxa.app/privacy#choices` |
 
-Not: Domain hazır değilse geçici olarak GitHub Pages kullanılabilir:
+GitHub Pages (geçici, domain yokken):
 
-- `https://<github-user>.github.io/revoxa/privacy/`
-- `https://<github-user>.github.io/revoxa/support/`
+- Privacy: `https://jessedydx.github.io/revoxa/privacy/`
+- Support: `https://jessedydx.github.io/revoxa/support/`
+
+Not: `privacy-policy.html` gibi `.html` uzantılı yollar da çalışır; App Store için `/privacy/` ve `/support/` kullan.
 
 ## English Metadata
 

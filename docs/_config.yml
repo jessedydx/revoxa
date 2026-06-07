@@ -1,0 +1,10 @@
+title: Revoxa
+theme: jekyll-theme-minimal
+markdown: GFM
+exclude:
+  - app-store-content.md
+  - app-store-ios-macos-workflow.md
+  - usage.md
+  - roadmap.md
+  - privacy-policy.md
+  - support.md
