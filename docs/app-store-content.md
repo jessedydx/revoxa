@@ -24,6 +24,31 @@ GitHub Pages (geçici, domain yokken):
 
 Not: `privacy-policy.html` gibi `.html` uzantılı yollar da çalışır; App Store için `/privacy/` ve `/support/` kullan.
 
+## Yaş derecelendirmesi (Age Rating)
+
+**Önerilen sonuç:** `4+` (App Store Connect Age Rating anketi sonrası)
+
+Revoxa çocuklara yönelik değildir; ancak uygunsuz içerik, şiddet, kumar veya yetişkin temaları içermez. App Store Connect'te anket doldurulurken aşağıdaki yanıtlar bu sonuçla uyumludur:
+
+| Konu | Revoxa durumu | Connect'te beklenen yanıt |
+| --- | --- | --- |
+| Kullanıcı tarafından oluşturulan içerik / paylaşım | Yok (yalnızca yerel notlar) | Hayır |
+| Sosyal ağ / sohbet | Yok | Hayır |
+| Şiddet, korku, cinsel içerik | Yok | Hayır |
+| Kumar / simüle kumar | Yok | Hayır |
+| Tıbbi / tedavi içeriği | Yok | Hayır |
+| Alkol, tütün, uyuşturucu | Yok | Hayır |
+| Gerçek para / bankacılık işlemi | Yok (manuel kayıt, banka bağlantısı yok) | Hayır |
+| Sınırsız web tarama | Yok | Hayır |
+| Konum, kişiler, fotoğraf, mikrofon | Yok | Hayır |
+| Üçüncü taraf reklam / analitik | Yok | Hayır |
+
+**Notlar:**
+
+- Finance ikincil kategori seçilmiş olsa da uygulama gerçek finansal hesap veya ödeme işlemi yapmaz; yalnızca kullanıcının girdiği abonelik kayıtlarını takip eder.
+- TCMB döviz kuru isteği (`today.xml`) abonelik verisi göndermez; bu bir "unrestricted web" kullanımı sayılmaz.
+- Connect formu hesap onayı sonrası doldurulur; bu bölüm karar kaydı ve hazırlık notudur.
+
 ## English Metadata
 
 ### Name

@@ -71,9 +71,35 @@ Revoxa'yı macOS uygulaması olarak korurken iOS sürümünü hazırlamak, iki p
    - Support sayfası taslağı: `docs/support.md`.
 
 6. Mac App Store gereksinimlerini hazırla.
-   - App Sandbox için entitlement planını çıkar.
+   - App Sandbox entitlement dosyası: `Configurations/Revoxa-macOS/Revoxa-macOS.entitlements`
    - Gerekirse `PrivacyInfo.xcprivacy` dosyasını ekle.
    - macOS build ve paketleme akışının Store'a uygunluğunu kontrol et.
+
+### macOS App Sandbox planı
+
+Mac App Store dağıtımı için App Sandbox zorunludur. Revoxa'nın mevcut özellikleriyle uyumlu minimum entitlement seti:
+
+| Entitlement | Neden |
+| --- | --- |
+| `com.apple.security.app-sandbox` | Mac App Store zorunluluğu |
+| `com.apple.security.network.client` | TCMB döviz kuru (`ExchangeRateService`) |
+| `com.apple.security.files.user-selected.read-write` | CSV dışa aktarma (`NSSavePanel`) |
+
+Eklenmeyen / gerekmediği doğrulananlar:
+
+- Banka, e-posta, konum, kamera, mikrofon erişimi yok
+- Sunucu veya gelen ağ bağlantısı yok
+- iCloud / App Group paylaşımı yok (SwiftData yerel container'da)
+- Yerel bildirimler için ayrı sandbox entitlement gerekmez
+
+Doğrulama:
+
+```bash
+./script/package_app.sh --release --app-store
+./script/verify_mac_app_store_entitlements.sh dist/Revoxa.app
+```
+
+Not: Yerel `/Applications` kurulumu da sandbox ile imzalanır; uygulama davranışı Store build ile aynı kalır. Apple Developer onayı sonrası Mac App Store upload için Xcode archive + `Apple Distribution` imzası gerekir; bu adım hesap onayına bağlıdır.
 
 7. Lokal doğrulama yap.
    - `swift build`

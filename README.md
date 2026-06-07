@@ -8,6 +8,8 @@ Revoxa is a **local-first subscription tracker** for **macOS, iPhone, and iPad**
 
 Turkish quick-start guide: [docs/usage.md](docs/usage.md) (Türkçe)
 
+License: [MIT](LICENSE)
+
 ## What it does
 
 Track digital subscriptions (streaming, software, cloud, AI tools, and more):
@@ -100,7 +102,9 @@ revoxa/
 ├── Revoxa.xcodeproj/             # iOS / iPad Xcode project
 ├── Sources/Revoxa/               # App code, assets, localization
 ├── Tests/RevoxaTests/            # Unit tests
-├── Configurations/Revoxa-iOS/    # iOS Info.plist & entitlements
+├── Configurations/
+│   ├── Revoxa-iOS/               # iOS Info.plist & entitlements
+│   └── Revoxa-macOS/             # macOS App Store sandbox entitlements
 ├── docs/
 │   ├── usage.md                  # Turkish usage guide
 │   ├── roadmap.md                # Version roadmap

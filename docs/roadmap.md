@@ -1,76 +1,81 @@
-# Revoxa yol haritası
+# Revoxa roadmap
 
-Ürün evrimi için planlanan ana sürümler. Mevcut depo **v0.1** ile uyumludur.
+Product direction for Revoxa. The repo currently ships a **multi-platform v0.1** (macOS + iPhone + iPad) with App Store preparation in progress.
 
-## v0.1 — Personal macOS app
+## v0.1 — Local subscription tracker (current)
 
-**Durum:** Mevcut kapsam
+**Status:** Shipped locally; App Store submission pending Apple Developer approval
 
-- SwiftUI + SwiftData yerel abonelik yönetimi
-- Dashboard, Subscriptions, Upcoming, Cancel List, Insights, Archive
-- Settings: tercihler, CSV export, veriyi temizleme
-- Yerel yenileme bildirimleri (`UserNotifications`)
-- SPM + `script/build_and_run.sh` ile kişisel `.app` çalıştırma
-- Birim testler (hesaplayıcılar, CSV, bildirim planlama)
+**Platforms:** macOS 14+, iOS / iPadOS 17+
 
-**Kapsam dışı:** App Store, StoreKit, iCloud, backend, banka/e-posta entegrasyonu.
+**Screens:** Dashboard, Subscriptions, Calendar, Settings (plus Insights on iPad)
+
+**Core features:**
+
+- SwiftUI + SwiftData local subscription management
+- Billing cycles, categories, status, notes, cancellation URLs
+- Monthly / yearly cost estimates and calendar view
+- Local renewal reminders (`UserNotifications`)
+- CSV export (macOS save panel, iOS share sheet)
+- English + Turkish UI
+- Shared Swift package + `Revoxa.xcodeproj` for iOS
+- macOS packaging via `script/build_and_run.sh`
+- Unit tests (calculators, CSV, notifications, exchange rates)
+
+**App Store prep (pre–Developer account):**
+
+- Marketing screenshots (iPhone, iPad, macOS)
+- Metadata drafts, privacy/support pages (GitHub Pages)
+- Privacy manifest, macOS App Sandbox entitlements
+- iOS notification usage description
+
+**Out of scope for v0.1:** iCloud sync, backend, bank/email integration, StoreKit.
 
 ---
 
 ## v0.2 — Polish + import
 
-**Hedef:** Günlük kullanımı güçlendirmek, veri taşınabilirliği
+**Goal:** Daily-use improvements and data portability
 
-- UI/UX cilası (tutarlı dil, erişilebilirlik, boş durumlar)
-- **CSV import** (export ile simetrik şema)
-- Örnek / demo veri seçenekleri (geliştirme ve ilk kurulum)
-- Form ve liste iyileştirmeleri (toplu işlemler, sıralama)
-- Dokümantasyon ve yerel yedekleme akışı
+- UI/UX polish (accessibility, empty states, consistency)
+- **CSV import** (symmetric with export schema)
+- Demo / sample data options for first launch
+- List and form improvements (sorting, batch actions)
+- Documentation and local backup guidance
 
 ---
 
 ## v0.3 — iCloud sync
 
-**Hedef:** Aynı Apple ID ile Mac’ler arası senkron
+**Goal:** Sync across devices with the same Apple ID
 
-- CloudKit veya SwiftData + iCloud container
-- Çakışma çözümü stratejisi (son yazan / birleştirme kuralları)
-- Gizlilik metni ve kullanıcıya açık “veri nerede” açıklaması
-- Bildirimlerin cihaz bazlı kalması (senkron dışı)
-
----
-
-## v0.4 — iOS companion
-
-**Hedef:** Mobil okuma ve hızlı güncelleme
-
-- iOS uygulaması (SwiftUI paylaşılan modeller / paket)
-- v0.3 senkron ile tutarlı veri katmanı
-- macOS’ta tam CRUD; iOS’ta öncelik: liste, yaklaşan, hatırlatma
-- Widget / Live Activity değerlendirmesi (opsiyonel)
+- CloudKit or SwiftData + iCloud container
+- Conflict resolution strategy
+- Updated privacy copy (“where your data lives”)
+- Notifications remain device-local
 
 ---
 
-## v1.0 — App Store candidate
+## v1.0 — App Store release
 
-**Hedef:** Genel dağıtıma hazır ürün
+**Goal:** Public distribution on Mac App Store and iOS App Store
 
-- App Store Connect, kod imzalama, notarization
-- Gizlilik manifesti, App Store açıklamaları
-- StoreKit (varsa premium katman) — ürün kararına bağlı
-- iCloud senkron stabilizasyonu
-- Destek / geri bildirim kanalı, sürüm notları
-- Kapsamlı test (UI, senkron, bildirimler)
+- App Store Connect metadata, review, and universal purchase strategy (if desired)
+- Production signing, TestFlight, and release builds
+- StoreKit (optional premium tier — product decision)
+- Stabilized iCloud sync (if v0.3 ships first)
+- Support channel and release notes
 
 ---
 
-## Karar kayıtları (özet)
+## Decision log
 
-| Konu | v0.1 | Sonraki |
-|------|------|---------|
-| Backend | Hayır | v1.0’da da zorunlu değil |
-| Bank / e-posta | Hayır | Uzun vadede değerlendirme |
-| Usage limits | Hayır | İhtiyaç netleşince |
-| App Store | Hayır | v1.0 |
+| Topic | v0.1 | Later |
+| --- | --- | --- |
+| Backend | No | Not required for v1.0 |
+| Bank / email integration | No | Revisit only if product direction changes |
+| iOS app | Yes (shipped in repo) | iPad + iPhone maintained with macOS |
+| App Store | Prepared, not submitted | v1.0 target |
+| Age rating | Documented as 4+ | Enter in Connect after account approval |
 
-Bu dosya ürün niyetini yansıtır; tarihler ve kapsam sprint planlamasında güncellenebilir.
+This file reflects product intent; scope and timing may change during sprint planning.

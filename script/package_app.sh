@@ -8,6 +8,8 @@ MIN_SYSTEM_VERSION="14.0"
 LS_CATEGORY="public.app-category.productivity"
 
 CONFIGURATION="debug"
+SKIP_ENTITLEMENTS=false
+VERIFY_MAC_APP_STORE=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --configuration)
@@ -22,8 +24,16 @@ while [[ $# -gt 0 ]]; do
       CONFIGURATION="debug"
       shift
       ;;
+    --app-store)
+      VERIFY_MAC_APP_STORE=true
+      shift
+      ;;
+    --skip-entitlements)
+      SKIP_ENTITLEMENTS=true
+      shift
+      ;;
     -h|--help)
-      echo "usage: $0 [--configuration release|debug] [--release|--debug]" >&2
+      echo "usage: $0 [--configuration release|debug] [--release|--debug] [--app-store] [--skip-entitlements]" >&2
       exit 0
       ;;
     *)
@@ -39,6 +49,7 @@ if [[ "$CONFIGURATION" != "release" && "$CONFIGURATION" != "debug" ]]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ENTITLEMENTS_FILE="$ROOT_DIR/Configurations/Revoxa-macOS/Revoxa-macOS.entitlements"
 VERSION_FILE="$ROOT_DIR/VERSION"
 DIST_DIR="$ROOT_DIR/dist"
 APP_BUNDLE="$DIST_DIR/$APP_NAME.app"
@@ -202,13 +213,21 @@ PLIST
 
 if command -v codesign >/dev/null 2>&1; then
   sign_target() {
-    codesign --force --sign - --identifier "$BUNDLE_ID" --timestamp=none "$1"
+    local -a sign_args=(--force --sign - --identifier "$BUNDLE_ID" --timestamp=none)
+    if [[ "$SKIP_ENTITLEMENTS" != true && -f "$ENTITLEMENTS_FILE" ]]; then
+      sign_args+=(--entitlements "$ENTITLEMENTS_FILE")
+    fi
+    codesign "${sign_args[@]}" "$1"
   }
   if [[ -d "$PACKAGED_RESOURCE_BUNDLE" ]]; then
     sign_target "$PACKAGED_RESOURCE_BUNDLE" >/dev/null 2>&1 || true
   fi
   sign_target "$APP_BINARY"
   sign_target "$APP_BUNDLE"
+fi
+
+if [[ "$VERIFY_MAC_APP_STORE" == true ]]; then
+  "$ROOT_DIR/script/verify_mac_app_store_entitlements.sh" "$APP_BUNDLE" >&2
 fi
 
 echo "$APP_BUNDLE"
