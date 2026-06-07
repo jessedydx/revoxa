@@ -2,7 +2,7 @@
 
 Last updated: 2026-06-07
 
-This draft is intended for the public Privacy Policy URL required for App Store submission. Replace the support contact and URL placeholders before publication.
+This draft is intended for the public Privacy Policy URL required for App Store submission.
 
 ## Overview
 
@@ -77,9 +77,7 @@ This Privacy Policy may be updated as Revoxa changes. The updated date at the to
 
 For privacy or support questions, contact:
 
-`support@revoxa.app`
-
-Replace this email with the final support address before App Store submission.
+`revoxa.app@gmail.com`
 
 ## Turkish Summary
 

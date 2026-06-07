@@ -1,6 +1,6 @@
 # Revoxa Support Page Draft
 
-This draft is intended for the public Support URL required for App Store submission. Replace contact placeholders before publication.
+This draft is intended for the public Support URL required for App Store submission.
 
 ## Revoxa Support
 
@@ -54,9 +54,7 @@ Check the location you selected during export. Revoxa creates CSV files only whe
 
 For support, contact:
 
-`support@revoxa.app`
-
-Replace this email with the final support address before App Store submission.
+`revoxa.app@gmail.com`
 
 ## Turkish Support Summary
 

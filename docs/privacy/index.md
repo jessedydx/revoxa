@@ -75,7 +75,7 @@ This Privacy Policy may be updated as Revoxa changes. The updated date at the to
 
 For privacy or support questions, contact:
 
-`support@revoxa.app`
+`revoxa.app@gmail.com`
 
 ## Turkish Summary
 

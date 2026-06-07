@@ -46,7 +46,7 @@ Check the location you selected during export. Revoxa creates CSV files only whe
 
 For support, contact:
 
-`support@revoxa.app`
+`revoxa.app@gmail.com`
 
 ## Turkish Support Summary
 
