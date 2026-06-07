@@ -1,263 +1,139 @@
 # Revoxa
 
-Revoxa, aboneliklerinizi tek bir yerde takip etmeniz için tasarlanmış **kişisel macOS masaüstü uygulamasıdır**. Veriler yalnızca cihazınızda kalır; hesap, bulut senkronizasyonu veya harici backend yoktur.
+Revoxa is a **local-first subscription tracker** for **macOS, iPhone, and iPad**. Keep recurring costs, renewal dates, categories, and reminders on your device — no account, cloud sync, or backend.
 
-Kısa kullanım adımları için [docs/usage.md](docs/usage.md) dosyasına bakın. Sürüm planı için [docs/roadmap.md](docs/roadmap.md).
+- **Bundle ID:** `com.revoxa.app`
+- **Version:** see [`VERSION`](VERSION)
+- **UI languages:** English and Turkish (Settings → Language)
 
-## Revoxa nedir?
+Turkish quick-start guide: [docs/usage.md](docs/usage.md) (Türkçe)
 
-Dijital aboneliklerin (yazılım, yayın, bulut, AI araçları vb.) adını, tutarını, yenileme tarihini ve durumunu kaydedip özetleyen yerel bir yönetim aracıdır. Dashboard ile aylık/yıllık tahmini harcamayı görür, yaklaşan ödemeleri planlar, iptal etmeyi düşündüğünüz abonelikleri ayrı listede tutar ve CSV ile verinizi dışa aktarabilirsiniz.
+## What it does
 
-## Bu sürümün kapsamı (v0.1)
+Track digital subscriptions (streaming, software, cloud, AI tools, and more):
 
-Bu depo **v0.1 — kişisel macOS uygulaması** kapsamındadır:
+- Add and edit subscriptions with amount, currency, billing cycle, next billing date, category, status, notes, and cancellation URL
+- See monthly and yearly cost estimates on the dashboard
+- Review upcoming renewals in a calendar view
+- Enable local renewal reminders
+- Export subscriptions and dashboard summaries as CSV (macOS save panel; iOS share sheet)
 
-- Tam abonelik CRUD (SwiftData)
-- Dashboard, Upcoming, Cancel List, Insights, Archive ekranları
-- Ayarlar: varsayılan para birimi, hatırlatma günü, görünüm, bildirimler
-- CSV dışa aktarma (abonelik listesi + dashboard özeti)
-- Yerel yenileme hatırlatmaları (UserNotifications)
-- Birim testler (hesaplayıcılar, CSV, bildirim planlama)
+Data is stored locally with **SwiftData**. You control your records.
 
-Dağıtım hedefi değildir; App Store, StoreKit veya iCloud bu sürümde yoktur.
+## Platforms
 
-## macOS-only kişisel kullanım notu
+| Platform | Minimum | Notes |
+|----------|---------|--------|
+| macOS | 14+ | Menu bar extra, unified window, `NSSavePanel` export |
+| iOS / iPadOS | 17+ | Tab navigation (iPhone) or split view (iPad) |
+| Xcode project | `Revoxa.xcodeproj` | Scheme: **Revoxa iOS** |
 
-- **Yalnızca macOS 14+** (Swift Package Manager executable + `script/build_and_run.sh` ile `.app` paketleme).
-- **Kişisel kullanım** için tasarlanmıştır; üretim ortamı, çok kullanıcılı hesap veya resmi destek vaadi yoktur.
-- Veriler **SwiftData** ile uygulama sandbox’ında yerel olarak saklanır; başka cihazla paylaşılmaz.
-- İstediğiniz zaman **Settings → Clear All Data** ile tüm kayıtları silebilirsiniz.
+Shared Swift code lives in `Sources/Revoxa/`. Platform-specific UI is isolated under `macOS/` and `iOS/`.
 
-## Kullanılan teknolojiler
+## Main screens
 
-| Alan | Teknoloji |
-|------|-----------|
-| Dil / UI | Swift 5.9, SwiftUI |
-| Platform | macOS 14+ (`AppKit` entegrasyonu, `NSApplicationDelegate`) |
-| Veri | SwiftData (`@Model` `Subscription`) |
-| Tercihler | `@AppStorage` |
-| Bildirimler | `UserNotifications` |
-| Paketleme | Swift Package Manager (`Package.swift`) |
-| Test | `swift test` (XCTest) |
+| Screen | Description |
+|--------|-------------|
+| **Dashboard** | Monthly/yearly totals, upcoming payments, category overview |
+| **Subscriptions** | Search, filters, add/edit/delete |
+| **Calendar** | Month view of renewals; day detail sheet |
+| **Settings** | Currency, theme, language, reminders, CSV export |
 
-## Özellikler
+Exchange rates can be fetched from the public [TCMB daily XML feed](https://www.tcmb.gov.tr/kurlar/today.xml) to show converted totals. Subscription records are not sent with that request.
 
-### Subscription CRUD
+## Requirements
 
-Abonelik ekleme, düzenleme ve silme. Alanlar: ad, tutar, para birimi, faturalama döngüsü (haftalık/aylık/üç aylık/yıllık/özel gün), sonraki ödeme tarihi, kategori, ödeme yöntemi, durum, hatırlatma günü, iptal URL’si, notlar.
+- macOS 14+ for the desktop app
+- Xcode 15+ (or Swift 5.9+ toolchain) for building
+- iOS 17+ simulator or device for the mobile target
 
-**Subscriptions** ekranından veya **⌘N** ile yeni kayıt açılır. Durum ve kategori filtreleri, arama (⌘F) desteklenir.
-
-### Dashboard
-
-Aktif benzeri abonelikler için tahmini aylık/yıllık toplamlar (para birimi bazında), 7 gün içinde yenilenecekler, iptal adayı sayısı ve kategori dağılımı özeti.
-
-### Upcoming
-
-Aktif, deneme ve “Cancel Soon” abonelikler; sonraki ödeme tarihine göre gruplanmış yaklaşan ödemeler.
-
-### Cancel List
-
-Durumu **Cancel Soon** olan abonelikler; iptal URL’si açma ve düzenleme.
-
-### Insights
-
-Kategori bazında tahmini harcama, en pahalı abonelikler (aylık/yıllık tahmin) ve durum dağılımı.
-
-### Archive
-
-**Cancelled** ve **Archived** kayıtlar; arama, kategori filtresi, kalıcı silme.
-
-### CSV export
-
-**Settings → Data**: tüm abonelikler veya dashboard özet CSV’si (`NSSavePanel` ile kayıt).
-
-### Local reminders
-
-**Settings → Renewal reminders**: macOS yerel bildirimleri; abonelik başına `reminderDaysBefore` gün önce yenileme uyarısı. İzin verilmezse hatırlatmalar planlanmaz.
-
-## Bilerek eklenmeyenler
-
-Aşağıdakiler bu sürümün **kapsam dışı** bilinçli tercihleridir:
-
-| Özellik | Not |
-|---------|-----|
-| App Store | Dağıtım ve inceleme süreci yok |
-| StoreKit | Uygulama içi satın alma / abonelik yok |
-| iCloud sync | Cihazlar arası senkron yok |
-| Usage Limits | Kullanım kotası / limit takibi yok |
-| Bank integration | Banka veya kart API entegrasyonu yok |
-| Email scanning | Fatura / e-posta tarama yok |
-| Backend | Sunucu, hesap ve uzaktan API yok |
-
-## Proje yapısı
-
-```
-revoxa/
-├── Package.swift              # SPM tanımı (macOS 14 executable)
-├── README.md
-├── docs/
-│   ├── usage.md               # Kısa kullanım kılavuzu
-│   └── roadmap.md             # Sürüm yol haritası
-├── Sources/Revoxa/
-│   ├── App/                   # @main, AppDelegate, menü kısayolları
-│   ├── Core/
-│   │   ├── DesignSystem/      # Renk, tipografi, spacing token’ları
-│   │   ├── Extensions/
-│   │   ├── Formatters/
-│   │   └── Services/          # Billing, Dashboard, Upcoming, Insights, CSV, bildirimler
-│   ├── Models/                # Subscription, enum’lar, tercihler
-│   └── Views/
-│       ├── Components/
-│       ├── Navigation/        # Sidebar, Detail yönlendirme
-│       └── Screens/           # Dashboard, Subscriptions, …
-├── Tests/RevoxaTests/         # Birim testler
-├── script/
-│   ├── package_app.sh         # dist/Revoxa.app paketleme (debug/release)
-│   ├── verify_app_bundle.sh   # .app icon / Info.plist doğrulama
-│   ├── sync_applications.sh   # dist/Revoxa.app → /Applications
-│   ├── install-local.sh       # Release → /Applications + lsregister + Dock
-│   ├── build_and_run.sh       # Paketle + Applications güncelle + çalıştır
-│   └── install.sh             # install-local.sh sarmalayıcısı
-├── VERSION                    # CFBundleShortVersionString
-└── dist/                      # Üretilen Revoxa.app (gitignore)
-```
-
-## Lokal çalıştırma adımları
-
-### Gereksinimler
-
-- macOS 14 veya üzeri
-- Xcode 15+ veya Swift 5.9+ toolchain (`swift --version`)
-
-### Derleme ve çalıştırma
+## Quick start (macOS)
 
 ```bash
-cd /path/to/revoxa
+git clone https://github.com/jessedydx/revoxa.git
+cd revoxa
 
-# Derleme
 swift build
-
-# Testler
 swift test
 
-# .app oluşturup açma (önerilen, Debug)
-# dist/Revoxa.app üretir ve /Applications/Revoxa.app dosyasını günceller
+# Build dist/Revoxa.app, sync to /Applications, and launch
 ./script/build_and_run.sh
-
-# Release .app
-./script/build_and_run.sh --release --package-only
 ```
 
-### Applications klasörüne kurulum (kişisel kullanım)
-
-Xcode’dan çalıştırmak uygulamayı `/Applications` altına koymaz. Launchpad, Spotlight ve Dock için paketlenmiş `.app` gerekir:
+Install a release build to `/Applications`:
 
 ```bash
 ./script/install-local.sh
-# veya
-./script/install.sh
 ```
 
-Bu komutlar **Release** derler, `dist/Revoxa.app` oluşturur, bundle içindeki ikonları doğrular ve `/Applications/Revoxa.app` konumuna kopyalar. Launch Services kaydı yenilenir; Dock yeniden başlatılır. Sonrasında uygulama Finder → Uygulamalar, Launchpad, Spotlight (`Revoxa`), App Switcher, Stage Manager ve Dock’tan açılabilir. Menü çubuğu (`MenuBarExtra`) kurulu sürümde de çalışır.
+**Tip:** For notifications and the correct app icon in Stage Manager, run the app from **`/Applications/Revoxa.app`**, not only `swift run` or a DerivedData build. See [docs/usage.md](docs/usage.md) for troubleshooting.
 
-**Stage Manager ve ikonlar için:** Uygulamayı Xcode veya DerivedData içindeki debug `.app` ile değil, yalnızca **`/Applications/Revoxa.app`** üzerinden açın. Aynı `com.revoxa.app` kimliğiyle iki kopya açıksa Stage Manager boş veya eski ikon gösterebilir.
-
-İlk açılışta macOS güvenlik uyarısı çıkabilir (imza/notarization yok); **Sağ tık → Aç** ile bir kez onaylayabilirsiniz.
-
-| Komut | Açıklama |
-|-------|----------|
-| `./script/install-local.sh` | Release build + doğrulama + `/Applications/Revoxa.app` |
-| `./script/install-local.sh --refresh-finder` | Kurulum + Finder yeniden başlat |
-| `./script/install.sh` | `install-local.sh` ile aynı |
-| `./script/install.sh --dry-run` | Yalnızca Release paketleme (`dist/`) |
-| `./script/verify_app_bundle.sh` | `dist/Revoxa.app` ikon / plist kontrolü |
-| `./script/build_and_run.sh` | Debug paket + `/Applications` güncelle + aç |
-| `./script/build_and_run.sh --release` | Release paket + `/Applications` güncelle + aç |
-| `./script/build_and_run.sh --skip-applications-sync` | Yalnızca `dist/` (Applications dokunulmaz) |
-| `./script/sync_applications.sh` | Mevcut `dist/Revoxa.app` → `/Applications` kopyala |
-| `./script/build_and_run.sh --verify` | Paketle, aç, süreç doğrula |
-| `./script/build_and_run.sh --debug` | lldb ile binary |
-
-Doğrudan binary:
+## Quick start (iOS)
 
 ```bash
-swift run Revoxa
+xcodebuild \
+  -project Revoxa.xcodeproj \
+  -scheme "Revoxa iOS" \
+  -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
+  CODE_SIGNING_ALLOWED=NO \
+  build
 ```
 
-Ayarlar penceresi: **Revoxa → Settings…** veya **⌘,**.
+Open `Revoxa.xcodeproj` in Xcode to run on a simulator or device once signing is configured.
 
-### Icon / Stage Manager sorun giderme
+## Scripts
 
-Dock ve Uygulamalar klasöründe ikon görünüp **Stage Manager**’da boş kutu görünüyorsa, çoğunlukla eski kurulum veya macOS ikon önbelleği kaynaklıdır.
+| Script | Purpose |
+|--------|---------|
+| `script/build_and_run.sh` | Package macOS app, sync `/Applications`, launch |
+| `script/build_and_run.sh --package-only` | Package only (no launch) |
+| `script/install-local.sh` | Release build + `/Applications` install |
+| `script/capture_app_store_screenshots.sh` | Capture raw screenshots + marketing frames |
+| `script/generate_app_store_screenshots.swift` | Compose App Store marketing PNGs from raw shots |
+| `script/verify_app_bundle.sh` | Validate `dist/Revoxa.app` icons and plist |
 
-1. Revoxa’yı tamamen kapatın (`⌘Q` veya Activity Monitor).
-2. Proje kökünden yeniden kurun:
+## Project layout
 
-   ```bash
-   ./script/install-local.sh
-   ```
+```
+revoxa/
+├── Package.swift                 # Shared Swift package (macOS + iOS)
+├── Revoxa.xcodeproj/             # iOS / iPad Xcode project
+├── Sources/Revoxa/               # App code, assets, localization
+├── Tests/RevoxaTests/            # Unit tests
+├── Configurations/Revoxa-iOS/    # iOS Info.plist & entitlements
+├── docs/
+│   ├── usage.md                  # Turkish usage guide
+│   ├── roadmap.md                # Version roadmap
+│   ├── app-store-content.md      # App Store metadata drafts
+│   ├── privacy-policy.md         # Privacy policy draft (GitHub Pages)
+│   ├── support.md                # Support page draft (GitHub Pages)
+│   └── app-store-assets/         # Screenshots (raw + final)
+├── script/                       # Build, install, screenshot tooling
+└── VERSION
+```
 
-3. Uygulamayı **Finder → Uygulamalar → Revoxa** ile açın (Xcode ▶ Run değil).
-4. Hâlâ boşsa:
-   - Revoxa’yı kapatın
-   - `./script/install-local.sh --refresh-finder` (Dock + Finder yenilenir)
-   - Gerekirse Terminal’de (yalnızca ikon önbelleği; verilerinize dokunmaz):
+## App Store preparation
 
-     ```bash
-     touch /Applications/Revoxa.app
-     killall Dock
-     killall Finder
-     ```
+Store copy, screenshot specs, and workflow notes:
 
-5. Sorun sürerse Mac’i yeniden başlatın.
+- [docs/app-store-content.md](docs/app-store-content.md)
+- [docs/app-store-ios-macos-workflow.md](docs/app-store-ios-macos-workflow.md)
+- Marketing screenshots: `docs/app-store-assets/screenshots/final/`
 
-**Notlar:**
+Privacy and support pages are drafted under `docs/` for [GitHub Pages](https://pages.github.com/) (required public URLs for App Store Connect).
 
-- `MenuBarIcon` yalnızca menü çubuğu şablon simgesidir; uygulama ikonu `AppIcon` asset setinden gelir.
-- Finder’da uygulama ikonuna sağ tıklayıp “Get Info” ile özel ikon atamayın; Stage Manager bazen bundle içindeki `AppIcon.icns` yerine bu önbelleği kullanır.
-- İsteğe bağlı derin önbellek temizliği (sudo, sistem geneli ikon cache):
+## Intentionally out of scope (today)
 
-  ```bash
-  sudo rm -rf /Library/Caches/com.apple.iconservices.store
-  sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -o -name com.apple.iconservices \) -exec rm -rf {} \;
-  killall Dock
-  ```
+| Area | Status |
+|------|--------|
+| User accounts / backend | Not planned for local-first model |
+| Bank or email integration | Manual entry only |
+| iCloud sync | Roadmap item |
+| StoreKit / in-app purchases | Product decision pending |
+| CSV import | Roadmap item |
 
-### Bildirimler / Sistem Ayarları’nda görünmüyor
+See [docs/roadmap.md](docs/roadmap.md) for version planning.
 
-Revoxa, **Sistem Ayarları → Bildirimler** listesine yalnızca uygulama en az bir kez bildirim izni istedikten sonra eklenir. Liste boşsa veya Revoxa yoksa:
+## License
 
-1. `./script/install-local.sh` ile `/Applications/Revoxa.app` kurun.
-2. Uygulamayı **Uygulamalar** klasöründen açın (`swift run` veya Xcode DerivedData değil).
-3. İlk açılışta macOS izin penceresi çıkabilir — **İzin Ver** deyin.
-4. **Revoxa → Ayarlar** (⌘,) → **Yerel bildirimleri etkinleştir** anahtarını bir kez açın.
-5. **Sistem Ayarları → Bildirimler** içinde **Revoxa** görünmeli; **Bildirimlere izin ver** açık olsun.
-
-Hâlâ listede yoksa: Revoxa’yı tamamen kapatın (`⌘Q`), `./script/install-local.sh` tekrar çalıştırın, Uygulamalar’dan yeniden açın. Gerekirse Mac’i yeniden başlatın.
-
-## Bilinen sınırlamalar
-
-- **Para birimi dönüşümü yok**: Dashboard ve Insights, her para birimini ayrı toplar; tek bir “genel toplam” döviz kuru ile birleştirilmez.
-- **Tahminler**: Aylık/yıllık maliyetler `BillingCalculator` ile faturalama döngüsünden türetilir; gerçek banka ekstresi değildir.
-- **Tek cihaz**: Veri yedekleme/geri yükleme yalnızca CSV export ve manuel yönetimle sınırlıdır; CSV import henüz yok (plan: v0.2).
-- **Bildirimler**: Sistem izni gerekir; uygulama kapalıyken davranış macOS bildirim politikasına bağlıdır.
-- **UI dili**: Ayarlar’dan Türkçe, English veya Sistem Dili seçilebilir (`Localizable.xcstrings`).
-- **Kişisel dağıtım**: `./script/install.sh` ile `/Applications` kurulumu desteklenir; App Store, notarization, DMG ve otomatik güncelleme yoktur (yerel ad-hoc imza yalnızca çalıştırmayı kolaylaştırır).
-
-## Gelecek fikirleri
-
-Detaylı sürüm planı: [docs/roadmap.md](docs/roadmap.md).
-
-Özet:
-
-- **v0.2**: UI cilası, CSV import, örnek veri iyileştirmeleri
-- **v0.3**: iCloud / CloudKit senkron
-- **v0.4**: iOS companion
-- **v1.0**: App Store adayı (StoreKit, gizlilik, notarization)
-
-Ek fikirler: çoklu para birimi raporlama, bütçe hedefleri, tekrarlayan ödeme geçmişi, menü çubuğu widget’ı, kısayol ile hızlı ekleme.
-
-## Lisans
-
-Bu depoda lisans dosyası yoksa kullanım koşulları depo sahibine aittir; dağıtım öncesi bir `LICENSE` eklemeniz önerilir.
+No `LICENSE` file is included yet. Add one before public distribution if you want to clarify terms.
