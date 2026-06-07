@@ -4,6 +4,30 @@ Bu belge günlük kullanım için hızlı referanstır. Genel bakış ve kurulum
 
 ## İlk açılış
 
+### Günlük kullanım (Applications)
+
+Launchpad, Spotlight ve Dock için uygulamayı bir kez kurun:
+
+```bash
+./script/install.sh
+```
+
+Ardından **Uygulamalar** klasöründen veya Spotlight’ta `Revoxa` yazarak açın. Güncelleme sonrası aynı komutu tekrar çalıştırmanız yeterlidir.
+
+macOS ilk açılışta güvenlik uyarısı gösterebilir; **Sağ tık → Aç** ile onaylayın.
+
+### Dil
+
+**Ayarlar → Genel → Dil** bölümünden seçebilirsiniz:
+
+- **Türkçe** — arayüz Türkçe
+- **English** — arayüz İngilizce
+- **Sistem Dili** — macOS sistem dilini takip eder
+
+Tercih `@AppStorage` ile saklanır. Çoğu ekran dil değişince anında güncellenir; bazı sistem menüleri uygulama yeniden açıldığında yenilenir (Ayarlar’daki kısa not).
+
+### Geliştirme
+
 1. `./script/build_and_run.sh` veya `swift run Revoxa` ile uygulamayı başlatın.
 2. Sol kenar çubuğundan bir bölüm seçin (varsayılan: **Dashboard**).
 3. İlk aboneliği eklemek için **Subscriptions** → **Add Subscription** veya **⌘N**.

@@ -113,8 +113,14 @@ revoxa/
 │       └── Screens/           # Dashboard, Subscriptions, …
 ├── Tests/RevoxaTests/         # Birim testler
 ├── script/
-│   └── build_and_run.sh       # Derleme + .app paketleme + çalıştırma
-└── dist/                      # Üretilen Revoxa.app (git’e eklenmeyebilir)
+│   ├── package_app.sh         # dist/Revoxa.app paketleme (debug/release)
+│   ├── verify_app_bundle.sh   # .app icon / Info.plist doğrulama
+│   ├── sync_applications.sh   # dist/Revoxa.app → /Applications
+│   ├── install-local.sh       # Release → /Applications + lsregister + Dock
+│   ├── build_and_run.sh       # Paketle + Applications güncelle + çalıştır
+│   └── install.sh             # install-local.sh sarmalayıcısı
+├── VERSION                    # CFBundleShortVersionString
+└── dist/                      # Üretilen Revoxa.app (gitignore)
 ```
 
 ## Lokal çalıştırma adımları
@@ -135,18 +141,43 @@ swift build
 # Testler
 swift test
 
-# .app oluşturup açma (önerilen)
+# .app oluşturup açma (önerilen, Debug)
+# dist/Revoxa.app üretir ve /Applications/Revoxa.app dosyasını günceller
 ./script/build_and_run.sh
+
+# Release .app
+./script/build_and_run.sh --release --package-only
 ```
 
-`build_and_run.sh` modları:
+### Applications klasörüne kurulum (kişisel kullanım)
+
+Xcode’dan çalıştırmak uygulamayı `/Applications` altına koymaz. Launchpad, Spotlight ve Dock için paketlenmiş `.app` gerekir:
+
+```bash
+./script/install-local.sh
+# veya
+./script/install.sh
+```
+
+Bu komutlar **Release** derler, `dist/Revoxa.app` oluşturur, bundle içindeki ikonları doğrular ve `/Applications/Revoxa.app` konumuna kopyalar. Launch Services kaydı yenilenir; Dock yeniden başlatılır. Sonrasında uygulama Finder → Uygulamalar, Launchpad, Spotlight (`Revoxa`), App Switcher, Stage Manager ve Dock’tan açılabilir. Menü çubuğu (`MenuBarExtra`) kurulu sürümde de çalışır.
+
+**Stage Manager ve ikonlar için:** Uygulamayı Xcode veya DerivedData içindeki debug `.app` ile değil, yalnızca **`/Applications/Revoxa.app`** üzerinden açın. Aynı `com.revoxa.app` kimliğiyle iki kopya açıksa Stage Manager boş veya eski ikon gösterebilir.
+
+İlk açılışta macOS güvenlik uyarısı çıkabilir (imza/notarization yok); **Sağ tık → Aç** ile bir kez onaylayabilirsiniz.
 
 | Komut | Açıklama |
 |-------|----------|
-| `./script/build_and_run.sh` | Derle, `dist/Revoxa.app` oluştur, aç |
+| `./script/install-local.sh` | Release build + doğrulama + `/Applications/Revoxa.app` |
+| `./script/install-local.sh --refresh-finder` | Kurulum + Finder yeniden başlat |
+| `./script/install.sh` | `install-local.sh` ile aynı |
+| `./script/install.sh --dry-run` | Yalnızca Release paketleme (`dist/`) |
+| `./script/verify_app_bundle.sh` | `dist/Revoxa.app` ikon / plist kontrolü |
+| `./script/build_and_run.sh` | Debug paket + `/Applications` güncelle + aç |
+| `./script/build_and_run.sh --release` | Release paket + `/Applications` güncelle + aç |
+| `./script/build_and_run.sh --skip-applications-sync` | Yalnızca `dist/` (Applications dokunulmaz) |
+| `./script/sync_applications.sh` | Mevcut `dist/Revoxa.app` → `/Applications` kopyala |
+| `./script/build_and_run.sh --verify` | Paketle, aç, süreç doğrula |
 | `./script/build_and_run.sh --debug` | lldb ile binary |
-| `./script/build_and_run.sh --verify` | Uygulamanın çalıştığını doğrula |
-| `./script/build_and_run.sh --logs` | Konsol log akışı |
 
 Doğrudan binary:
 
@@ -156,14 +187,63 @@ swift run Revoxa
 
 Ayarlar penceresi: **Revoxa → Settings…** veya **⌘,**.
 
+### Icon / Stage Manager sorun giderme
+
+Dock ve Uygulamalar klasöründe ikon görünüp **Stage Manager**’da boş kutu görünüyorsa, çoğunlukla eski kurulum veya macOS ikon önbelleği kaynaklıdır.
+
+1. Revoxa’yı tamamen kapatın (`⌘Q` veya Activity Monitor).
+2. Proje kökünden yeniden kurun:
+
+   ```bash
+   ./script/install-local.sh
+   ```
+
+3. Uygulamayı **Finder → Uygulamalar → Revoxa** ile açın (Xcode ▶ Run değil).
+4. Hâlâ boşsa:
+   - Revoxa’yı kapatın
+   - `./script/install-local.sh --refresh-finder` (Dock + Finder yenilenir)
+   - Gerekirse Terminal’de (yalnızca ikon önbelleği; verilerinize dokunmaz):
+
+     ```bash
+     touch /Applications/Revoxa.app
+     killall Dock
+     killall Finder
+     ```
+
+5. Sorun sürerse Mac’i yeniden başlatın.
+
+**Notlar:**
+
+- `MenuBarIcon` yalnızca menü çubuğu şablon simgesidir; uygulama ikonu `AppIcon` asset setinden gelir.
+- Finder’da uygulama ikonuna sağ tıklayıp “Get Info” ile özel ikon atamayın; Stage Manager bazen bundle içindeki `AppIcon.icns` yerine bu önbelleği kullanır.
+- İsteğe bağlı derin önbellek temizliği (sudo, sistem geneli ikon cache):
+
+  ```bash
+  sudo rm -rf /Library/Caches/com.apple.iconservices.store
+  sudo find /private/var/folders/ \( -name com.apple.dock.iconcache -o -name com.apple.iconservices \) -exec rm -rf {} \;
+  killall Dock
+  ```
+
+### Bildirimler / Sistem Ayarları’nda görünmüyor
+
+Revoxa, **Sistem Ayarları → Bildirimler** listesine yalnızca uygulama en az bir kez bildirim izni istedikten sonra eklenir. Liste boşsa veya Revoxa yoksa:
+
+1. `./script/install-local.sh` ile `/Applications/Revoxa.app` kurun.
+2. Uygulamayı **Uygulamalar** klasöründen açın (`swift run` veya Xcode DerivedData değil).
+3. İlk açılışta macOS izin penceresi çıkabilir — **İzin Ver** deyin.
+4. **Revoxa → Ayarlar** (⌘,) → **Yerel bildirimleri etkinleştir** anahtarını bir kez açın.
+5. **Sistem Ayarları → Bildirimler** içinde **Revoxa** görünmeli; **Bildirimlere izin ver** açık olsun.
+
+Hâlâ listede yoksa: Revoxa’yı tamamen kapatın (`⌘Q`), `./script/install-local.sh` tekrar çalıştırın, Uygulamalar’dan yeniden açın. Gerekirse Mac’i yeniden başlatın.
+
 ## Bilinen sınırlamalar
 
 - **Para birimi dönüşümü yok**: Dashboard ve Insights, her para birimini ayrı toplar; tek bir “genel toplam” döviz kuru ile birleştirilmez.
 - **Tahminler**: Aylık/yıllık maliyetler `BillingCalculator` ile faturalama döngüsünden türetilir; gerçek banka ekstresi değildir.
 - **Tek cihaz**: Veri yedekleme/geri yükleme yalnızca CSV export ve manuel yönetimle sınırlıdır; CSV import henüz yok (plan: v0.2).
 - **Bildirimler**: Sistem izni gerekir; uygulama kapalıyken davranış macOS bildirim politikasına bağlıdır.
-- **UI dili**: Arayüz büyük ölçüde İngilizce; bazı dashboard metinleri Türkçe olabilir.
-- **Kişisel dağıtım**: Kod imzalama, notarization ve otomatik güncelleme bu depoda tanımlı değildir.
+- **UI dili**: Ayarlar’dan Türkçe, English veya Sistem Dili seçilebilir (`Localizable.xcstrings`).
+- **Kişisel dağıtım**: `./script/install.sh` ile `/Applications` kurulumu desteklenir; App Store, notarization, DMG ve otomatik güncelleme yoktur (yerel ad-hoc imza yalnızca çalıştırmayı kolaylaştırır).
 
 ## Gelecek fikirleri
 
