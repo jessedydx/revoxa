@@ -125,10 +125,13 @@ private extension ScreenshotSpec.Platform {
     var canvasSize: CGSize {
         switch self {
         case .iphone:
-            return CGSize(width: 1290, height: 2796)
+            // App Store Connect 6.7" display (portrait)
+            return CGSize(width: 1284, height: 2778)
         case .ipad:
-            return CGSize(width: 2048, height: 2732)
+            // App Store Connect 13" iPad (portrait); matches simulator raw captures
+            return CGSize(width: 2064, height: 2752)
         case .mac:
+            // Mac App Store marketing screenshot
             return CGSize(width: 2880, height: 1800)
         }
     }

@@ -287,7 +287,7 @@ swift script/generate_app_store_screenshots.swift
 
 ### iPhone final dosyaları
 
-Boyut: `1290 x 2796`
+Boyut: `1284 x 2778` (App Store Connect 6.7" iPhone)
 
 - `docs/app-store-assets/screenshots/final/iphone/01-dashboard.png`
 - `docs/app-store-assets/screenshots/final/iphone/02-subscriptions.png`
@@ -298,7 +298,7 @@ Boyut: `1290 x 2796`
 
 ### iPad final dosyaları
 
-Boyut: `2048 x 2732`
+Boyut: `2064 x 2752` (App Store Connect iPad; `2048 x 2732` de kabul edilir)
 
 - `docs/app-store-assets/screenshots/final/ipad/01-dashboard.png`
 - `docs/app-store-assets/screenshots/final/ipad/02-calendar.png`
