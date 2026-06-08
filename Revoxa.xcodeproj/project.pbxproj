@@ -7,132 +7,132 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		311457135E73B72B43FC4646 /* RevoxaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1971A0FE8693328E990E6 /* RevoxaApp.swift */; };
-		CB6A2C5C4B4569F6754DDBC3 /* CategoryChartPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9BDE7411304C3D6A97B5C /* CategoryChartPalette.swift */; };
-		06500903403A2F8431501DCA /* RevoxaDesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E8387F2D27F989223DA55C /* RevoxaDesignTokens.swift */; };
-		BA6F9AB5969A2379BE9C92C7 /* RevoxaThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0923AB29D5A429030F7EF97F /* RevoxaThemeSettings.swift */; };
-		6B8D2DEDD4B37B41C72D9DD4 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFBE9C91E99B890FC05B37 /* Color+Hex.swift */; };
-		ED4D2F27041082579665A4B0 /* Decimal+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F64777DD2A69529CDAD979 /* Decimal+Chart.swift */; };
-		405BE76A8B1065040E4DCC60 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BFFDBA8A3B063A91E095A /* CurrencyFormatter.swift */; };
-		45A4C98978FDCA9BE5544C2D /* DecimalInputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528571C4134DD995D45AEA7 /* DecimalInputFormatter.swift */; };
-		E3E690F61E7FE5F67CCBB064 /* RevoxaDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D537E430BFCDCDE7695EF /* RevoxaDateFormatter.swift */; };
-		B62D268BC1EBF9CA181B5818 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867A13E3A0A2EA22F739C5D6 /* AppLanguage.swift */; };
-		7B5296B1F8AE4FCE87AF9AA3 /* Bundle+ModuleFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84065E7F89651585C9260849 /* Bundle+ModuleFallback.swift */; };
-		C935601320A030226AA3579B /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB162B05AE87152D0EBAEFF /* L10n.swift */; };
-		614862DFBF3EFAF2B8185C3E /* RevoxaLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE51DB15C396439B112D46EC /* RevoxaLocale.swift */; };
-		9525D5B59B58907F23B97AB8 /* RevoxaResourceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */; };
-		E1B2F3C12A7B7C1111E9A057 /* BillingCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */; };
-		E35B62DD2263AB6AF9175E11 /* BillingScheduleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */; };
-		6CE97DBABAA31870BC00748F /* CSVExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE736FBE566FAD3393F289 /* CSVExportService.swift */; };
-		173CDCC0F3D1EA5A4F1F983A /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2D627FC8534138F43FB03 /* CSVExporter.swift */; };
-		B82D25278070D82D5871896E /* DashboardCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092D36B4E12FEF5B65CD7155 /* DashboardCalculator.swift */; };
-		2DA087E5929EA873003D624F /* ExchangeRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C32F010792CF285C002D12E /* ExchangeRateService.swift */; };
-		49B4838BFA27C080434D77FE /* InsightsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A452FF6F3A4DFA092DB9631 /* InsightsCalculator.swift */; };
-		80B5FB437EB6A1472E0DA422 /* NotificationSchedulingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069058C38A76B7DB20D1EE5 /* NotificationSchedulingService.swift */; };
-		3A1BDA51352CDF98A44D1ED4 /* RevoxaAppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BCFEB5B62D5C3A5FF237E6 /* RevoxaAppActions.swift */; };
-		36E67358876D1D2BBC5CC037 /* ScreenshotFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F51E3C63120C5EF8503EDB /* ScreenshotFixtures.swift */; };
-		448AF1128CECF169DDE21D43 /* UpcomingCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A96B6C06842F0643EA419 /* UpcomingCalculator.swift */; };
-		D3A203D18A98B707FE3BFD9C /* ValueReviewCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA6AE1EE39EDE44F58BD34 /* ValueReviewCalculator.swift */; };
-		A492CC796D17CFDC44CC2698 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416A7AB68D692F4430C0E4B9 /* AppPreferences.swift */; };
-		0B92F62D5E1CB564A32BE8A4 /* AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65FE976CA5356B74DECCB0 /* AppSection.swift */; };
-		AAD1D495B040414EE5EF1C39 /* RevoxaCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084F0658404E535CE65648C /* RevoxaCurrency.swift */; };
-		F543F121C3B402C57B07406D /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F2F04AA51ABDBE56F6474B /* Subscription.swift */; };
-		794451D7DBB52EF7FD88D519 /* SubscriptionCategory+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756D160031C65A707F68FBCC /* SubscriptionCategory+Chart.swift */; };
-		ADEB6310672F7EA9CFF3501F /* SubscriptionCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10671598A28D8FE48BD124DC /* SubscriptionCategoryFilter.swift */; };
-		60FBA0DE7649A5D274395642 /* SubscriptionEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905176E94984449520FEC90E /* SubscriptionEnums.swift */; };
-		492078853D0A191573910868 /* SubscriptionFormState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F3A818AF05461CBBE491B /* SubscriptionFormState.swift */; };
-		56A7DAC88DECE9232184D24B /* SubscriptionSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10903A27F59160887145EA91 /* SubscriptionSamples.swift */; };
-		59623EDB5B21E6B34C75C84F /* SubscriptionTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706AFF94B6DECFC0C4A402FE /* SubscriptionTemplate.swift */; };
-		B37EA40392C193ADA1F32FAE /* SubscriptionValueReviewEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B090EEF411401ED5C4F36B /* SubscriptionValueReviewEnums.swift */; };
-		CDF63C923B4947DCA2E18AC8 /* RevoxaCurrencyTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831449DBC7B09EC0899D789 /* RevoxaCurrencyTotalsView.swift */; };
-		B67A580F0E94089EBB34EE76 /* CategoryDonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF41D187C7905F1B29024C2A /* CategoryDonutChartView.swift */; };
-		0BA441E7E4A1DF6CD8B3AA47 /* RevoxaComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B425490A2BE0D432D5FFDB5B /* RevoxaComponents.swift */; };
-		67CF1C91EC08B62E1E61997D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C8A09EF76DFB13909934 /* ContentView.swift */; };
-		80E9B517A8C565FE5309CE89 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA7C33661D319A307B6931E /* DetailView.swift */; };
-		99F64DD8E92CD5852D43C534 /* SectionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA504C5A999EA0D1FDD8465 /* SectionModalView.swift */; };
-		8984BF096B4C9C5571D6E61C /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E39E54D05E64B3DBF541A0 /* SidebarView.swift */; };
-		1F8CA070E21B298EEAE91478 /* CalendarAnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */; };
-		734D600A797DEAFDB109819C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2D094BAFE5778E924EEE9B /* CalendarView.swift */; };
-		58EA61E0A1248EF2B4C3EF3D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */; };
-		49293A18F1F3A2B42AFB18AD /* PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */; };
-		D8F97409F89FA5E824399FF2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA65B92727799709FF1DBD /* SettingsView.swift */; };
-		F0691667516C2A702885CA6F /* SubscriptionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */; };
-		236019F565A402F55DBE0840 /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29FB6C176EDDEB9F800554 /* SubscriptionsView.swift */; };
-		66794ED0FA60E831C6AC9D97 /* RevoxaMobileRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D566171CCCFF2993427941B0 /* RevoxaMobileRootView.swift */; };
-		8374935EE15C2394F45E923D /* MenuBarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A1E067091E06EB70169524 /* MenuBarPopoverView.swift */; };
-		C24DFCFC5731086BDE464548 /* RevoxaMenuBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E5A9BC41B112D0E7918D4 /* RevoxaMenuBarIcon.swift */; };
-		88DD930874BCA9AF0E2C624B /* RevoxaMainWindowAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201EC50A193C8BF8B49FCD19 /* RevoxaMainWindowAccessor.swift */; };
-		9AF60B6BD87F04407DA761A5 /* RevoxaWindowConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B4D5CB91C3806CC732B5E /* RevoxaWindowConfigurator.swift */; };
-		4BEF36A634DA2E9A237C0BFC /* MainWindowToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B764420DD521980FAFD27 /* MainWindowToolbar.swift */; };
-		077153682966A45756420352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5455639EF14D5DCC63E555 /* Assets.xcassets */; };
-		7EE9CCE7E137869A8F567DAF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C6D706871F69B85448AD9BF9 /* Localizable.xcstrings */; };
-		BDAB8F4C5E5DB74040866890 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 79FB693122622A57696D914C /* PrivacyInfo.xcprivacy */; };
+		06500903403A2F8431501DCA /* Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E8387F2D27F989223DA55C /* Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift */; };
+		077153682966A45756420352 /* Sources/Revoxa/Resources/Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5455639EF14D5DCC63E555 /* Sources/Revoxa/Resources/Assets.xcassets */; };
+		0B92F62D5E1CB564A32BE8A4 /* Sources/Revoxa/Models/AppSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA65FE976CA5356B74DECCB0 /* Sources/Revoxa/Models/AppSection.swift */; };
+		0BA441E7E4A1DF6CD8B3AA47 /* Sources/Revoxa/Views/Components/RevoxaComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B425490A2BE0D432D5FFDB5B /* Sources/Revoxa/Views/Components/RevoxaComponents.swift */; };
+		173CDCC0F3D1EA5A4F1F983A /* Sources/Revoxa/Core/Services/CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA2D627FC8534138F43FB03 /* Sources/Revoxa/Core/Services/CSVExporter.swift */; };
+		1F8CA070E21B298EEAE91478 /* Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A669F515CD7DDFD9E7443 /* Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift */; };
+		236019F565A402F55DBE0840 /* Sources/Revoxa/Views/Screens/SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29FB6C176EDDEB9F800554 /* Sources/Revoxa/Views/Screens/SubscriptionsView.swift */; };
+		2DA087E5929EA873003D624F /* Sources/Revoxa/Core/Services/ExchangeRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C32F010792CF285C002D12E /* Sources/Revoxa/Core/Services/ExchangeRateService.swift */; };
+		311457135E73B72B43FC4646 /* Sources/Revoxa/App/RevoxaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1971A0FE8693328E990E6 /* Sources/Revoxa/App/RevoxaApp.swift */; };
+		36E67358876D1D2BBC5CC037 /* Sources/Revoxa/Core/Services/ScreenshotFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F51E3C63120C5EF8503EDB /* Sources/Revoxa/Core/Services/ScreenshotFixtures.swift */; };
+		3A1BDA51352CDF98A44D1ED4 /* Sources/Revoxa/Core/Services/RevoxaAppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BCFEB5B62D5C3A5FF237E6 /* Sources/Revoxa/Core/Services/RevoxaAppActions.swift */; };
+		405BE76A8B1065040E4DCC60 /* Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BFFDBA8A3B063A91E095A /* Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift */; };
+		448AF1128CECF169DDE21D43 /* Sources/Revoxa/Core/Services/UpcomingCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A96B6C06842F0643EA419 /* Sources/Revoxa/Core/Services/UpcomingCalculator.swift */; };
+		45A4C98978FDCA9BE5544C2D /* Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9528571C4134DD995D45AEA7 /* Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift */; };
+		492078853D0A191573910868 /* Sources/Revoxa/Models/SubscriptionFormState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527F3A818AF05461CBBE491B /* Sources/Revoxa/Models/SubscriptionFormState.swift */; };
+		49293A18F1F3A2B42AFB18AD /* Sources/Revoxa/Views/Screens/PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135B0283B6FD3BDC858AD119 /* Sources/Revoxa/Views/Screens/PlaceholderScreen.swift */; };
+		49B4838BFA27C080434D77FE /* Sources/Revoxa/Core/Services/InsightsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A452FF6F3A4DFA092DB9631 /* Sources/Revoxa/Core/Services/InsightsCalculator.swift */; };
+		4BEF36A634DA2E9A237C0BFC /* Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B764420DD521980FAFD27 /* Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift */; };
+		56A7DAC88DECE9232184D24B /* Sources/Revoxa/Models/SubscriptionSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10903A27F59160887145EA91 /* Sources/Revoxa/Models/SubscriptionSamples.swift */; };
+		58EA61E0A1248EF2B4C3EF3D /* Sources/Revoxa/Views/Screens/DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F2E00D270328FE9D70BE2 /* Sources/Revoxa/Views/Screens/DashboardView.swift */; };
+		59623EDB5B21E6B34C75C84F /* Sources/Revoxa/Models/SubscriptionTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706AFF94B6DECFC0C4A402FE /* Sources/Revoxa/Models/SubscriptionTemplate.swift */; };
+		60FBA0DE7649A5D274395642 /* Sources/Revoxa/Models/SubscriptionEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905176E94984449520FEC90E /* Sources/Revoxa/Models/SubscriptionEnums.swift */; };
+		614862DFBF3EFAF2B8185C3E /* Sources/Revoxa/Core/Localization/RevoxaLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE51DB15C396439B112D46EC /* Sources/Revoxa/Core/Localization/RevoxaLocale.swift */; };
+		66794ED0FA60E831C6AC9D97 /* Sources/Revoxa/iOS/RevoxaMobileRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D566171CCCFF2993427941B0 /* Sources/Revoxa/iOS/RevoxaMobileRootView.swift */; };
+		67CF1C91EC08B62E1E61997D /* Sources/Revoxa/Views/ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A4C8A09EF76DFB13909934 /* Sources/Revoxa/Views/ContentView.swift */; };
+		6B8D2DEDD4B37B41C72D9DD4 /* Sources/Revoxa/Core/Extensions/Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCFBE9C91E99B890FC05B37 /* Sources/Revoxa/Core/Extensions/Color+Hex.swift */; };
+		6CE97DBABAA31870BC00748F /* Sources/Revoxa/Core/Services/CSVExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE736FBE566FAD3393F289 /* Sources/Revoxa/Core/Services/CSVExportService.swift */; };
+		734D600A797DEAFDB109819C /* Sources/Revoxa/Views/Screens/CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2D094BAFE5778E924EEE9B /* Sources/Revoxa/Views/Screens/CalendarView.swift */; };
+		794451D7DBB52EF7FD88D519 /* Sources/Revoxa/Models/SubscriptionCategory+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756D160031C65A707F68FBCC /* Sources/Revoxa/Models/SubscriptionCategory+Chart.swift */; };
+		7B5296B1F8AE4FCE87AF9AA3 /* Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84065E7F89651585C9260849 /* Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift */; };
+		7EE9CCE7E137869A8F567DAF /* Sources/Revoxa/Resources/Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C6D706871F69B85448AD9BF9 /* Sources/Revoxa/Resources/Localizable.xcstrings */; };
+		80B5FB437EB6A1472E0DA422 /* Sources/Revoxa/Core/Services/NotificationSchedulingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3069058C38A76B7DB20D1EE5 /* Sources/Revoxa/Core/Services/NotificationSchedulingService.swift */; };
+		80E9B517A8C565FE5309CE89 /* Sources/Revoxa/Views/Navigation/DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA7C33661D319A307B6931E /* Sources/Revoxa/Views/Navigation/DetailView.swift */; };
+		8374935EE15C2394F45E923D /* Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A1E067091E06EB70169524 /* Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift */; };
+		88DD930874BCA9AF0E2C624B /* Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201EC50A193C8BF8B49FCD19 /* Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift */; };
+		8984BF096B4C9C5571D6E61C /* Sources/Revoxa/Views/Navigation/SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E39E54D05E64B3DBF541A0 /* Sources/Revoxa/Views/Navigation/SidebarView.swift */; };
+		9525D5B59B58907F23B97AB8 /* Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D331C399F87D8815DA21BF /* Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift */; };
+		99F64DD8E92CD5852D43C534 /* Sources/Revoxa/Views/Navigation/SectionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA504C5A999EA0D1FDD8465 /* Sources/Revoxa/Views/Navigation/SectionModalView.swift */; };
+		9AF60B6BD87F04407DA761A5 /* Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B4D5CB91C3806CC732B5E /* Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift */; };
+		A492CC796D17CFDC44CC2698 /* Sources/Revoxa/Models/AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416A7AB68D692F4430C0E4B9 /* Sources/Revoxa/Models/AppPreferences.swift */; };
+		AAD1D495B040414EE5EF1C39 /* Sources/Revoxa/Models/RevoxaCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084F0658404E535CE65648C /* Sources/Revoxa/Models/RevoxaCurrency.swift */; };
+		ADEB6310672F7EA9CFF3501F /* Sources/Revoxa/Models/SubscriptionCategoryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10671598A28D8FE48BD124DC /* Sources/Revoxa/Models/SubscriptionCategoryFilter.swift */; };
+		B37EA40392C193ADA1F32FAE /* Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B090EEF411401ED5C4F36B /* Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift */; };
+		B62D268BC1EBF9CA181B5818 /* Sources/Revoxa/Core/Localization/AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867A13E3A0A2EA22F739C5D6 /* Sources/Revoxa/Core/Localization/AppLanguage.swift */; };
+		B67A580F0E94089EBB34EE76 /* Sources/Revoxa/Views/Components/CategoryDonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF41D187C7905F1B29024C2A /* Sources/Revoxa/Views/Components/CategoryDonutChartView.swift */; };
+		B82D25278070D82D5871896E /* Sources/Revoxa/Core/Services/DashboardCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092D36B4E12FEF5B65CD7155 /* Sources/Revoxa/Core/Services/DashboardCalculator.swift */; };
+		BA6F9AB5969A2379BE9C92C7 /* Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0923AB29D5A429030F7EF97F /* Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift */; };
+		BDAB8F4C5E5DB74040866890 /* Sources/Revoxa/Resources/PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 79FB693122622A57696D914C /* Sources/Revoxa/Resources/PrivacyInfo.xcprivacy */; };
+		C24DFCFC5731086BDE464548 /* Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E5A9BC41B112D0E7918D4 /* Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift */; };
+		C935601320A030226AA3579B /* Sources/Revoxa/Core/Localization/L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB162B05AE87152D0EBAEFF /* Sources/Revoxa/Core/Localization/L10n.swift */; };
+		CB6A2C5C4B4569F6754DDBC3 /* Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9BDE7411304C3D6A97B5C /* Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift */; };
+		CDF63C923B4947DCA2E18AC8 /* Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831449DBC7B09EC0899D789 /* Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift */; };
+		D3A203D18A98B707FE3BFD9C /* Sources/Revoxa/Core/Services/ValueReviewCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA6AE1EE39EDE44F58BD34 /* Sources/Revoxa/Core/Services/ValueReviewCalculator.swift */; };
+		D8F97409F89FA5E824399FF2 /* Sources/Revoxa/Views/Screens/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA65B92727799709FF1DBD /* Sources/Revoxa/Views/Screens/SettingsView.swift */; };
+		E1B2F3C12A7B7C1111E9A057 /* Sources/Revoxa/Core/Services/BillingCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B05D9AEADEE7B44E1D19B /* Sources/Revoxa/Core/Services/BillingCalculator.swift */; };
+		E35B62DD2263AB6AF9175E11 /* Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDA554491B5B02F92511DC /* Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift */; };
+		E3E690F61E7FE5F67CCBB064 /* Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D537E430BFCDCDE7695EF /* Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift */; };
+		ED4D2F27041082579665A4B0 /* Sources/Revoxa/Core/Extensions/Decimal+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F64777DD2A69529CDAD979 /* Sources/Revoxa/Core/Extensions/Decimal+Chart.swift */; };
+		F0691667516C2A702885CA6F /* Sources/Revoxa/Views/Screens/SubscriptionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9594D98B55EB023931CEA /* Sources/Revoxa/Views/Screens/SubscriptionFormView.swift */; };
+		F543F121C3B402C57B07406D /* Sources/Revoxa/Models/Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F2F04AA51ABDBE56F6474B /* Sources/Revoxa/Models/Subscription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		61D1971A0FE8693328E990E6 /* RevoxaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/App/RevoxaApp.swift; sourceTree = "<group>"; };
-		7DD9BDE7411304C3D6A97B5C /* CategoryChartPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift; sourceTree = "<group>"; };
-		E7E8387F2D27F989223DA55C /* RevoxaDesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift; sourceTree = "<group>"; };
-		0923AB29D5A429030F7EF97F /* RevoxaThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift; sourceTree = "<group>"; };
-		CDCFBE9C91E99B890FC05B37 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Core/Extensions/Color+Hex.swift"; sourceTree = "<group>"; };
-		98F64777DD2A69529CDAD979 /* Decimal+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Core/Extensions/Decimal+Chart.swift"; sourceTree = "<group>"; };
-		CE7BFFDBA8A3B063A91E095A /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift; sourceTree = "<group>"; };
-		9528571C4134DD995D45AEA7 /* DecimalInputFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift; sourceTree = "<group>"; };
-		9C7D537E430BFCDCDE7695EF /* RevoxaDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift; sourceTree = "<group>"; };
-		867A13E3A0A2EA22F739C5D6 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/AppLanguage.swift; sourceTree = "<group>"; };
-		84065E7F89651585C9260849 /* Bundle+ModuleFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift"; sourceTree = "<group>"; };
-		CEB162B05AE87152D0EBAEFF /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/L10n.swift; sourceTree = "<group>"; };
-		BE51DB15C396439B112D46EC /* RevoxaLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/RevoxaLocale.swift; sourceTree = "<group>"; };
-		53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift; sourceTree = "<group>"; };
-		BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/BillingCalculator.swift; sourceTree = "<group>"; };
-		D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift; sourceTree = "<group>"; };
-		C7DE736FBE566FAD3393F289 /* CSVExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/CSVExportService.swift; sourceTree = "<group>"; };
-		EFA2D627FC8534138F43FB03 /* CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/CSVExporter.swift; sourceTree = "<group>"; };
-		092D36B4E12FEF5B65CD7155 /* DashboardCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/DashboardCalculator.swift; sourceTree = "<group>"; };
-		2C32F010792CF285C002D12E /* ExchangeRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/ExchangeRateService.swift; sourceTree = "<group>"; };
-		5A452FF6F3A4DFA092DB9631 /* InsightsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/InsightsCalculator.swift; sourceTree = "<group>"; };
-		3069058C38A76B7DB20D1EE5 /* NotificationSchedulingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/NotificationSchedulingService.swift; sourceTree = "<group>"; };
-		57BCFEB5B62D5C3A5FF237E6 /* RevoxaAppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/RevoxaAppActions.swift; sourceTree = "<group>"; };
-		C0F51E3C63120C5EF8503EDB /* ScreenshotFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/ScreenshotFixtures.swift; sourceTree = "<group>"; };
-		173A96B6C06842F0643EA419 /* UpcomingCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/UpcomingCalculator.swift; sourceTree = "<group>"; };
-		08CA6AE1EE39EDE44F58BD34 /* ValueReviewCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/ValueReviewCalculator.swift; sourceTree = "<group>"; };
-		416A7AB68D692F4430C0E4B9 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/AppPreferences.swift; sourceTree = "<group>"; };
-		EA65FE976CA5356B74DECCB0 /* AppSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/AppSection.swift; sourceTree = "<group>"; };
-		5084F0658404E535CE65648C /* RevoxaCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/RevoxaCurrency.swift; sourceTree = "<group>"; };
-		91F2F04AA51ABDBE56F6474B /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/Subscription.swift; sourceTree = "<group>"; };
-		756D160031C65A707F68FBCC /* SubscriptionCategory+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Models/SubscriptionCategory+Chart.swift"; sourceTree = "<group>"; };
-		10671598A28D8FE48BD124DC /* SubscriptionCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionCategoryFilter.swift; sourceTree = "<group>"; };
-		905176E94984449520FEC90E /* SubscriptionEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionEnums.swift; sourceTree = "<group>"; };
-		527F3A818AF05461CBBE491B /* SubscriptionFormState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionFormState.swift; sourceTree = "<group>"; };
-		10903A27F59160887145EA91 /* SubscriptionSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionSamples.swift; sourceTree = "<group>"; };
-		706AFF94B6DECFC0C4A402FE /* SubscriptionTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionTemplate.swift; sourceTree = "<group>"; };
-		47B090EEF411401ED5C4F36B /* SubscriptionValueReviewEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift; sourceTree = "<group>"; };
-		6831449DBC7B09EC0899D789 /* RevoxaCurrencyTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift; sourceTree = "<group>"; };
-		DF41D187C7905F1B29024C2A /* CategoryDonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Components/CategoryDonutChartView.swift; sourceTree = "<group>"; };
-		B425490A2BE0D432D5FFDB5B /* RevoxaComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Components/RevoxaComponents.swift; sourceTree = "<group>"; };
-		C4A4C8A09EF76DFB13909934 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/ContentView.swift; sourceTree = "<group>"; };
-		BEA7C33661D319A307B6931E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Navigation/DetailView.swift; sourceTree = "<group>"; };
-		CFA504C5A999EA0D1FDD8465 /* SectionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Navigation/SectionModalView.swift; sourceTree = "<group>"; };
-		03E39E54D05E64B3DBF541A0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Navigation/SidebarView.swift; sourceTree = "<group>"; };
-		F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift; sourceTree = "<group>"; };
-		7F2D094BAFE5778E924EEE9B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/CalendarView.swift; sourceTree = "<group>"; };
-		6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/DashboardView.swift; sourceTree = "<group>"; };
-		135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/PlaceholderScreen.swift; sourceTree = "<group>"; };
-		F6AA65B92727799709FF1DBD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SettingsView.swift; sourceTree = "<group>"; };
-		9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SubscriptionFormView.swift; sourceTree = "<group>"; };
-		5B29FB6C176EDDEB9F800554 /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SubscriptionsView.swift; sourceTree = "<group>"; };
-		D566171CCCFF2993427941B0 /* RevoxaMobileRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/iOS/RevoxaMobileRootView.swift; sourceTree = "<group>"; };
-		77A1E067091E06EB70169524 /* MenuBarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift; sourceTree = "<group>"; };
-		343E5A9BC41B112D0E7918D4 /* RevoxaMenuBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift; sourceTree = "<group>"; };
-		201EC50A193C8BF8B49FCD19 /* RevoxaMainWindowAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift; sourceTree = "<group>"; };
-		D07B4D5CB91C3806CC732B5E /* RevoxaWindowConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift; sourceTree = "<group>"; };
-		2F4B764420DD521980FAFD27 /* MainWindowToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift; sourceTree = "<group>"; };
-		3A5455639EF14D5DCC63E555 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sources/Revoxa/Resources/Assets.xcassets; sourceTree = "<group>"; };
-		C6D706871F69B85448AD9BF9 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Sources/Revoxa/Resources/Localizable.xcstrings; sourceTree = "<group>"; };
-		79FB693122622A57696D914C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sources/Revoxa/Resources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		12EC16CD593DB682300CC0C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configurations/Revoxa-iOS/Info.plist; sourceTree = "<group>"; };
-		7D59A548921CC5B164B1056D /* Revoxa-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Configurations/Revoxa-iOS/Revoxa-iOS.entitlements; sourceTree = "<group>"; };
+		03E39E54D05E64B3DBF541A0 /* Sources/Revoxa/Views/Navigation/SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Navigation/SidebarView.swift; sourceTree = "<group>"; };
+		08CA6AE1EE39EDE44F58BD34 /* Sources/Revoxa/Core/Services/ValueReviewCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/ValueReviewCalculator.swift; sourceTree = "<group>"; };
+		0923AB29D5A429030F7EF97F /* Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift; sourceTree = "<group>"; };
+		092D36B4E12FEF5B65CD7155 /* Sources/Revoxa/Core/Services/DashboardCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/DashboardCalculator.swift; sourceTree = "<group>"; };
+		10671598A28D8FE48BD124DC /* Sources/Revoxa/Models/SubscriptionCategoryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionCategoryFilter.swift; sourceTree = "<group>"; };
+		10903A27F59160887145EA91 /* Sources/Revoxa/Models/SubscriptionSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionSamples.swift; sourceTree = "<group>"; };
+		12EC16CD593DB682300CC0C9 /* Configurations/Revoxa-iOS/Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Configurations/Revoxa-iOS/Info.plist"; sourceTree = "<group>"; };
+		135B0283B6FD3BDC858AD119 /* Sources/Revoxa/Views/Screens/PlaceholderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/PlaceholderScreen.swift; sourceTree = "<group>"; };
+		173A96B6C06842F0643EA419 /* Sources/Revoxa/Core/Services/UpcomingCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/UpcomingCalculator.swift; sourceTree = "<group>"; };
+		201EC50A193C8BF8B49FCD19 /* Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift; sourceTree = "<group>"; };
+		2C32F010792CF285C002D12E /* Sources/Revoxa/Core/Services/ExchangeRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/ExchangeRateService.swift; sourceTree = "<group>"; };
+		2F4B764420DD521980FAFD27 /* Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift; sourceTree = "<group>"; };
+		3069058C38A76B7DB20D1EE5 /* Sources/Revoxa/Core/Services/NotificationSchedulingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/NotificationSchedulingService.swift; sourceTree = "<group>"; };
+		343E5A9BC41B112D0E7918D4 /* Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift; sourceTree = "<group>"; };
+		3A5455639EF14D5DCC63E555 /* Sources/Revoxa/Resources/Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sources/Revoxa/Resources/Assets.xcassets; sourceTree = "<group>"; };
+		416A7AB68D692F4430C0E4B9 /* Sources/Revoxa/Models/AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/AppPreferences.swift; sourceTree = "<group>"; };
+		47B090EEF411401ED5C4F36B /* Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift; sourceTree = "<group>"; };
+		5084F0658404E535CE65648C /* Sources/Revoxa/Models/RevoxaCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/RevoxaCurrency.swift; sourceTree = "<group>"; };
+		527F3A818AF05461CBBE491B /* Sources/Revoxa/Models/SubscriptionFormState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionFormState.swift; sourceTree = "<group>"; };
+		53D331C399F87D8815DA21BF /* Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift; sourceTree = "<group>"; };
+		57BCFEB5B62D5C3A5FF237E6 /* Sources/Revoxa/Core/Services/RevoxaAppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/RevoxaAppActions.swift; sourceTree = "<group>"; };
+		5A452FF6F3A4DFA092DB9631 /* Sources/Revoxa/Core/Services/InsightsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/InsightsCalculator.swift; sourceTree = "<group>"; };
+		5B29FB6C176EDDEB9F800554 /* Sources/Revoxa/Views/Screens/SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SubscriptionsView.swift; sourceTree = "<group>"; };
+		61D1971A0FE8693328E990E6 /* Sources/Revoxa/App/RevoxaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/App/RevoxaApp.swift; sourceTree = "<group>"; };
+		6831449DBC7B09EC0899D789 /* Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift; sourceTree = "<group>"; };
+		6F6F2E00D270328FE9D70BE2 /* Sources/Revoxa/Views/Screens/DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/DashboardView.swift; sourceTree = "<group>"; };
+		706AFF94B6DECFC0C4A402FE /* Sources/Revoxa/Models/SubscriptionTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionTemplate.swift; sourceTree = "<group>"; };
+		756D160031C65A707F68FBCC /* Sources/Revoxa/Models/SubscriptionCategory+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Models/SubscriptionCategory+Chart.swift"; sourceTree = "<group>"; };
+		77A1E067091E06EB70169524 /* Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift; sourceTree = "<group>"; };
+		79FB693122622A57696D914C /* Sources/Revoxa/Resources/PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Sources/Revoxa/Resources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7D59A548921CC5B164B1056D /* Configurations/Revoxa-iOS/Revoxa-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Configurations/Revoxa-iOS/Revoxa-iOS.entitlements"; sourceTree = "<group>"; };
+		7DD9BDE7411304C3D6A97B5C /* Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift; sourceTree = "<group>"; };
 		7F08AF349D98CEAA47760002 /* Revoxa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revoxa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F2D094BAFE5778E924EEE9B /* Sources/Revoxa/Views/Screens/CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/CalendarView.swift; sourceTree = "<group>"; };
+		84065E7F89651585C9260849 /* Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift"; sourceTree = "<group>"; };
+		867A13E3A0A2EA22F739C5D6 /* Sources/Revoxa/Core/Localization/AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/AppLanguage.swift; sourceTree = "<group>"; };
+		905176E94984449520FEC90E /* Sources/Revoxa/Models/SubscriptionEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/SubscriptionEnums.swift; sourceTree = "<group>"; };
+		91F2F04AA51ABDBE56F6474B /* Sources/Revoxa/Models/Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/Subscription.swift; sourceTree = "<group>"; };
+		9528571C4134DD995D45AEA7 /* Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift; sourceTree = "<group>"; };
+		98F64777DD2A69529CDAD979 /* Sources/Revoxa/Core/Extensions/Decimal+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Core/Extensions/Decimal+Chart.swift"; sourceTree = "<group>"; };
+		9C7D537E430BFCDCDE7695EF /* Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift; sourceTree = "<group>"; };
+		9DC9594D98B55EB023931CEA /* Sources/Revoxa/Views/Screens/SubscriptionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SubscriptionFormView.swift; sourceTree = "<group>"; };
+		B425490A2BE0D432D5FFDB5B /* Sources/Revoxa/Views/Components/RevoxaComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Components/RevoxaComponents.swift; sourceTree = "<group>"; };
+		BA5B05D9AEADEE7B44E1D19B /* Sources/Revoxa/Core/Services/BillingCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/BillingCalculator.swift; sourceTree = "<group>"; };
+		BE51DB15C396439B112D46EC /* Sources/Revoxa/Core/Localization/RevoxaLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/RevoxaLocale.swift; sourceTree = "<group>"; };
+		BEA7C33661D319A307B6931E /* Sources/Revoxa/Views/Navigation/DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Navigation/DetailView.swift; sourceTree = "<group>"; };
+		C0F51E3C63120C5EF8503EDB /* Sources/Revoxa/Core/Services/ScreenshotFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/ScreenshotFixtures.swift; sourceTree = "<group>"; };
+		C4A4C8A09EF76DFB13909934 /* Sources/Revoxa/Views/ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/ContentView.swift; sourceTree = "<group>"; };
+		C6D706871F69B85448AD9BF9 /* Sources/Revoxa/Resources/Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Sources/Revoxa/Resources/Localizable.xcstrings; sourceTree = "<group>"; };
+		C7DE736FBE566FAD3393F289 /* Sources/Revoxa/Core/Services/CSVExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/CSVExportService.swift; sourceTree = "<group>"; };
+		CDCFBE9C91E99B890FC05B37 /* Sources/Revoxa/Core/Extensions/Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/Revoxa/Core/Extensions/Color+Hex.swift"; sourceTree = "<group>"; };
+		CE7BFFDBA8A3B063A91E095A /* Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift; sourceTree = "<group>"; };
+		CEB162B05AE87152D0EBAEFF /* Sources/Revoxa/Core/Localization/L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/L10n.swift; sourceTree = "<group>"; };
+		CFA504C5A999EA0D1FDD8465 /* Sources/Revoxa/Views/Navigation/SectionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Navigation/SectionModalView.swift; sourceTree = "<group>"; };
+		D07B4D5CB91C3806CC732B5E /* Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift; sourceTree = "<group>"; };
+		D0CDA554491B5B02F92511DC /* Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift; sourceTree = "<group>"; };
+		D566171CCCFF2993427941B0 /* Sources/Revoxa/iOS/RevoxaMobileRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/iOS/RevoxaMobileRootView.swift; sourceTree = "<group>"; };
+		DF41D187C7905F1B29024C2A /* Sources/Revoxa/Views/Components/CategoryDonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Components/CategoryDonutChartView.swift; sourceTree = "<group>"; };
+		E7E8387F2D27F989223DA55C /* Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift; sourceTree = "<group>"; };
+		EA65FE976CA5356B74DECCB0 /* Sources/Revoxa/Models/AppSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Models/AppSection.swift; sourceTree = "<group>"; };
+		EFA2D627FC8534138F43FB03 /* Sources/Revoxa/Core/Services/CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/CSVExporter.swift; sourceTree = "<group>"; };
+		F40A669F515CD7DDFD9E7443 /* Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift; sourceTree = "<group>"; };
+		F6AA65B92727799709FF1DBD /* Sources/Revoxa/Views/Screens/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +146,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1507F349832A04790D3C1273 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				61D1971A0FE8693328E990E6 /* Sources/Revoxa/App/RevoxaApp.swift */,
+				7DD9BDE7411304C3D6A97B5C /* Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift */,
+				E7E8387F2D27F989223DA55C /* Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift */,
+				0923AB29D5A429030F7EF97F /* Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift */,
+				CDCFBE9C91E99B890FC05B37 /* Sources/Revoxa/Core/Extensions/Color+Hex.swift */,
+				98F64777DD2A69529CDAD979 /* Sources/Revoxa/Core/Extensions/Decimal+Chart.swift */,
+				CE7BFFDBA8A3B063A91E095A /* Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift */,
+				9528571C4134DD995D45AEA7 /* Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift */,
+				9C7D537E430BFCDCDE7695EF /* Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift */,
+				867A13E3A0A2EA22F739C5D6 /* Sources/Revoxa/Core/Localization/AppLanguage.swift */,
+				84065E7F89651585C9260849 /* Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift */,
+				CEB162B05AE87152D0EBAEFF /* Sources/Revoxa/Core/Localization/L10n.swift */,
+				BE51DB15C396439B112D46EC /* Sources/Revoxa/Core/Localization/RevoxaLocale.swift */,
+				53D331C399F87D8815DA21BF /* Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift */,
+				BA5B05D9AEADEE7B44E1D19B /* Sources/Revoxa/Core/Services/BillingCalculator.swift */,
+				D0CDA554491B5B02F92511DC /* Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift */,
+				C7DE736FBE566FAD3393F289 /* Sources/Revoxa/Core/Services/CSVExportService.swift */,
+				EFA2D627FC8534138F43FB03 /* Sources/Revoxa/Core/Services/CSVExporter.swift */,
+				092D36B4E12FEF5B65CD7155 /* Sources/Revoxa/Core/Services/DashboardCalculator.swift */,
+				2C32F010792CF285C002D12E /* Sources/Revoxa/Core/Services/ExchangeRateService.swift */,
+				5A452FF6F3A4DFA092DB9631 /* Sources/Revoxa/Core/Services/InsightsCalculator.swift */,
+				3069058C38A76B7DB20D1EE5 /* Sources/Revoxa/Core/Services/NotificationSchedulingService.swift */,
+				57BCFEB5B62D5C3A5FF237E6 /* Sources/Revoxa/Core/Services/RevoxaAppActions.swift */,
+				C0F51E3C63120C5EF8503EDB /* Sources/Revoxa/Core/Services/ScreenshotFixtures.swift */,
+				173A96B6C06842F0643EA419 /* Sources/Revoxa/Core/Services/UpcomingCalculator.swift */,
+				08CA6AE1EE39EDE44F58BD34 /* Sources/Revoxa/Core/Services/ValueReviewCalculator.swift */,
+				416A7AB68D692F4430C0E4B9 /* Sources/Revoxa/Models/AppPreferences.swift */,
+				EA65FE976CA5356B74DECCB0 /* Sources/Revoxa/Models/AppSection.swift */,
+				5084F0658404E535CE65648C /* Sources/Revoxa/Models/RevoxaCurrency.swift */,
+				91F2F04AA51ABDBE56F6474B /* Sources/Revoxa/Models/Subscription.swift */,
+				756D160031C65A707F68FBCC /* Sources/Revoxa/Models/SubscriptionCategory+Chart.swift */,
+				10671598A28D8FE48BD124DC /* Sources/Revoxa/Models/SubscriptionCategoryFilter.swift */,
+				905176E94984449520FEC90E /* Sources/Revoxa/Models/SubscriptionEnums.swift */,
+				527F3A818AF05461CBBE491B /* Sources/Revoxa/Models/SubscriptionFormState.swift */,
+				10903A27F59160887145EA91 /* Sources/Revoxa/Models/SubscriptionSamples.swift */,
+				706AFF94B6DECFC0C4A402FE /* Sources/Revoxa/Models/SubscriptionTemplate.swift */,
+				47B090EEF411401ED5C4F36B /* Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift */,
+				6831449DBC7B09EC0899D789 /* Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift */,
+				DF41D187C7905F1B29024C2A /* Sources/Revoxa/Views/Components/CategoryDonutChartView.swift */,
+				B425490A2BE0D432D5FFDB5B /* Sources/Revoxa/Views/Components/RevoxaComponents.swift */,
+				C4A4C8A09EF76DFB13909934 /* Sources/Revoxa/Views/ContentView.swift */,
+				BEA7C33661D319A307B6931E /* Sources/Revoxa/Views/Navigation/DetailView.swift */,
+				CFA504C5A999EA0D1FDD8465 /* Sources/Revoxa/Views/Navigation/SectionModalView.swift */,
+				03E39E54D05E64B3DBF541A0 /* Sources/Revoxa/Views/Navigation/SidebarView.swift */,
+				F40A669F515CD7DDFD9E7443 /* Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift */,
+				7F2D094BAFE5778E924EEE9B /* Sources/Revoxa/Views/Screens/CalendarView.swift */,
+				6F6F2E00D270328FE9D70BE2 /* Sources/Revoxa/Views/Screens/DashboardView.swift */,
+				135B0283B6FD3BDC858AD119 /* Sources/Revoxa/Views/Screens/PlaceholderScreen.swift */,
+				F6AA65B92727799709FF1DBD /* Sources/Revoxa/Views/Screens/SettingsView.swift */,
+				9DC9594D98B55EB023931CEA /* Sources/Revoxa/Views/Screens/SubscriptionFormView.swift */,
+				5B29FB6C176EDDEB9F800554 /* Sources/Revoxa/Views/Screens/SubscriptionsView.swift */,
+				D566171CCCFF2993427941B0 /* Sources/Revoxa/iOS/RevoxaMobileRootView.swift */,
+				77A1E067091E06EB70169524 /* Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift */,
+				343E5A9BC41B112D0E7918D4 /* Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift */,
+				201EC50A193C8BF8B49FCD19 /* Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift */,
+				D07B4D5CB91C3806CC732B5E /* Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift */,
+				2F4B764420DD521980FAFD27 /* Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
 		518DA81DB9B99529C0C0AEBE = {
 			isa = PBXGroup;
 			children = (
@@ -156,76 +220,20 @@
 			);
 			sourceTree = "<group>";
 		};
-		1507F349832A04790D3C1273 /* Sources */ = {
+		547D009064F7C3F13BEF3460 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				61D1971A0FE8693328E990E6 /* RevoxaApp.swift */,
-				7DD9BDE7411304C3D6A97B5C /* CategoryChartPalette.swift */,
-				E7E8387F2D27F989223DA55C /* RevoxaDesignTokens.swift */,
-				0923AB29D5A429030F7EF97F /* RevoxaThemeSettings.swift */,
-				CDCFBE9C91E99B890FC05B37 /* Color+Hex.swift */,
-				98F64777DD2A69529CDAD979 /* Decimal+Chart.swift */,
-				CE7BFFDBA8A3B063A91E095A /* CurrencyFormatter.swift */,
-				9528571C4134DD995D45AEA7 /* DecimalInputFormatter.swift */,
-				9C7D537E430BFCDCDE7695EF /* RevoxaDateFormatter.swift */,
-				867A13E3A0A2EA22F739C5D6 /* AppLanguage.swift */,
-				84065E7F89651585C9260849 /* Bundle+ModuleFallback.swift */,
-				CEB162B05AE87152D0EBAEFF /* L10n.swift */,
-				BE51DB15C396439B112D46EC /* RevoxaLocale.swift */,
-				53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */,
-				BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */,
-				D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */,
-				C7DE736FBE566FAD3393F289 /* CSVExportService.swift */,
-				EFA2D627FC8534138F43FB03 /* CSVExporter.swift */,
-				092D36B4E12FEF5B65CD7155 /* DashboardCalculator.swift */,
-				2C32F010792CF285C002D12E /* ExchangeRateService.swift */,
-				5A452FF6F3A4DFA092DB9631 /* InsightsCalculator.swift */,
-				3069058C38A76B7DB20D1EE5 /* NotificationSchedulingService.swift */,
-				57BCFEB5B62D5C3A5FF237E6 /* RevoxaAppActions.swift */,
-				C0F51E3C63120C5EF8503EDB /* ScreenshotFixtures.swift */,
-				173A96B6C06842F0643EA419 /* UpcomingCalculator.swift */,
-				08CA6AE1EE39EDE44F58BD34 /* ValueReviewCalculator.swift */,
-				416A7AB68D692F4430C0E4B9 /* AppPreferences.swift */,
-				EA65FE976CA5356B74DECCB0 /* AppSection.swift */,
-				5084F0658404E535CE65648C /* RevoxaCurrency.swift */,
-				91F2F04AA51ABDBE56F6474B /* Subscription.swift */,
-				756D160031C65A707F68FBCC /* SubscriptionCategory+Chart.swift */,
-				10671598A28D8FE48BD124DC /* SubscriptionCategoryFilter.swift */,
-				905176E94984449520FEC90E /* SubscriptionEnums.swift */,
-				527F3A818AF05461CBBE491B /* SubscriptionFormState.swift */,
-				10903A27F59160887145EA91 /* SubscriptionSamples.swift */,
-				706AFF94B6DECFC0C4A402FE /* SubscriptionTemplate.swift */,
-				47B090EEF411401ED5C4F36B /* SubscriptionValueReviewEnums.swift */,
-				6831449DBC7B09EC0899D789 /* RevoxaCurrencyTotalsView.swift */,
-				DF41D187C7905F1B29024C2A /* CategoryDonutChartView.swift */,
-				B425490A2BE0D432D5FFDB5B /* RevoxaComponents.swift */,
-				C4A4C8A09EF76DFB13909934 /* ContentView.swift */,
-				BEA7C33661D319A307B6931E /* DetailView.swift */,
-				CFA504C5A999EA0D1FDD8465 /* SectionModalView.swift */,
-				03E39E54D05E64B3DBF541A0 /* SidebarView.swift */,
-				F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */,
-				7F2D094BAFE5778E924EEE9B /* CalendarView.swift */,
-				6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */,
-				135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */,
-				F6AA65B92727799709FF1DBD /* SettingsView.swift */,
-				9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */,
-				5B29FB6C176EDDEB9F800554 /* SubscriptionsView.swift */,
-				D566171CCCFF2993427941B0 /* RevoxaMobileRootView.swift */,
-				77A1E067091E06EB70169524 /* MenuBarPopoverView.swift */,
-				343E5A9BC41B112D0E7918D4 /* RevoxaMenuBarIcon.swift */,
-				201EC50A193C8BF8B49FCD19 /* RevoxaMainWindowAccessor.swift */,
-				D07B4D5CB91C3806CC732B5E /* RevoxaWindowConfigurator.swift */,
-				2F4B764420DD521980FAFD27 /* MainWindowToolbar.swift */,
+				7F08AF349D98CEAA47760002 /* Revoxa.app */,
 			);
-			name = Sources;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		AAE953452CCD6DDD91445CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3A5455639EF14D5DCC63E555 /* Assets.xcassets */,
-				C6D706871F69B85448AD9BF9 /* Localizable.xcstrings */,
-				79FB693122622A57696D914C /* PrivacyInfo.xcprivacy */,
+				3A5455639EF14D5DCC63E555 /* Sources/Revoxa/Resources/Assets.xcassets */,
+				C6D706871F69B85448AD9BF9 /* Sources/Revoxa/Resources/Localizable.xcstrings */,
+				79FB693122622A57696D914C /* Sources/Revoxa/Resources/PrivacyInfo.xcprivacy */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -233,18 +241,10 @@
 		D5A68EAABFB03DE6EDEDEC0C /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				12EC16CD593DB682300CC0C9 /* Info.plist */,
-				7D59A548921CC5B164B1056D /* Revoxa-iOS.entitlements */,
+				12EC16CD593DB682300CC0C9 /* Configurations/Revoxa-iOS/Info.plist */,
+				7D59A548921CC5B164B1056D /* Configurations/Revoxa-iOS/Revoxa-iOS.entitlements */,
 			);
 			name = Configurations;
-			sourceTree = "<group>";
-		};
-		547D009064F7C3F13BEF3460 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7F08AF349D98CEAA47760002 /* Revoxa.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,9 +306,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				077153682966A45756420352 /* Assets.xcassets in Resources */,
-				7EE9CCE7E137869A8F567DAF /* Localizable.xcstrings in Resources */,
-				BDAB8F4C5E5DB74040866890 /* PrivacyInfo.xcprivacy in Resources */,
+				077153682966A45756420352 /* Sources/Revoxa/Resources/Assets.xcassets in Resources */,
+				7EE9CCE7E137869A8F567DAF /* Sources/Revoxa/Resources/Localizable.xcstrings in Resources */,
+				BDAB8F4C5E5DB74040866890 /* Sources/Revoxa/Resources/PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,69 +319,96 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				311457135E73B72B43FC4646 /* RevoxaApp.swift in Sources */,
-				CB6A2C5C4B4569F6754DDBC3 /* CategoryChartPalette.swift in Sources */,
-				06500903403A2F8431501DCA /* RevoxaDesignTokens.swift in Sources */,
-				BA6F9AB5969A2379BE9C92C7 /* RevoxaThemeSettings.swift in Sources */,
-				6B8D2DEDD4B37B41C72D9DD4 /* Color+Hex.swift in Sources */,
-				ED4D2F27041082579665A4B0 /* Decimal+Chart.swift in Sources */,
-				405BE76A8B1065040E4DCC60 /* CurrencyFormatter.swift in Sources */,
-				45A4C98978FDCA9BE5544C2D /* DecimalInputFormatter.swift in Sources */,
-				E3E690F61E7FE5F67CCBB064 /* RevoxaDateFormatter.swift in Sources */,
-				B62D268BC1EBF9CA181B5818 /* AppLanguage.swift in Sources */,
-				7B5296B1F8AE4FCE87AF9AA3 /* Bundle+ModuleFallback.swift in Sources */,
-				C935601320A030226AA3579B /* L10n.swift in Sources */,
-				614862DFBF3EFAF2B8185C3E /* RevoxaLocale.swift in Sources */,
-				9525D5B59B58907F23B97AB8 /* RevoxaResourceBundle.swift in Sources */,
-				E1B2F3C12A7B7C1111E9A057 /* BillingCalculator.swift in Sources */,
-				E35B62DD2263AB6AF9175E11 /* BillingScheduleCalculator.swift in Sources */,
-				6CE97DBABAA31870BC00748F /* CSVExportService.swift in Sources */,
-				173CDCC0F3D1EA5A4F1F983A /* CSVExporter.swift in Sources */,
-				B82D25278070D82D5871896E /* DashboardCalculator.swift in Sources */,
-				2DA087E5929EA873003D624F /* ExchangeRateService.swift in Sources */,
-				49B4838BFA27C080434D77FE /* InsightsCalculator.swift in Sources */,
-				80B5FB437EB6A1472E0DA422 /* NotificationSchedulingService.swift in Sources */,
-				3A1BDA51352CDF98A44D1ED4 /* RevoxaAppActions.swift in Sources */,
-				36E67358876D1D2BBC5CC037 /* ScreenshotFixtures.swift in Sources */,
-				448AF1128CECF169DDE21D43 /* UpcomingCalculator.swift in Sources */,
-				D3A203D18A98B707FE3BFD9C /* ValueReviewCalculator.swift in Sources */,
-				A492CC796D17CFDC44CC2698 /* AppPreferences.swift in Sources */,
-				0B92F62D5E1CB564A32BE8A4 /* AppSection.swift in Sources */,
-				AAD1D495B040414EE5EF1C39 /* RevoxaCurrency.swift in Sources */,
-				F543F121C3B402C57B07406D /* Subscription.swift in Sources */,
-				794451D7DBB52EF7FD88D519 /* SubscriptionCategory+Chart.swift in Sources */,
-				ADEB6310672F7EA9CFF3501F /* SubscriptionCategoryFilter.swift in Sources */,
-				60FBA0DE7649A5D274395642 /* SubscriptionEnums.swift in Sources */,
-				492078853D0A191573910868 /* SubscriptionFormState.swift in Sources */,
-				56A7DAC88DECE9232184D24B /* SubscriptionSamples.swift in Sources */,
-				59623EDB5B21E6B34C75C84F /* SubscriptionTemplate.swift in Sources */,
-				B37EA40392C193ADA1F32FAE /* SubscriptionValueReviewEnums.swift in Sources */,
-				CDF63C923B4947DCA2E18AC8 /* RevoxaCurrencyTotalsView.swift in Sources */,
-				B67A580F0E94089EBB34EE76 /* CategoryDonutChartView.swift in Sources */,
-				0BA441E7E4A1DF6CD8B3AA47 /* RevoxaComponents.swift in Sources */,
-				67CF1C91EC08B62E1E61997D /* ContentView.swift in Sources */,
-				80E9B517A8C565FE5309CE89 /* DetailView.swift in Sources */,
-				99F64DD8E92CD5852D43C534 /* SectionModalView.swift in Sources */,
-				8984BF096B4C9C5571D6E61C /* SidebarView.swift in Sources */,
-				1F8CA070E21B298EEAE91478 /* CalendarAnalyticsSheet.swift in Sources */,
-				734D600A797DEAFDB109819C /* CalendarView.swift in Sources */,
-				58EA61E0A1248EF2B4C3EF3D /* DashboardView.swift in Sources */,
-				49293A18F1F3A2B42AFB18AD /* PlaceholderScreen.swift in Sources */,
-				D8F97409F89FA5E824399FF2 /* SettingsView.swift in Sources */,
-				F0691667516C2A702885CA6F /* SubscriptionFormView.swift in Sources */,
-				236019F565A402F55DBE0840 /* SubscriptionsView.swift in Sources */,
-				66794ED0FA60E831C6AC9D97 /* RevoxaMobileRootView.swift in Sources */,
-				8374935EE15C2394F45E923D /* MenuBarPopoverView.swift in Sources */,
-				C24DFCFC5731086BDE464548 /* RevoxaMenuBarIcon.swift in Sources */,
-				88DD930874BCA9AF0E2C624B /* RevoxaMainWindowAccessor.swift in Sources */,
-				9AF60B6BD87F04407DA761A5 /* RevoxaWindowConfigurator.swift in Sources */,
-				4BEF36A634DA2E9A237C0BFC /* MainWindowToolbar.swift in Sources */,
+				311457135E73B72B43FC4646 /* Sources/Revoxa/App/RevoxaApp.swift in Sources */,
+				CB6A2C5C4B4569F6754DDBC3 /* Sources/Revoxa/Core/DesignSystem/CategoryChartPalette.swift in Sources */,
+				06500903403A2F8431501DCA /* Sources/Revoxa/Core/DesignSystem/RevoxaDesignTokens.swift in Sources */,
+				BA6F9AB5969A2379BE9C92C7 /* Sources/Revoxa/Core/DesignSystem/RevoxaThemeSettings.swift in Sources */,
+				6B8D2DEDD4B37B41C72D9DD4 /* Sources/Revoxa/Core/Extensions/Color+Hex.swift in Sources */,
+				ED4D2F27041082579665A4B0 /* Sources/Revoxa/Core/Extensions/Decimal+Chart.swift in Sources */,
+				405BE76A8B1065040E4DCC60 /* Sources/Revoxa/Core/Formatters/CurrencyFormatter.swift in Sources */,
+				45A4C98978FDCA9BE5544C2D /* Sources/Revoxa/Core/Formatters/DecimalInputFormatter.swift in Sources */,
+				E3E690F61E7FE5F67CCBB064 /* Sources/Revoxa/Core/Formatters/RevoxaDateFormatter.swift in Sources */,
+				B62D268BC1EBF9CA181B5818 /* Sources/Revoxa/Core/Localization/AppLanguage.swift in Sources */,
+				7B5296B1F8AE4FCE87AF9AA3 /* Sources/Revoxa/Core/Localization/Bundle+ModuleFallback.swift in Sources */,
+				C935601320A030226AA3579B /* Sources/Revoxa/Core/Localization/L10n.swift in Sources */,
+				614862DFBF3EFAF2B8185C3E /* Sources/Revoxa/Core/Localization/RevoxaLocale.swift in Sources */,
+				9525D5B59B58907F23B97AB8 /* Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift in Sources */,
+				E1B2F3C12A7B7C1111E9A057 /* Sources/Revoxa/Core/Services/BillingCalculator.swift in Sources */,
+				E35B62DD2263AB6AF9175E11 /* Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift in Sources */,
+				6CE97DBABAA31870BC00748F /* Sources/Revoxa/Core/Services/CSVExportService.swift in Sources */,
+				173CDCC0F3D1EA5A4F1F983A /* Sources/Revoxa/Core/Services/CSVExporter.swift in Sources */,
+				B82D25278070D82D5871896E /* Sources/Revoxa/Core/Services/DashboardCalculator.swift in Sources */,
+				2DA087E5929EA873003D624F /* Sources/Revoxa/Core/Services/ExchangeRateService.swift in Sources */,
+				49B4838BFA27C080434D77FE /* Sources/Revoxa/Core/Services/InsightsCalculator.swift in Sources */,
+				80B5FB437EB6A1472E0DA422 /* Sources/Revoxa/Core/Services/NotificationSchedulingService.swift in Sources */,
+				3A1BDA51352CDF98A44D1ED4 /* Sources/Revoxa/Core/Services/RevoxaAppActions.swift in Sources */,
+				36E67358876D1D2BBC5CC037 /* Sources/Revoxa/Core/Services/ScreenshotFixtures.swift in Sources */,
+				448AF1128CECF169DDE21D43 /* Sources/Revoxa/Core/Services/UpcomingCalculator.swift in Sources */,
+				D3A203D18A98B707FE3BFD9C /* Sources/Revoxa/Core/Services/ValueReviewCalculator.swift in Sources */,
+				A492CC796D17CFDC44CC2698 /* Sources/Revoxa/Models/AppPreferences.swift in Sources */,
+				0B92F62D5E1CB564A32BE8A4 /* Sources/Revoxa/Models/AppSection.swift in Sources */,
+				AAD1D495B040414EE5EF1C39 /* Sources/Revoxa/Models/RevoxaCurrency.swift in Sources */,
+				F543F121C3B402C57B07406D /* Sources/Revoxa/Models/Subscription.swift in Sources */,
+				794451D7DBB52EF7FD88D519 /* Sources/Revoxa/Models/SubscriptionCategory+Chart.swift in Sources */,
+				ADEB6310672F7EA9CFF3501F /* Sources/Revoxa/Models/SubscriptionCategoryFilter.swift in Sources */,
+				60FBA0DE7649A5D274395642 /* Sources/Revoxa/Models/SubscriptionEnums.swift in Sources */,
+				492078853D0A191573910868 /* Sources/Revoxa/Models/SubscriptionFormState.swift in Sources */,
+				56A7DAC88DECE9232184D24B /* Sources/Revoxa/Models/SubscriptionSamples.swift in Sources */,
+				59623EDB5B21E6B34C75C84F /* Sources/Revoxa/Models/SubscriptionTemplate.swift in Sources */,
+				B37EA40392C193ADA1F32FAE /* Sources/Revoxa/Models/SubscriptionValueReviewEnums.swift in Sources */,
+				CDF63C923B4947DCA2E18AC8 /* Sources/Revoxa/Shared/Components/RevoxaCurrencyTotalsView.swift in Sources */,
+				B67A580F0E94089EBB34EE76 /* Sources/Revoxa/Views/Components/CategoryDonutChartView.swift in Sources */,
+				0BA441E7E4A1DF6CD8B3AA47 /* Sources/Revoxa/Views/Components/RevoxaComponents.swift in Sources */,
+				67CF1C91EC08B62E1E61997D /* Sources/Revoxa/Views/ContentView.swift in Sources */,
+				80E9B517A8C565FE5309CE89 /* Sources/Revoxa/Views/Navigation/DetailView.swift in Sources */,
+				99F64DD8E92CD5852D43C534 /* Sources/Revoxa/Views/Navigation/SectionModalView.swift in Sources */,
+				8984BF096B4C9C5571D6E61C /* Sources/Revoxa/Views/Navigation/SidebarView.swift in Sources */,
+				1F8CA070E21B298EEAE91478 /* Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift in Sources */,
+				734D600A797DEAFDB109819C /* Sources/Revoxa/Views/Screens/CalendarView.swift in Sources */,
+				58EA61E0A1248EF2B4C3EF3D /* Sources/Revoxa/Views/Screens/DashboardView.swift in Sources */,
+				49293A18F1F3A2B42AFB18AD /* Sources/Revoxa/Views/Screens/PlaceholderScreen.swift in Sources */,
+				D8F97409F89FA5E824399FF2 /* Sources/Revoxa/Views/Screens/SettingsView.swift in Sources */,
+				F0691667516C2A702885CA6F /* Sources/Revoxa/Views/Screens/SubscriptionFormView.swift in Sources */,
+				236019F565A402F55DBE0840 /* Sources/Revoxa/Views/Screens/SubscriptionsView.swift in Sources */,
+				66794ED0FA60E831C6AC9D97 /* Sources/Revoxa/iOS/RevoxaMobileRootView.swift in Sources */,
+				8374935EE15C2394F45E923D /* Sources/Revoxa/macOS/MenuBar/MenuBarPopoverView.swift in Sources */,
+				C24DFCFC5731086BDE464548 /* Sources/Revoxa/macOS/MenuBar/RevoxaMenuBarIcon.swift in Sources */,
+				88DD930874BCA9AF0E2C624B /* Sources/Revoxa/macOS/RevoxaMainWindowAccessor.swift in Sources */,
+				9AF60B6BD87F04407DA761A5 /* Sources/Revoxa/macOS/RevoxaWindowConfigurator.swift in Sources */,
+				4BEF36A634DA2E9A237C0BFC /* Sources/Revoxa/macOS/Toolbar/MainWindowToolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		3DDF142C91E4BE3A6BA5A69E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Configurations/Revoxa-iOS/Revoxa-iOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 5JAMN2986A;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Configurations/Revoxa-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.revoxa.app;
+				PRODUCT_NAME = Revoxa;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4A43692AD8BCEEB8B727C85B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -432,6 +459,33 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+			};
+			name = Debug;
+		};
+		4D8F6610AF6606489ED8DFBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Configurations/Revoxa-iOS/Revoxa-iOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 5JAMN2986A;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Configurations/Revoxa-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.revoxa.app;
+				PRODUCT_NAME = Revoxa;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -488,71 +542,23 @@
 			};
 			name = Release;
 		};
-		4D8F6610AF6606489ED8DFBC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Configurations/Revoxa-iOS/Revoxa-iOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Configurations/Revoxa-iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.revoxa.app;
-				PRODUCT_NAME = Revoxa;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3DDF142C91E4BE3A6BA5A69E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Configurations/Revoxa-iOS/Revoxa-iOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Configurations/Revoxa-iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.revoxa.app;
-				PRODUCT_NAME = Revoxa;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		479141CF4F7E78536D4D69BF /* Build configuration list for PBXProject "Revoxa" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4A43692AD8BCEEB8B727C85B /* Debug */,
-				C28449456A5A705A7479770B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1C9E302A2D5FE01BD0E20588 /* Build configuration list for PBXNativeTarget "Revoxa iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4D8F6610AF6606489ED8DFBC /* Debug */,
 				3DDF142C91E4BE3A6BA5A69E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		479141CF4F7E78536D4D69BF /* Build configuration list for PBXProject "Revoxa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A43692AD8BCEEB8B727C85B /* Debug */,
+				C28449456A5A705A7479770B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
