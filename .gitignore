@@ -15,6 +15,10 @@ DerivedData/
 # Local app bundles
 dist/
 
+# Local signing/provisioning files
+*.provisionprofile
+*.mobileprovision
+
 # Generated icon intermediates
 AppIcon/AppIcon.iconset/
 
