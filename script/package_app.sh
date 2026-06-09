@@ -4,6 +4,7 @@ set -euo pipefail
 
 APP_NAME="Revoxa"
 BUNDLE_ID="com.revoxa.app"
+RESOURCE_BUNDLE_ID="$BUNDLE_ID.resources"
 MIN_SYSTEM_VERSION="14.0"
 LS_CATEGORY="public.app-category.productivity"
 
@@ -62,6 +63,7 @@ PKG_INFO="$APP_CONTENTS/PkgInfo"
 APP_ICON_ICNS="$ROOT_DIR/AppIcon/AppIcon.icns"
 ASSETS_CATALOG="$ROOT_DIR/Sources/Revoxa/Resources/Assets.xcassets"
 LOCALIZABLE_XCSTRINGS="$ROOT_DIR/Sources/Revoxa/Resources/Localizable.xcstrings"
+PACKAGED_RESOURCE_BUNDLE=""
 
 if [[ -f "$VERSION_FILE" ]]; then
   APP_VERSION="$(tr -d '[:space:]' <"$VERSION_FILE")"
@@ -95,6 +97,22 @@ if [[ -d "$RESOURCE_BUNDLE" ]]; then
   # SPM ships raw .xcstrings; the packaged .app needs compiled .lproj catalogs at runtime.
   if [[ -f "$LOCALIZABLE_XCSTRINGS" ]] && command -v xcrun >/dev/null 2>&1; then
     xcrun xcstringstool compile "$LOCALIZABLE_XCSTRINGS" --output-directory "$PACKAGED_RESOURCE_BUNDLE" >&2
+  fi
+
+  RESOURCE_INFO_PLIST="$PACKAGED_RESOURCE_BUNDLE/Info.plist"
+  if [[ -f "$RESOURCE_INFO_PLIST" ]]; then
+    set_resource_plist_string() {
+      local key="$1"
+      local value="$2"
+      /usr/libexec/PlistBuddy -c "Set :$key $value" "$RESOURCE_INFO_PLIST" 2>/dev/null \
+        || /usr/libexec/PlistBuddy -c "Add :$key string $value" "$RESOURCE_INFO_PLIST"
+    }
+
+    set_resource_plist_string "CFBundleIdentifier" "$RESOURCE_BUNDLE_ID"
+    set_resource_plist_string "CFBundleName" "RevoxaResources"
+    set_resource_plist_string "CFBundlePackageType" "BNDL"
+    set_resource_plist_string "CFBundleShortVersionString" "$APP_VERSION"
+    set_resource_plist_string "CFBundleVersion" "$APP_VERSION"
   fi
 fi
 
@@ -213,14 +231,16 @@ PLIST
 
 if command -v codesign >/dev/null 2>&1; then
   sign_target() {
-    local -a sign_args=(--force --sign - --identifier "$BUNDLE_ID" --timestamp=none)
+    local target="$1"
+    local identifier="${2:-$BUNDLE_ID}"
+    local -a sign_args=(--force --sign - --identifier "$identifier" --timestamp=none)
     if [[ "$SKIP_ENTITLEMENTS" != true && -f "$ENTITLEMENTS_FILE" ]]; then
       sign_args+=(--entitlements "$ENTITLEMENTS_FILE")
     fi
-    codesign "${sign_args[@]}" "$1"
+    codesign "${sign_args[@]}" "$target"
   }
-  if [[ -d "$PACKAGED_RESOURCE_BUNDLE" ]]; then
-    sign_target "$PACKAGED_RESOURCE_BUNDLE" >/dev/null 2>&1 || true
+  if [[ -n "$PACKAGED_RESOURCE_BUNDLE" && -d "$PACKAGED_RESOURCE_BUNDLE" ]]; then
+    sign_target "$PACKAGED_RESOURCE_BUNDLE" "$RESOURCE_BUNDLE_ID" >/dev/null 2>&1 || true
   fi
   sign_target "$APP_BINARY"
   sign_target "$APP_BUNDLE"

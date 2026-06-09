@@ -59,6 +59,15 @@ bundle_id="$(/usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$INFO_PLIST
 display_name="$(/usr/libexec/PlistBuddy -c "Print :CFBundleDisplayName" "$INFO_PLIST" 2>/dev/null || true)"
 [[ "$display_name" == "$APP_NAME" ]] || fail "unexpected CFBundleDisplayName: ${display_name:-<missing>}"
 
+RESOURCE_BUNDLE="$APP_BUNDLE/Contents/MacOS/Revoxa_Revoxa.bundle"
+if [[ -d "$RESOURCE_BUNDLE" ]]; then
+  resource_info_plist="$RESOURCE_BUNDLE/Info.plist"
+  [[ -f "$resource_info_plist" ]] || fail "resource bundle missing Info.plist: $RESOURCE_BUNDLE"
+  resource_bundle_id="$(/usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$resource_info_plist" 2>/dev/null || true)"
+  [[ "$resource_bundle_id" == "com.revoxa.app.resources" ]] \
+    || fail "unexpected resource bundle CFBundleIdentifier: ${resource_bundle_id:-<missing>}"
+fi
+
 if [[ -d "$APPICONSET_DIR" ]]; then
   for png in "${required_pngs[@]}"; do
     [[ -f "$APPICONSET_DIR/$png" ]] || fail "AppIcon.appiconset missing $png (run script/generate_app_icon.sh)"
