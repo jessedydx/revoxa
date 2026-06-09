@@ -35,7 +35,7 @@ struct CategoryDonutChartView: View {
     }
 
     private var sliceColors: [String: Color] {
-        CategoryChartPalette.colorMap(for: chartTotals, colorScheme: colorScheme)
+        CategoryChartPalette.colorMap(for: chartTotals)
     }
 
     private var slices: [DonutSlice] {
@@ -127,7 +127,7 @@ struct CategoryDonutChartView: View {
     }
 
     private var centerCurrencyCode: String {
-        chartTotals.first?.currencyCode ?? "TRY"
+        chartTotals.first?.currencyCode ?? RevoxaCurrency.defaultCode
     }
 
     private func detailText(for total: CategoryPaymentTotal) -> String {
@@ -135,26 +135,16 @@ struct CategoryDonutChartView: View {
         return "\(amount) · \(total.amount.sharePercentage(of: totalAmount))%"
     }
 
-    private var defaultRingColor: Color {
-        guard let largest = chartTotals.first else { return RevoxaColor.accent }
-        return sliceColors[largest.id] ?? RevoxaColor.accent
-    }
-
     private func draw(in context: inout GraphicsContext, geo: DonutGeometry) {
         let separatorColor = separatorLineColor
         let separatorWidth = geo.separatorWidth
-
-        if hoveredCategoryID == nil {
-            drawFullRing(in: &context, geo: geo, color: defaultRingColor, separatorColor: separatorColor)
-            return
-        }
 
         for slice in slices {
             let isHovered = hoveredCategoryID == slice.id
             let accent = slice.fillColor
 
             let fill: Color = {
-                if isHovered { return accent }
+                if hoveredCategoryID == nil || isHovered { return accent }
                 return accent.opacity(colorScheme == .dark ? 0.38 : 0.48)
             }()
 
@@ -175,25 +165,6 @@ struct CategoryDonutChartView: View {
         }
 
         strokeRingOutlines(in: &context, geo: geo, separatorColor: separatorColor, separatorWidth: separatorWidth)
-    }
-
-    private func drawFullRing(
-        in context: inout GraphicsContext,
-        geo: DonutGeometry,
-        color: Color,
-        separatorColor: Color
-    ) {
-        context.fill(
-            geo.fullAnnulusPath(),
-            with: .color(color),
-            style: FillStyle(eoFill: true)
-        )
-        strokeRingOutlines(
-            in: &context,
-            geo: geo,
-            separatorColor: separatorColor,
-            separatorWidth: geo.separatorWidth
-        )
     }
 
     private func strokeRingOutlines(

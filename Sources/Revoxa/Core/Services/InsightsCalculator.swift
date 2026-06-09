@@ -14,14 +14,27 @@ struct InsightsCalculator {
 
     func summary(
         for subscriptions: [Subscription],
-        exchangeRates: ExchangeRateSnapshot? = nil
+        exchangeRates: ExchangeRateSnapshot? = nil,
+        displayCurrencyCode: String = RevoxaCurrency.defaultCode
     ) -> InsightsSummary {
         let spendSubscriptions = subscriptions.filter(\.isActiveLike)
-        let categoryTotals = categoryTotals(for: spendSubscriptions, exchangeRates: exchangeRates)
+        let categoryTotals = categoryTotals(
+            for: spendSubscriptions,
+            exchangeRates: exchangeRates,
+            displayCurrencyCode: displayCurrencyCode
+        )
         let topSubscriptions = spendSubscriptions
             .sorted {
-                displayMonthlyCost(for: $0, exchangeRates: exchangeRates)
-                    > displayMonthlyCost(for: $1, exchangeRates: exchangeRates)
+                displayMonthlyCost(
+                    for: $0,
+                    exchangeRates: exchangeRates,
+                    displayCurrencyCode: displayCurrencyCode
+                )
+                    > displayMonthlyCost(
+                        for: $1,
+                        exchangeRates: exchangeRates,
+                        displayCurrencyCode: displayCurrencyCode
+                    )
             }
             .prefix(10)
             .map {
@@ -47,9 +60,15 @@ struct InsightsCalculator {
 
     private func categoryTotals(
         for subscriptions: [Subscription],
-        exchangeRates: ExchangeRateSnapshot?
+        exchangeRates: ExchangeRateSnapshot?,
+        displayCurrencyCode: String
     ) -> [CategorySpendTotal] {
-        if let exchangeRates, let convertedTotals = convertedCategoryTotals(for: subscriptions, exchangeRates: exchangeRates) {
+        if let exchangeRates,
+           let convertedTotals = convertedCategoryTotals(
+            for: subscriptions,
+            exchangeRates: exchangeRates,
+            displayCurrencyCode: displayCurrencyCode
+           ) {
             return convertedTotals
         }
 
@@ -58,15 +77,25 @@ struct InsightsCalculator {
 
     private func convertedCategoryTotals(
         for subscriptions: [Subscription],
-        exchangeRates: ExchangeRateSnapshot
+        exchangeRates: ExchangeRateSnapshot,
+        displayCurrencyCode: String
     ) -> [CategorySpendTotal]? {
         var grouped: [SubscriptionCategory: (monthly: Decimal, yearly: Decimal)] = [:]
+        let targetCurrencyCode = Subscription.sanitizedCurrencyCode(displayCurrencyCode)
 
         for subscription in subscriptions {
             let monthly = billingCalculator.estimatedMonthlyCost(for: subscription)
             let yearly = billingCalculator.estimatedYearlyCost(for: subscription)
-            guard let convertedMonthly = exchangeRates.convertToTRY(monthly, from: subscription.currencyCode),
-                  let convertedYearly = exchangeRates.convertToTRY(yearly, from: subscription.currencyCode)
+            guard let convertedMonthly = exchangeRates.convert(
+                monthly,
+                from: subscription.currencyCode,
+                to: targetCurrencyCode
+            ),
+            let convertedYearly = exchangeRates.convert(
+                yearly,
+                from: subscription.currencyCode,
+                to: targetCurrencyCode
+            )
             else {
                 return nil
             }
@@ -78,7 +107,7 @@ struct InsightsCalculator {
         return grouped
             .map {
                 CategorySpendTotal(
-                    currencyCode: "TRY",
+                    currencyCode: targetCurrencyCode,
                     category: $0.key,
                     estimatedMonthlyTotal: $0.value.monthly,
                     estimatedYearlyTotal: $0.value.yearly
@@ -120,9 +149,18 @@ struct InsightsCalculator {
             }
     }
 
-    private func displayMonthlyCost(for subscription: Subscription, exchangeRates: ExchangeRateSnapshot?) -> Decimal {
+    private func displayMonthlyCost(
+        for subscription: Subscription,
+        exchangeRates: ExchangeRateSnapshot?,
+        displayCurrencyCode: String
+    ) -> Decimal {
         let monthlyCost = billingCalculator.estimatedMonthlyCost(for: subscription)
-        return exchangeRates?.convertToTRY(monthlyCost, from: subscription.currencyCode) ?? monthlyCost
+        return CurrencyDisplay.convertedAmount(
+            monthlyCost,
+            from: subscription.currencyCode,
+            to: displayCurrencyCode,
+            using: exchangeRates
+        ).amount
     }
 }
 

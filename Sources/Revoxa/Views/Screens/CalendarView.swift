@@ -11,6 +11,7 @@ struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query(sort: \Subscription.nextBillingDate) private var subscriptions: [Subscription]
+    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
     @State private var displayedMonth = Date()
     @State private var selectedCalendarDay: CalendarDay?
     @State private var editingSubscription: Subscription?
@@ -58,7 +59,7 @@ struct CalendarView: View {
     }
 
     private var displayMonthTotals: [CurrencyTotal] {
-        convertedTotals(monthTotals) ?? monthTotals
+        CurrencyDisplay.displayTotals(monthTotals, in: displayCurrencyCode, using: exchangeRateSnapshot)
     }
 
     private var calendarGridRowCount: Int {
@@ -76,6 +77,7 @@ struct CalendarView: View {
 
             calendarContent
         }
+        #if os(macOS)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
@@ -87,6 +89,7 @@ struct CalendarView: View {
                 .keyboardShortcut("n", modifiers: .command)
             }
         }
+        #endif
         .task {
             await refreshExchangeRates()
         }
@@ -105,7 +108,11 @@ struct CalendarView: View {
             }
         }
         .sheet(item: $selectedCalendarDay) { day in
-            CalendarDayOccurrencesSheet(day: day) { subscription in
+            CalendarDayOccurrencesSheet(
+                day: day,
+                exchangeRateSnapshot: exchangeRateSnapshot,
+                displayCurrencyCode: displayCurrencyCode
+            ) { subscription in
                 openSubscriptionEditor(fromDaySheet: subscription)
             }
             .revoxaPresentationDetents()
@@ -114,7 +121,8 @@ struct CalendarView: View {
             CalendarAnalyticsSheet(
                 displayedMonth: displayedMonth,
                 subscriptions: activeSubscriptions,
-                exchangeRateSnapshot: exchangeRateSnapshot
+                exchangeRateSnapshot: exchangeRateSnapshot,
+                displayCurrencyCode: displayCurrencyCode
             )
         }
     }
@@ -124,7 +132,9 @@ struct CalendarView: View {
         if isCompactLayout {
             ScrollView {
                 VStack(alignment: .leading, spacing: RevoxaSpacing.medium) {
+                    #if os(macOS)
                     pageHeader
+                    #endif
                     calendarCard
                 }
                 .padding(RevoxaSpacing.medium)
@@ -133,12 +143,18 @@ struct CalendarView: View {
         } else {
             GeometryReader { geometry in
                 let verticalPadding = RevoxaSpacing.xLarge * 2
+                #if os(macOS)
                 let headerBlock = CalendarLayout.pageHeaderHeight + RevoxaSpacing.large
+                #else
+                let headerBlock: CGFloat = 0
+                #endif
                 let calendarCardHeight = geometry.size.height - verticalPadding - headerBlock
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: RevoxaSpacing.large) {
+                        #if os(macOS)
                         pageHeader
+                        #endif
                         calendarCard
                             .frame(height: max(calendarCardHeight, 520))
                     }
@@ -323,10 +339,6 @@ struct CalendarView: View {
 
     private var monthSummaryText: String {
         L10n.tf("calendar.monthSummary", monthOccurrences.count)
-    }
-
-    private func convertedTotals(_ totals: [CurrencyTotal]) -> [CurrencyTotal]? {
-        exchangeRateSnapshot?.convertedTotalsToTRY(totals)
     }
 
     private var exchangeRateFootnote: String? {
@@ -524,6 +536,8 @@ private struct CalendarDayCell: View {
 
 private struct CalendarDayOccurrencesSheet: View {
     let day: CalendarDay
+    let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
     let onSelectSubscription: (Subscription) -> Void
 
     @Environment(\.dismiss) private var dismiss
@@ -565,7 +579,11 @@ private struct CalendarDayOccurrencesSheet: View {
                         )
                     } else {
                         ForEach(day.occurrences) { occurrence in
-                            CalendarDayOccurrenceRow(occurrence: occurrence) {
+                            CalendarDayOccurrenceRow(
+                                occurrence: occurrence,
+                                exchangeRateSnapshot: exchangeRateSnapshot,
+                                displayCurrencyCode: displayCurrencyCode
+                            ) {
                                 onSelectSubscription(occurrence.subscription)
                             }
                         }
@@ -628,6 +646,8 @@ private struct CalendarDayOccurrencesSheet: View {
 
 private struct CalendarDayOccurrenceRow: View {
     let occurrence: BillingOccurrence
+    let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
     let onSelect: () -> Void
 
     private var subscription: Subscription {
@@ -670,7 +690,14 @@ private struct CalendarDayOccurrenceRow: View {
                 Spacer(minLength: RevoxaSpacing.small)
 
                 VStack(alignment: .trailing, spacing: RevoxaSpacing.xSmall) {
-                    Text(CurrencyFormatter.string(from: subscription.amount, currencyCode: subscription.currencyCode))
+                    Text(
+                        CurrencyDisplay.formattedAmount(
+                            subscription.amount,
+                            from: subscription.currencyCode,
+                            to: displayCurrencyCode,
+                            using: exchangeRateSnapshot
+                        )
+                    )
                         .font(.system(size: 15, weight: .semibold, design: .rounded))
                         .foregroundStyle(RevoxaColor.textPrimary)
                         .lineLimit(1)

@@ -75,13 +75,15 @@ struct BillingScheduleCalculator {
     func categoryPaymentTotals(
         for subscriptions: [Subscription],
         in interval: DateInterval,
-        exchangeRates: ExchangeRateSnapshot? = nil
+        exchangeRates: ExchangeRateSnapshot? = nil,
+        displayCurrencyCode: String = RevoxaCurrency.defaultCode
     ) -> [CategoryPaymentTotal] {
         if let exchangeRates,
            let convertedTotals = convertedCategoryPaymentTotals(
             for: subscriptions,
             in: interval,
-            exchangeRates: exchangeRates
+            exchangeRates: exchangeRates,
+            displayCurrencyCode: displayCurrencyCode
            ) {
             return convertedTotals
         }
@@ -107,9 +109,11 @@ struct BillingScheduleCalculator {
     private func convertedCategoryPaymentTotals(
         for subscriptions: [Subscription],
         in interval: DateInterval,
-        exchangeRates: ExchangeRateSnapshot
+        exchangeRates: ExchangeRateSnapshot,
+        displayCurrencyCode: String
     ) -> [CategoryPaymentTotal]? {
         var grouped: [SubscriptionCategory: Decimal] = [:]
+        let targetCurrencyCode = Subscription.sanitizedCurrencyCode(displayCurrencyCode)
 
         for subscription in subscriptions {
             let paymentAmount = billingCalculator.netBillingAmount(for: subscription)
@@ -117,9 +121,10 @@ struct BillingScheduleCalculator {
             guard occurrenceCount > 0 else { continue }
 
             let totalForSubscription = paymentAmount * Decimal(occurrenceCount)
-            guard let convertedAmount = exchangeRates.convertToTRY(
+            guard let convertedAmount = exchangeRates.convert(
                 totalForSubscription,
-                from: subscription.currencyCode
+                from: subscription.currencyCode,
+                to: targetCurrencyCode
             ) else {
                 return nil
             }
@@ -132,7 +137,7 @@ struct BillingScheduleCalculator {
                 CategoryPaymentTotal(
                     category: $0.key,
                     amount: $0.value,
-                    currencyCode: "TRY"
+                    currencyCode: targetCurrencyCode
                 )
             }
             .sorted { $0.amount > $1.amount }

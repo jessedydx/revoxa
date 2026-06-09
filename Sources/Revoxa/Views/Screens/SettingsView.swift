@@ -46,7 +46,9 @@ struct SettingsView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: RevoxaSpacing.xLarge) {
+                    #if os(macOS)
                     header
+                    #endif
                     generalSection
                     dataSection
                 }

@@ -4,6 +4,7 @@ struct CalendarAnalyticsSheet: View {
     let displayedMonth: Date
     let subscriptions: [Subscription]
     let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -22,7 +23,8 @@ struct CalendarAnalyticsSheet: View {
         billingSchedule.categoryPaymentTotals(
             for: subscriptions,
             in: monthInterval,
-            exchangeRates: exchangeRateSnapshot
+            exchangeRates: exchangeRateSnapshot,
+            displayCurrencyCode: displayCurrencyCode
         )
     }
 
@@ -30,7 +32,8 @@ struct CalendarAnalyticsSheet: View {
         billingSchedule.categoryPaymentTotals(
             for: subscriptions,
             in: yearInterval,
-            exchangeRates: exchangeRateSnapshot
+            exchangeRates: exchangeRateSnapshot,
+            displayCurrencyCode: displayCurrencyCode
         )
     }
 

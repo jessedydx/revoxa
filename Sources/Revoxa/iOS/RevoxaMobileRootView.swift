@@ -118,12 +118,16 @@ struct RevoxaMobileRootView: View {
         NavigationStack {
             DetailView(section: section)
                 .navigationTitle(section.title)
+                .navigationBarTitleDisplayMode(.large)
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button {
-                            isShowingAddSheet = true
-                        } label: {
-                            Label(RevoxaStrings.addSubscription, systemImage: "plus")
+                    if section != .settings {
+                        ToolbarItem(placement: .primaryAction) {
+                            Button {
+                                isShowingAddSheet = true
+                            } label: {
+                                Label(RevoxaStrings.addSubscription, systemImage: "plus")
+                            }
+                            .revoxaPrimaryButton()
                         }
                     }
                 }

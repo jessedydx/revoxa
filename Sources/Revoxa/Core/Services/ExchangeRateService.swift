@@ -21,16 +21,45 @@ struct ExchangeRateSnapshot: Codable, Equatable {
         return amount * rate
     }
 
-    func convertedTotalsToTRY(_ totals: [CurrencyTotal]) -> [CurrencyTotal]? {
+    func convert(_ amount: Decimal, from sourceCurrencyCode: String, to targetCurrencyCode: String) -> Decimal? {
+        let source = Subscription.sanitizedCurrencyCode(sourceCurrencyCode)
+        let target = Subscription.sanitizedCurrencyCode(targetCurrencyCode)
+
+        if source == target {
+            return amount
+        }
+
+        guard let amountInBase = convertToTRY(amount, from: source) else {
+            return nil
+        }
+
+        if target == baseCurrencyCode {
+            return amountInBase
+        }
+
+        guard let targetRate = rateToTRY(for: target), targetRate > .zero else {
+            return nil
+        }
+
+        return amountInBase / targetRate
+    }
+
+    func convertedTotals(_ totals: [CurrencyTotal], to targetCurrencyCode: String) -> [CurrencyTotal]? {
+        let target = Subscription.sanitizedCurrencyCode(targetCurrencyCode)
         var convertedTotal = Decimal.zero
+
         for total in totals {
-            guard let convertedAmount = convertToTRY(total.amount, from: total.currencyCode) else {
+            guard let convertedAmount = convert(total.amount, from: total.currencyCode, to: target) else {
                 return nil
             }
             convertedTotal += convertedAmount
         }
 
-        return [CurrencyTotal(currencyCode: "TRY", amount: convertedTotal)]
+        return [CurrencyTotal(currencyCode: target, amount: convertedTotal)]
+    }
+
+    func convertedTotalsToTRY(_ totals: [CurrencyTotal]) -> [CurrencyTotal]? {
+        convertedTotals(totals, to: baseCurrencyCode)
     }
 }
 

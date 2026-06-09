@@ -10,6 +10,10 @@ import AppKit
 struct RevoxaApp: App {
     #if os(macOS)
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #else
+    init() {
+        RevoxaIOSNavigationAppearance.configure()
+    }
     #endif
 
     private let modelContainer: ModelContainer = {

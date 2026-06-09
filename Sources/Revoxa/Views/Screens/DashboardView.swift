@@ -4,6 +4,7 @@ import SwiftUI
 struct DashboardView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query(sort: \Subscription.nextBillingDate) private var subscriptions: [Subscription]
+    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
     private let dashboardCalculator = DashboardCalculator()
     private let billingCalculator = BillingCalculator()
     private let exchangeRateService = ExchangeRateService.shared
@@ -15,11 +16,11 @@ struct DashboardView: View {
     }
 
     private var displayMonthlyTotals: [CurrencyTotal] {
-        convertedTotals(summary.monthlyTotals) ?? summary.monthlyTotals
+        CurrencyDisplay.displayTotals(summary.monthlyTotals, in: displayCurrencyCode, using: exchangeRateSnapshot)
     }
 
     private var displayYearlyTotals: [CurrencyTotal] {
-        convertedTotals(summary.yearlyTotals) ?? summary.yearlyTotals
+        CurrencyDisplay.displayTotals(summary.yearlyTotals, in: displayCurrencyCode, using: exchangeRateSnapshot)
     }
 
     private var isCompactLayout: Bool {
@@ -33,7 +34,9 @@ struct DashboardView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: RevoxaSpacing.large) {
+                    #if os(macOS)
                     header
+                    #endif
                     heroGrid
                     contentGrid
                 }
@@ -139,7 +142,8 @@ struct DashboardView: View {
                     DashboardSubscriptionCostRow(
                         subscription: subscription,
                         billingCalculator: billingCalculator,
-                        exchangeRateSnapshot: exchangeRateSnapshot
+                        exchangeRateSnapshot: exchangeRateSnapshot,
+                        displayCurrencyCode: displayCurrencyCode
                     )
                 }
             }
@@ -160,11 +164,12 @@ struct DashboardView: View {
 
     private func displayMonthlyCost(for subscription: Subscription) -> Decimal {
         let monthlyCost = billingCalculator.estimatedMonthlyCost(for: subscription)
-        return exchangeRateSnapshot?.convertToTRY(monthlyCost, from: subscription.currencyCode) ?? monthlyCost
-    }
-
-    private func convertedTotals(_ totals: [CurrencyTotal]) -> [CurrencyTotal]? {
-        exchangeRateSnapshot?.convertedTotalsToTRY(totals)
+        return CurrencyDisplay.convertedAmount(
+            monthlyCost,
+            from: subscription.currencyCode,
+            to: displayCurrencyCode,
+            using: exchangeRateSnapshot
+        ).amount
     }
 
     private var exchangeRateFootnote: String? {
@@ -352,6 +357,7 @@ private struct DashboardSubscriptionCostRow: View {
     let subscription: Subscription
     let billingCalculator: BillingCalculator
     let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
 
     var body: some View {
         HStack(spacing: RevoxaSpacing.medium) {
@@ -368,11 +374,12 @@ private struct DashboardSubscriptionCostRow: View {
 
     private var costText: String {
         let monthlyCost = billingCalculator.estimatedMonthlyCost(for: subscription)
-        if let convertedCost = exchangeRateSnapshot?.convertToTRY(monthlyCost, from: subscription.currencyCode) {
-            return CurrencyFormatter.string(from: convertedCost, currencyCode: "TRY")
-        }
-
-        return CurrencyFormatter.string(from: monthlyCost, currencyCode: subscription.currencyCode)
+        return CurrencyDisplay.formattedAmount(
+            monthlyCost,
+            from: subscription.currencyCode,
+            to: displayCurrencyCode,
+            using: exchangeRateSnapshot
+        )
     }
 }
 

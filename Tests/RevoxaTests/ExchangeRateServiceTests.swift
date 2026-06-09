@@ -35,6 +35,18 @@ struct ExchangeRateServiceTests {
         #expect(snapshot.rateToTRY(for: "EUR") == Decimal(string: "53.2181"))
         #expect(snapshot.rateToTRY(for: "JPY") == Decimal(string: "0.318"))
         #expect(snapshot.convertToTRY(Decimal(10), from: "USD") == Decimal(string: "457.134"))
+        let usdRate = Decimal(string: "45.7134")!
+        let eurRate = Decimal(string: "53.2181")!
+        #expect(snapshot.convert(Decimal(10), from: "EUR", to: "USD") == (Decimal(10) * eurRate) / usdRate)
+        #expect(
+            snapshot.convertedTotals(
+                [
+                    CurrencyTotal(currencyCode: "USD", amount: Decimal(10)),
+                    CurrencyTotal(currencyCode: "EUR", amount: Decimal(5))
+                ],
+                to: "USD"
+            ) == [CurrencyTotal(currencyCode: "USD", amount: Decimal(10) + (Decimal(5) * eurRate) / usdRate)]
+        )
     }
 
     private func date(_ year: Int, _ month: Int, _ day: Int) -> Date {

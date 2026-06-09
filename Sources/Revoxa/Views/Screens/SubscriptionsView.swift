@@ -5,7 +5,9 @@ struct SubscriptionsView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Subscription.name) private var subscriptions: [Subscription]
+    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
     @State private var searchText = ""
+    @State private var exchangeRateSnapshot: ExchangeRateSnapshot?
     @State private var selectedStatusFilter = SubscriptionStatusFilter.all
     @State private var selectedCategoryFilter = SubscriptionCategoryFilter.all
     @State private var editingSubscription: Subscription?
@@ -31,7 +33,9 @@ struct SubscriptionsView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: RevoxaSpacing.large) {
+                #if os(macOS)
                 header
+                #endif
                 filterBar
                 content
             }
@@ -46,6 +50,9 @@ struct SubscriptionsView: View {
         )
         .onReceive(NotificationCenter.default.publisher(for: .revoxaFocusSearch)) { _ in
             isSearchPresented = true
+        }
+        .task {
+            await refreshExchangeRates()
         }
         .sheet(item: $editingSubscription) { subscription in
             SubscriptionFormView(subscription: subscription) { subscription in
@@ -88,6 +95,7 @@ struct SubscriptionsView: View {
                 shownCountText
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(RevoxaSpacing.medium)
         .background(RevoxaColor.surface)
         .clipShape(RoundedRectangle(cornerRadius: RevoxaRadius.medium))
@@ -105,7 +113,7 @@ struct SubscriptionsView: View {
                 }
             }
             .pickerStyle(.menu)
-            .frame(width: isCompactLayout ? 148 : 180)
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Picker(L10n.t("subscriptions.category"), selection: $selectedCategoryFilter) {
                 ForEach(SubscriptionCategoryFilter.allCases) { filter in
@@ -113,8 +121,9 @@ struct SubscriptionsView: View {
                 }
             }
             .pickerStyle(.menu)
-            .frame(width: isCompactLayout ? 164 : 200)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var shownCountText: some View {
@@ -136,13 +145,35 @@ struct SubscriptionsView: View {
                 message: L10n.t("subscriptions.noMatch.subtitle")
             )
         } else if isCompactLayout {
-            SubscriptionCardList(subscriptions: filteredSubscriptions) { subscription in
+            SubscriptionCardList(
+                subscriptions: filteredSubscriptions,
+                exchangeRateSnapshot: exchangeRateSnapshot,
+                displayCurrencyCode: displayCurrencyCode
+            ) { subscription in
                 editingSubscription = subscription
             }
         } else {
-            SubscriptionTable(subscriptions: filteredSubscriptions) { subscription in
+            SubscriptionTable(
+                subscriptions: filteredSubscriptions,
+                exchangeRateSnapshot: exchangeRateSnapshot,
+                displayCurrencyCode: displayCurrencyCode
+            ) { subscription in
                 editingSubscription = subscription
             }
+        }
+    }
+
+    private func refreshExchangeRates() async {
+        guard ScreenshotFixtures.isEnabled == false else {
+            exchangeRateSnapshot = nil
+            return
+        }
+
+        let exchangeRateService = ExchangeRateService.shared
+        do {
+            exchangeRateSnapshot = try await exchangeRateService.latestRates()
+        } catch {
+            exchangeRateSnapshot = exchangeRateService.cachedSnapshot
         }
     }
 
@@ -150,13 +181,19 @@ struct SubscriptionsView: View {
 
 private struct SubscriptionCardList: View {
     let subscriptions: [Subscription]
+    let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
     let onSelect: (Subscription) -> Void
 
     var body: some View {
         ScrollView {
             LazyVStack(spacing: RevoxaSpacing.small) {
                 ForEach(subscriptions) { subscription in
-                    SubscriptionCardRow(subscription: subscription) {
+                    SubscriptionCardRow(
+                        subscription: subscription,
+                        exchangeRateSnapshot: exchangeRateSnapshot,
+                        displayCurrencyCode: displayCurrencyCode
+                    ) {
                         onSelect(subscription)
                     }
                 }
@@ -169,6 +206,8 @@ private struct SubscriptionCardList: View {
 
 private struct SubscriptionCardRow: View {
     let subscription: Subscription
+    let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
     let onSelect: () -> Void
 
     var body: some View {
@@ -200,7 +239,14 @@ private struct SubscriptionCardRow: View {
 
                 HStack(alignment: .firstTextBaseline, spacing: RevoxaSpacing.medium) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(CurrencyFormatter.string(from: subscription.amount, currencyCode: subscription.currencyCode))
+                        Text(
+                            CurrencyDisplay.formattedAmount(
+                                subscription.amount,
+                                from: subscription.currencyCode,
+                                to: displayCurrencyCode,
+                                using: exchangeRateSnapshot
+                            )
+                        )
                             .font(RevoxaFont.body.weight(.semibold))
                             .foregroundStyle(RevoxaColor.textPrimary)
                             .lineLimit(1)
@@ -242,6 +288,8 @@ private struct SubscriptionCardRow: View {
 
 private struct SubscriptionTable: View {
     let subscriptions: [Subscription]
+    let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
     let onSelect: (Subscription) -> Void
 
     var body: some View {
@@ -251,7 +299,11 @@ private struct SubscriptionTable: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(subscriptions) { subscription in
-                        SubscriptionTableRow(subscription: subscription) {
+                        SubscriptionTableRow(
+                            subscription: subscription,
+                            exchangeRateSnapshot: exchangeRateSnapshot,
+                            displayCurrencyCode: displayCurrencyCode
+                        ) {
                             onSelect(subscription)
                         }
 
@@ -293,7 +345,18 @@ private struct SubscriptionTableHeader: View {
 
 private struct SubscriptionTableRow: View {
     let subscription: Subscription
+    let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
     let onSelect: () -> Void
+
+    private var displayedAmount: (amount: Decimal, currencyCode: String) {
+        CurrencyDisplay.convertedAmount(
+            subscription.amount,
+            from: subscription.currencyCode,
+            to: displayCurrencyCode,
+            using: exchangeRateSnapshot
+        )
+    }
 
     var body: some View {
         HStack(spacing: RevoxaSpacing.medium) {
@@ -311,13 +374,13 @@ private struct SubscriptionTableRow: View {
             }
             .frame(minWidth: 148, maxWidth: .infinity, alignment: .leading)
 
-            Text(CurrencyFormatter.string(from: subscription.amount, currencyCode: subscription.currencyCode))
+            Text(CurrencyFormatter.string(from: displayedAmount.amount, currencyCode: displayedAmount.currencyCode))
                 .font(RevoxaFont.body)
                 .foregroundStyle(RevoxaColor.textPrimary)
                 .lineLimit(1)
                 .frame(minWidth: 78, alignment: .trailing)
 
-            Text(subscription.currencyCode)
+            Text(displayedAmount.currencyCode)
                 .font(RevoxaFont.body)
                 .foregroundStyle(RevoxaColor.textSecondary)
                 .frame(minWidth: 68, alignment: .leading)

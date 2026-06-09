@@ -4,6 +4,7 @@ import SwiftUI
 
 struct MenuBarPopoverView: View {
     @Query(sort: \Subscription.nextBillingDate) private var subscriptions: [Subscription]
+    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
 
     private let dashboardCalculator = DashboardCalculator()
     private let exchangeRateService = ExchangeRateService.shared
@@ -15,11 +16,11 @@ struct MenuBarPopoverView: View {
     }
 
     private var displayMonthlyTotals: [CurrencyTotal] {
-        exchangeRateSnapshot?.convertedTotalsToTRY(summary.monthlyTotals) ?? summary.monthlyTotals
+        CurrencyDisplay.displayTotals(summary.monthlyTotals, in: displayCurrencyCode, using: exchangeRateSnapshot)
     }
 
     private var displayYearlyTotals: [CurrencyTotal] {
-        exchangeRateSnapshot?.convertedTotalsToTRY(summary.yearlyTotals) ?? summary.yearlyTotals
+        CurrencyDisplay.displayTotals(summary.yearlyTotals, in: displayCurrencyCode, using: exchangeRateSnapshot)
     }
 
     private var upcomingPayments: [DashboardPayment] {
@@ -145,7 +146,11 @@ struct MenuBarPopoverView: View {
                 MenuBarEmptyRow(message: L10n.t("menubar.noUpcoming"))
             } else {
                 ForEach(upcomingPayments) { payment in
-                    MenuBarUpcomingRow(payment: payment, exchangeRateSnapshot: exchangeRateSnapshot)
+                    MenuBarUpcomingRow(
+                        payment: payment,
+                        exchangeRateSnapshot: exchangeRateSnapshot,
+                        displayCurrencyCode: displayCurrencyCode
+                    )
                     if payment.id != upcomingPayments.last?.id {
                         Divider().overlay(RevoxaColor.borderSubtle)
                     }
@@ -160,7 +165,11 @@ struct MenuBarPopoverView: View {
                 MenuBarEmptyRow(message: L10n.t("cancelList.empty.title"))
             } else {
                 ForEach(cancelCandidates) { subscription in
-                    MenuBarCancelRow(subscription: subscription, exchangeRateSnapshot: exchangeRateSnapshot)
+                    MenuBarCancelRow(
+                        subscription: subscription,
+                        exchangeRateSnapshot: exchangeRateSnapshot,
+                        displayCurrencyCode: displayCurrencyCode
+                    )
                     if subscription.id != cancelCandidates.last?.id {
                         Divider().overlay(RevoxaColor.borderSubtle)
                     }
@@ -273,6 +282,7 @@ private struct MenuBarEmptyRow: View {
 private struct MenuBarUpcomingRow: View {
     let payment: DashboardPayment
     let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
 
     var body: some View {
         HStack(alignment: .top, spacing: RevoxaSpacing.small) {
@@ -304,17 +314,19 @@ private struct MenuBarUpcomingRow: View {
     }
 
     private func formattedAmount(_ amount: Decimal, currencyCode: String) -> String {
-        if let convertedAmount = exchangeRateSnapshot?.convertToTRY(amount, from: currencyCode) {
-            return CurrencyFormatter.string(from: convertedAmount, currencyCode: "TRY")
-        }
-
-        return CurrencyFormatter.string(from: amount, currencyCode: currencyCode)
+        CurrencyDisplay.formattedAmount(
+            amount,
+            from: currencyCode,
+            to: displayCurrencyCode,
+            using: exchangeRateSnapshot
+        )
     }
 }
 
 private struct MenuBarCancelRow: View {
     let subscription: Subscription
     let exchangeRateSnapshot: ExchangeRateSnapshot?
+    let displayCurrencyCode: String
 
     var body: some View {
         HStack(alignment: .top, spacing: RevoxaSpacing.small) {
@@ -339,11 +351,12 @@ private struct MenuBarCancelRow: View {
     }
 
     private func formattedAmount(_ amount: Decimal, currencyCode: String) -> String {
-        if let convertedAmount = exchangeRateSnapshot?.convertToTRY(amount, from: currencyCode) {
-            return CurrencyFormatter.string(from: convertedAmount, currencyCode: "TRY")
-        }
-
-        return CurrencyFormatter.string(from: amount, currencyCode: currencyCode)
+        CurrencyDisplay.formattedAmount(
+            amount,
+            from: currencyCode,
+            to: displayCurrencyCode,
+            using: exchangeRateSnapshot
+        )
     }
 }
 #endif
