@@ -19,6 +19,23 @@ def q(value)
   value.match?(/\A[A-Za-z0-9_.$\/-]+\z/) ? value : "\"#{value}\""
 end
 
+def read_existing_build_setting(key)
+  pbxproj_path = File.join(PROJECT_DIR, "project.pbxproj")
+  return nil unless File.exist?(pbxproj_path)
+
+  match = File.read(pbxproj_path).match(/#{Regexp.escape(key)} = ([^;]+);/)
+  return nil unless match
+
+  value = match[1].strip.delete('"')
+  value.empty? ? nil : value
+end
+
+def resolved_development_team
+  ENV.fetch("REVOXA_IOS_DEVELOPMENT_TEAM", nil) ||
+    read_existing_build_setting("DEVELOPMENT_TEAM") ||
+    "5JAMN2986A"
+end
+
 source_files = Dir
   .glob(File.join(ROOT, "Sources", "Revoxa", "**", "*.swift"))
   .map { |path| path.delete_prefix("#{ROOT}/") }
@@ -127,9 +144,9 @@ target_build_settings = {
   "ASSETCATALOG_COMPILER_APPICON_NAME" => "AppIcon",
   "CODE_SIGN_ENTITLEMENTS" => "Configurations/Revoxa-iOS/Revoxa-iOS.entitlements",
   "CODE_SIGN_STYLE" => "Automatic",
-  "CURRENT_PROJECT_VERSION" => "1",
+  "CURRENT_PROJECT_VERSION" => read_existing_build_setting("CURRENT_PROJECT_VERSION") || "1",
   "DEVELOPMENT_ASSET_PATHS" => "\"\"",
-  "DEVELOPMENT_TEAM" => "\"\"",
+  "DEVELOPMENT_TEAM" => resolved_development_team,
   "GENERATE_INFOPLIST_FILE" => "NO",
   "INFOPLIST_FILE" => "Configurations/Revoxa-iOS/Info.plist",
   "IPHONEOS_DEPLOYMENT_TARGET" => "17.0",
