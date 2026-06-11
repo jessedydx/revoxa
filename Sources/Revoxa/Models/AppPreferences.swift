@@ -48,4 +48,5 @@ enum PreferenceKey {
     static let appLanguage = "settings.appLanguage"
     static let notificationsEnabled = "settings.notificationsEnabled"
     static let cachedExchangeRateSnapshot = "exchangeRates.cachedSnapshot"
+    static let hasSeenICloudOnboarding = "onboarding.hasSeenICloud"
 }

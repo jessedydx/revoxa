@@ -5,7 +5,7 @@ struct SubscriptionsView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Subscription.name) private var subscriptions: [Subscription]
-    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
+    @SyncedStringStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
     @State private var searchText = ""
     @State private var exchangeRateSnapshot: ExchangeRateSnapshot?
     @State private var selectedStatusFilter = SubscriptionStatusFilter.all

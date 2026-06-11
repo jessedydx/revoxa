@@ -43,6 +43,7 @@ enum RevoxaLanguageSettings {
 
     static func writeLanguage(_ language: AppLanguage, to defaults: UserDefaults = .standard) {
         defaults.set(language.rawValue, forKey: PreferenceKey.appLanguage)
+        RevoxaSyncedPreferences.pushLocalChange(key: PreferenceKey.appLanguage, value: language.rawValue)
     }
 
     static var resolvedLocale: Locale {

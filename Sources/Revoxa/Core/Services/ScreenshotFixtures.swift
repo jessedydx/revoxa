@@ -55,16 +55,7 @@ enum ScreenshotFixtures {
     }
 
     static func makeModelContainer() throws -> ModelContainer {
-        if isEnabled {
-            configureDefaultsIfNeeded()
-
-            let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: Subscription.self, configurations: configuration)
-            activeModelContainer = container
-            return container
-        }
-
-        let container = try ModelContainer(for: Subscription.self)
+        let container = try RevoxaPersistence.makeModelContainer()
         activeModelContainer = container
         return container
     }

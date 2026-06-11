@@ -16,15 +16,22 @@ enum RevoxaThemeSettings {
 
     static func writeTheme(_ theme: AppTheme, to defaults: UserDefaults = .standard) {
         defaults.set(theme.rawValue, forKey: PreferenceKey.appTheme)
+        RevoxaSyncedPreferences.pushLocalChange(key: PreferenceKey.appTheme, value: theme.rawValue)
     }
 }
 
 struct RevoxaRootView<Content: View>: View {
     @Environment(\.modelContext) private var modelContext
-    @AppStorage(PreferenceKey.appTheme) private var appThemeRawValue = AppTheme.system.rawValue
-    @AppStorage(PreferenceKey.appLanguage) private var appLanguageRawValue = AppLanguage.system.rawValue
+    @Environment(\.scenePhase) private var scenePhase
+    @SyncedStringStorage(PreferenceKey.appTheme) private var appThemeRawValue = AppTheme.system.rawValue
+    @SyncedStringStorage(PreferenceKey.appLanguage) private var appLanguageRawValue = AppLanguage.system.rawValue
+    @AppStorage(PreferenceKey.hasSeenICloudOnboarding) private var hasSeenICloudOnboarding = false
+
     private let refreshesOnLanguageChange: Bool
     @ViewBuilder private let content: () -> Content
+
+    @State private var preferencesRefreshToken = UUID()
+    @State private var isShowingICloudOnboarding = false
 
     init(
         refreshesOnLanguageChange: Bool = true,
@@ -53,17 +60,50 @@ struct RevoxaRootView<Content: View>: View {
     var body: some View {
         let root = content()
             .revoxaAppearance(theme: appTheme, languageRawValue: effectiveLanguageRawValue)
+            .environment(RevoxaCloudSyncMonitor.shared)
             .task {
                 await MainActor.run {
                     ScreenshotFixtures.seedIfNeeded(in: modelContext)
+                    presentOnboardingIfNeeded()
                 }
             }
+            .onChange(of: scenePhase) { _, newPhase in
+                guard newPhase == .active else { return }
+                Task {
+                    await RevoxaCloudSyncMonitor.shared.refreshAccountStatus()
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .revoxaSyncedPreferencesDidChange)) { _ in
+                preferencesRefreshToken = UUID()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .revoxaCloudDataDidChange)) { _ in
+                RevoxaCloudNotificationCoordinator.refreshNotificationsIfNeeded(in: modelContext)
+            }
+            .sheet(isPresented: $isShowingICloudOnboarding) {
+                ICloudOnboardingSheet()
+            }
 
-        if refreshesOnLanguageChange {
-            root.id(appLanguageRawValue)
-        } else {
-            root
+        Group {
+            if refreshesOnLanguageChange {
+                root
+                    .id(appLanguageRawValue)
+                    .id(preferencesRefreshToken)
+            } else {
+                root
+                    .id(preferencesRefreshToken)
+            }
         }
+    }
+
+    private func presentOnboardingIfNeeded() {
+        guard ScreenshotFixtures.isEnabled == false,
+              hasSeenICloudOnboarding == false,
+              RevoxaPersistence.isCloudKitEnabled
+        else {
+            return
+        }
+
+        isShowingICloudOnboarding = true
     }
 }
 

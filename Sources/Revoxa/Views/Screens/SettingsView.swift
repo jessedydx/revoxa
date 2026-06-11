@@ -4,12 +4,13 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(RevoxaCloudSyncMonitor.self) private var cloudSyncMonitor
     @Query(sort: \Subscription.name) private var subscriptions: [Subscription]
 
-    @AppStorage(PreferenceKey.defaultCurrencyCode) private var defaultCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
-    @AppStorage(PreferenceKey.defaultReminderDays) private var defaultReminderDays = 3
-    @AppStorage(PreferenceKey.appTheme) private var appThemeRawValue = AppTheme.system.rawValue
-    @AppStorage(PreferenceKey.appLanguage) private var appLanguageRawValue = AppLanguage.system.rawValue
+    @SyncedStringStorage(PreferenceKey.defaultCurrencyCode) private var defaultCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
+    @SyncedIntStorage(PreferenceKey.defaultReminderDays) private var defaultReminderDays = 3
+    @SyncedStringStorage(PreferenceKey.appTheme) private var appThemeRawValue = AppTheme.system.rawValue
+    @SyncedStringStorage(PreferenceKey.appLanguage) private var appLanguageRawValue = AppLanguage.system.rawValue
     @AppStorage(PreferenceKey.notificationsEnabled) private var notificationsEnabled = false
 
     @State private var isConfirmingClearAllData = false
@@ -49,6 +50,7 @@ struct SettingsView: View {
                     #if os(macOS)
                     header
                     #endif
+                    iCloudSection
                     generalSection
                     dataSection
                 }
@@ -87,6 +89,47 @@ struct SettingsView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .revoxaRefreshNotificationPermission)) { _ in
             refreshNotificationToggleFromSystem()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .revoxaCloudDataDidChange)) { _ in
+            RevoxaCloudNotificationCoordinator.refreshNotificationsIfNeeded(in: modelContext)
+        }
+        .task {
+            await cloudSyncMonitor.refreshAccountStatus()
+        }
+    }
+
+    private var iCloudSection: some View {
+        SettingsSection(title: L10n.t("icloud.settings.title")) {
+            VStack(alignment: .leading, spacing: RevoxaSpacing.medium) {
+                HStack(alignment: .top, spacing: RevoxaSpacing.medium) {
+                    Image(systemName: cloudSyncMonitor.isAvailable ? "icloud.fill" : "icloud.slash.fill")
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundStyle(cloudSyncMonitor.isAvailable ? RevoxaColor.accent : RevoxaColor.textSecondary)
+                        .frame(width: 28)
+
+                    VStack(alignment: .leading, spacing: RevoxaSpacing.xSmall) {
+                        Text(cloudSyncMonitor.statusTitle)
+                            .font(RevoxaFont.body.weight(.semibold))
+                            .foregroundStyle(RevoxaColor.textPrimary)
+
+                        Text(cloudSyncMonitor.statusDetail)
+                            .font(RevoxaFont.caption)
+                            .foregroundStyle(RevoxaColor.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                Text(L10n.t("icloud.settings.preferencesNote"))
+                    .font(RevoxaFont.caption)
+                    .foregroundStyle(RevoxaColor.textSecondary)
+
+                if cloudSyncMonitor.isUsingCloudKitStore && cloudSyncMonitor.isAvailable == false {
+                    Button(L10n.t("icloud.openSettings")) {
+                        cloudSyncMonitor.openSystemICloudSettings()
+                    }
+                    .tint(RevoxaColor.accent)
+                }
+            }
         }
     }
 

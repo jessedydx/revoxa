@@ -134,6 +134,7 @@ App Store Connect'te GitHub bağlıysa push sonrası otomatik TestFlight build i
    - Xcode target için Team ID atanmalı.
    - Automatic signing veya manuel provisioning stratejisi netleşmeli.
    - Gerekirse entitlement dosyaları App Store gereksinimlerine göre güncellenmeli.
+   - iCloud container: `iCloud.com.revoxa.app` (CloudKit + Key-Value store). iOS ve macOS target'larında **iCloud** capability açık olmalı.
 5. TestFlight için ilk iOS build'i yükle.
 6. macOS build'i Mac App Store gereksinimleriyle doğrula. Adım adım macOS TestFlight rehberi: `docs/macos-testflight-setup.md`.
 7. Store metadata, privacy bilgileri, ekran görüntüleri ve review notlarını gir.

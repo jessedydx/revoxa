@@ -11,7 +11,7 @@ struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query(sort: \Subscription.nextBillingDate) private var subscriptions: [Subscription]
-    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
+    @SyncedStringStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
     @State private var displayedMonth = Date()
     @State private var selectedCalendarDay: CalendarDay?
     @State private var editingSubscription: Subscription?

@@ -4,7 +4,7 @@ import SwiftUI
 
 struct MenuBarPopoverView: View {
     @Query(sort: \Subscription.nextBillingDate) private var subscriptions: [Subscription]
-    @AppStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
+    @SyncedStringStorage(PreferenceKey.defaultCurrencyCode) private var displayCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
 
     private let dashboardCalculator = DashboardCalculator()
     private let exchangeRateService = ExchangeRateService.shared

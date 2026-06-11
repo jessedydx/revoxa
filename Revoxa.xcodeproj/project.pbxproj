@@ -22,6 +22,12 @@
 		3FF728E8276F3C51BB93955E /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB162B05AE87152D0EBAEFF /* L10n.swift */; };
 		2134AEA4239BF8AE90FA3266 /* RevoxaLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE51DB15C396439B112D46EC /* RevoxaLocale.swift */; };
 		CF091431DA58B14B20EBB340 /* RevoxaResourceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */; };
+		D9FE1EA443C016ADC115B374 /* RevoxaCloudKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8228CBB511C17E6329978496 /* RevoxaCloudKitConstants.swift */; };
+		A98530EAFCEBAEC4CF5928D5 /* RevoxaCloudNotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AE968B5079EDD6B3601D5C /* RevoxaCloudNotificationCoordinator.swift */; };
+		60FA19990C3C3EAA55BBD288 /* RevoxaCloudSyncMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19B612D9B0BB61F8F5EAA27 /* RevoxaCloudSyncMonitor.swift */; };
+		7043ED2F07D3D2824BC3C705 /* RevoxaPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C0A422799D92FE16ADCCD /* RevoxaPersistence.swift */; };
+		B9927AE4093F3649936818E4 /* RevoxaSyncedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6EFE36D5272A8A40C29B8 /* RevoxaSyncedPreferences.swift */; };
+		662CD47A9D817FC62029E70E /* SyncedAppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E51BE5C20571CD2E1970C /* SyncedAppStorage.swift */; };
 		B2E2FC6CDAD90601BDA568EB /* BillingCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */; };
 		E76D09976B6A2427380DBAD4 /* BillingScheduleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */; };
 		7135036147A54363C295DA70 /* CSVExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE736FBE566FAD3393F289 /* CSVExportService.swift */; };
@@ -55,6 +61,7 @@
 		85E43677D63F4066AA94F6D0 /* CalendarAnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */; };
 		57B8F127929CE39C02B5FD4A /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2D094BAFE5778E924EEE9B /* CalendarView.swift */; };
 		402F531999DA5496887538B5 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */; };
+		BC448104B6ECEA2AB4DD3251 /* ICloudOnboardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B687CE5FC9466F39B2D3FC73 /* ICloudOnboardingSheet.swift */; };
 		C2E85503247D8326913E790E /* PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */; };
 		F56A1409280EA91088464BB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA65B92727799709FF1DBD /* SettingsView.swift */; };
 		10B632D2C332E5A787E10D04 /* SubscriptionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */; };
@@ -84,6 +91,12 @@
 		10683963EAF545850C24773B /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB162B05AE87152D0EBAEFF /* L10n.swift */; };
 		99D79B3031DFCF030762AC0F /* RevoxaLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE51DB15C396439B112D46EC /* RevoxaLocale.swift */; };
 		7EC0E40F41BCDA60050216E8 /* RevoxaResourceBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */; };
+		4CD3A581C45EECC5A1E40B8F /* RevoxaCloudKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8228CBB511C17E6329978496 /* RevoxaCloudKitConstants.swift */; };
+		376581641EC7331D004C869C /* RevoxaCloudNotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AE968B5079EDD6B3601D5C /* RevoxaCloudNotificationCoordinator.swift */; };
+		B4065D1B96371837EE4CF6DB /* RevoxaCloudSyncMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19B612D9B0BB61F8F5EAA27 /* RevoxaCloudSyncMonitor.swift */; };
+		C68AD29281B7CECAF6A4358F /* RevoxaPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C0A422799D92FE16ADCCD /* RevoxaPersistence.swift */; };
+		587A850E9A861D05BC12A7CC /* RevoxaSyncedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A6EFE36D5272A8A40C29B8 /* RevoxaSyncedPreferences.swift */; };
+		0B826CB411DCFE7FD5DC4822 /* SyncedAppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E51BE5C20571CD2E1970C /* SyncedAppStorage.swift */; };
 		DF335569789B617F97798C1C /* BillingCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */; };
 		962E231094059E36A1FE06BC /* BillingScheduleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */; };
 		739450549276F6DB51B0D9B3 /* CSVExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE736FBE566FAD3393F289 /* CSVExportService.swift */; };
@@ -117,6 +130,7 @@
 		A7653F99F98980CC79BA8815 /* CalendarAnalyticsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */; };
 		060E343A18164D1C01A21092 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2D094BAFE5778E924EEE9B /* CalendarView.swift */; };
 		B6AF0B16C8810392F7565192 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */; };
+		F051CE67EC7A60D722ABA525 /* ICloudOnboardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B687CE5FC9466F39B2D3FC73 /* ICloudOnboardingSheet.swift */; };
 		F6BFB6B7C78D14502C2AC570 /* PlaceholderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */; };
 		2DCF92C270528756D1B7FCC9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA65B92727799709FF1DBD /* SettingsView.swift */; };
 		B3F5D11DDE0338BB2292ECFF /* SubscriptionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */; };
@@ -149,6 +163,12 @@
 		CEB162B05AE87152D0EBAEFF /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/L10n.swift; sourceTree = "<group>"; };
 		BE51DB15C396439B112D46EC /* RevoxaLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/RevoxaLocale.swift; sourceTree = "<group>"; };
 		53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Localization/RevoxaResourceBundle.swift; sourceTree = "<group>"; };
+		8228CBB511C17E6329978496 /* RevoxaCloudKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Persistence/RevoxaCloudKitConstants.swift; sourceTree = "<group>"; };
+		D7AE968B5079EDD6B3601D5C /* RevoxaCloudNotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Persistence/RevoxaCloudNotificationCoordinator.swift; sourceTree = "<group>"; };
+		C19B612D9B0BB61F8F5EAA27 /* RevoxaCloudSyncMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Persistence/RevoxaCloudSyncMonitor.swift; sourceTree = "<group>"; };
+		F66C0A422799D92FE16ADCCD /* RevoxaPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Persistence/RevoxaPersistence.swift; sourceTree = "<group>"; };
+		91A6EFE36D5272A8A40C29B8 /* RevoxaSyncedPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Persistence/RevoxaSyncedPreferences.swift; sourceTree = "<group>"; };
+		B92E51BE5C20571CD2E1970C /* SyncedAppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Persistence/SyncedAppStorage.swift; sourceTree = "<group>"; };
 		BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/BillingCalculator.swift; sourceTree = "<group>"; };
 		D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/BillingScheduleCalculator.swift; sourceTree = "<group>"; };
 		C7DE736FBE566FAD3393F289 /* CSVExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Core/Services/CSVExportService.swift; sourceTree = "<group>"; };
@@ -182,6 +202,7 @@
 		F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/CalendarAnalyticsSheet.swift; sourceTree = "<group>"; };
 		7F2D094BAFE5778E924EEE9B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/CalendarView.swift; sourceTree = "<group>"; };
 		6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/DashboardView.swift; sourceTree = "<group>"; };
+		B687CE5FC9466F39B2D3FC73 /* ICloudOnboardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/ICloudOnboardingSheet.swift; sourceTree = "<group>"; };
 		135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/PlaceholderScreen.swift; sourceTree = "<group>"; };
 		F6AA65B92727799709FF1DBD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SettingsView.swift; sourceTree = "<group>"; };
 		9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Revoxa/Views/Screens/SubscriptionFormView.swift; sourceTree = "<group>"; };
@@ -250,6 +271,12 @@
 				CEB162B05AE87152D0EBAEFF /* L10n.swift */,
 				BE51DB15C396439B112D46EC /* RevoxaLocale.swift */,
 				53D331C399F87D8815DA21BF /* RevoxaResourceBundle.swift */,
+				8228CBB511C17E6329978496 /* RevoxaCloudKitConstants.swift */,
+				D7AE968B5079EDD6B3601D5C /* RevoxaCloudNotificationCoordinator.swift */,
+				C19B612D9B0BB61F8F5EAA27 /* RevoxaCloudSyncMonitor.swift */,
+				F66C0A422799D92FE16ADCCD /* RevoxaPersistence.swift */,
+				91A6EFE36D5272A8A40C29B8 /* RevoxaSyncedPreferences.swift */,
+				B92E51BE5C20571CD2E1970C /* SyncedAppStorage.swift */,
 				BA5B05D9AEADEE7B44E1D19B /* BillingCalculator.swift */,
 				D0CDA554491B5B02F92511DC /* BillingScheduleCalculator.swift */,
 				C7DE736FBE566FAD3393F289 /* CSVExportService.swift */,
@@ -283,6 +310,7 @@
 				F40A669F515CD7DDFD9E7443 /* CalendarAnalyticsSheet.swift */,
 				7F2D094BAFE5778E924EEE9B /* CalendarView.swift */,
 				6F6F2E00D270328FE9D70BE2 /* DashboardView.swift */,
+				B687CE5FC9466F39B2D3FC73 /* ICloudOnboardingSheet.swift */,
 				135B0283B6FD3BDC858AD119 /* PlaceholderScreen.swift */,
 				F6AA65B92727799709FF1DBD /* SettingsView.swift */,
 				9DC9594D98B55EB023931CEA /* SubscriptionFormView.swift */,
@@ -446,6 +474,12 @@
 				3FF728E8276F3C51BB93955E /* L10n.swift in Sources */,
 				2134AEA4239BF8AE90FA3266 /* RevoxaLocale.swift in Sources */,
 				CF091431DA58B14B20EBB340 /* RevoxaResourceBundle.swift in Sources */,
+				D9FE1EA443C016ADC115B374 /* RevoxaCloudKitConstants.swift in Sources */,
+				A98530EAFCEBAEC4CF5928D5 /* RevoxaCloudNotificationCoordinator.swift in Sources */,
+				60FA19990C3C3EAA55BBD288 /* RevoxaCloudSyncMonitor.swift in Sources */,
+				7043ED2F07D3D2824BC3C705 /* RevoxaPersistence.swift in Sources */,
+				B9927AE4093F3649936818E4 /* RevoxaSyncedPreferences.swift in Sources */,
+				662CD47A9D817FC62029E70E /* SyncedAppStorage.swift in Sources */,
 				B2E2FC6CDAD90601BDA568EB /* BillingCalculator.swift in Sources */,
 				E76D09976B6A2427380DBAD4 /* BillingScheduleCalculator.swift in Sources */,
 				7135036147A54363C295DA70 /* CSVExportService.swift in Sources */,
@@ -479,6 +513,7 @@
 				85E43677D63F4066AA94F6D0 /* CalendarAnalyticsSheet.swift in Sources */,
 				57B8F127929CE39C02B5FD4A /* CalendarView.swift in Sources */,
 				402F531999DA5496887538B5 /* DashboardView.swift in Sources */,
+				BC448104B6ECEA2AB4DD3251 /* ICloudOnboardingSheet.swift in Sources */,
 				C2E85503247D8326913E790E /* PlaceholderScreen.swift in Sources */,
 				F56A1409280EA91088464BB3 /* SettingsView.swift in Sources */,
 				10B632D2C332E5A787E10D04 /* SubscriptionFormView.swift in Sources */,
@@ -512,6 +547,12 @@
 				10683963EAF545850C24773B /* L10n.swift in Sources */,
 				99D79B3031DFCF030762AC0F /* RevoxaLocale.swift in Sources */,
 				7EC0E40F41BCDA60050216E8 /* RevoxaResourceBundle.swift in Sources */,
+				4CD3A581C45EECC5A1E40B8F /* RevoxaCloudKitConstants.swift in Sources */,
+				376581641EC7331D004C869C /* RevoxaCloudNotificationCoordinator.swift in Sources */,
+				B4065D1B96371837EE4CF6DB /* RevoxaCloudSyncMonitor.swift in Sources */,
+				C68AD29281B7CECAF6A4358F /* RevoxaPersistence.swift in Sources */,
+				587A850E9A861D05BC12A7CC /* RevoxaSyncedPreferences.swift in Sources */,
+				0B826CB411DCFE7FD5DC4822 /* SyncedAppStorage.swift in Sources */,
 				DF335569789B617F97798C1C /* BillingCalculator.swift in Sources */,
 				962E231094059E36A1FE06BC /* BillingScheduleCalculator.swift in Sources */,
 				739450549276F6DB51B0D9B3 /* CSVExportService.swift in Sources */,
@@ -545,6 +586,7 @@
 				A7653F99F98980CC79BA8815 /* CalendarAnalyticsSheet.swift in Sources */,
 				060E343A18164D1C01A21092 /* CalendarView.swift in Sources */,
 				B6AF0B16C8810392F7565192 /* DashboardView.swift in Sources */,
+				F051CE67EC7A60D722ABA525 /* ICloudOnboardingSheet.swift in Sources */,
 				F6BFB6B7C78D14502C2AC570 /* PlaceholderScreen.swift in Sources */,
 				2DCF92C270528756D1B7FCC9 /* SettingsView.swift in Sources */,
 				B3F5D11DDE0338BB2292ECFF /* SubscriptionFormView.swift in Sources */,

@@ -1910,13 +1910,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Local preferences and data export. No account, iCloud, StoreKit, or server settings."
+            "value": "iCloud sync, preferences, and data export."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yerel tercihler ve veri dışa aktarma. Hesap, iCloud, StoreKit veya sunucu ayarı yoktur."
+            "value": "iCloud senkronu, tercihler ve veri dışa aktarma."
           }
         }
       }
@@ -1958,13 +1958,301 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This permanently deletes all local subscription records and cannot be undone."
+            "value": "This permanently deletes all subscription records on this device and syncs the deletion through iCloud. This cannot be undone."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bu işlem tüm yerel abonelik kayıtlarını kalıcı olarak siler ve geri alınamaz."
+            "value": "Bu işlem bu cihazdaki tüm abonelik kayıtlarını kalıcı olarak siler ve silmeyi iCloud üzerinden senkronlar. Geri alınamaz."
+          }
+        }
+      }
+    },
+    "icloud.settings.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud Sync"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud Senkronu"
+          }
+        }
+      }
+    },
+    "icloud.settings.preferencesNote": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currency, default reminder, theme, and language sync across your devices via iCloud."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para birimi, varsayılan hatırlatma, tema ve dil iCloud ile cihazlarınız arasında senkronlanır."
+          }
+        }
+      }
+    },
+    "icloud.openSettings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarları Aç"
+          }
+        }
+      }
+    },
+    "icloud.status.available": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud is connected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud bağlı"
+          }
+        }
+      }
+    },
+    "icloud.status.noAccount": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to iCloud"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud'a giriş yapın"
+          }
+        }
+      }
+    },
+    "icloud.status.restricted": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud access is restricted"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud erişimi kısıtlı"
+          }
+        }
+      }
+    },
+    "icloud.status.unknown": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking iCloud status"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud durumu kontrol ediliyor"
+          }
+        }
+      }
+    },
+    "icloud.status.temporarilyUnavailable": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud is temporarily unavailable"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud geçici olarak kullanılamıyor"
+          }
+        }
+      }
+    },
+    "icloud.status.localOnly": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local storage only"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca yerel depolama"
+          }
+        }
+      }
+    },
+    "icloud.status.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscriptions stay in sync between iPhone, iPad, and Mac on the same Apple ID."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonelikler aynı Apple ID ile iPhone, iPad ve Mac arasında senkron kalır."
+          }
+        }
+      }
+    },
+    "icloud.status.localOnly.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This build is using local storage without iCloud sync."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu derleme iCloud senkronu olmadan yerel depolama kullanıyor."
+          }
+        }
+      }
+    },
+    "icloud.status.lastSync": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last cloud update: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son bulut güncellemesi: %@"
+          }
+        }
+      }
+    },
+    "icloud.onboarding.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your subscriptions, everywhere"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonelikleriniz her yerde"
+          }
+        }
+      }
+    },
+    "icloud.onboarding.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revoxa keeps your data available on iPhone, iPad, and Mac through iCloud."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revoxa verilerinizi iCloud ile iPhone, iPad ve Mac'te kullanılabilir tutar."
+          }
+        }
+      }
+    },
+    "icloud.onboarding.point.sync": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add, edit, or delete a subscription on one device and see it on the others."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir cihazda abonelik ekleyin, düzenleyin veya silin; diğerlerinde de görün."
+          }
+        }
+      }
+    },
+    "icloud.onboarding.point.privacy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data stays in your private iCloud account. Revoxa does not run its own servers."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veriler özel iCloud hesabınızda kalır. Revoxa kendi sunucusunu çalıştırmaz."
+          }
+        }
+      }
+    },
+    "icloud.onboarding.point.notifications": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renewal reminders stay on each device and are refreshed after cloud updates."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenileme hatırlatmaları her cihazda kalır ve bulut güncellemelerinden sonra yenilenir."
+          }
+        }
+      }
+    },
+    "icloud.onboarding.continue": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devam"
           }
         }
       }
@@ -2118,13 +2406,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deletes all locally stored subscriptions."
+            "value": "Deletes every subscription and syncs the removal through iCloud when available."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yerelde saklanan tüm abonelikleri siler."
+            "value": "Tüm abonelikleri siler ve mümkünse silmeyi iCloud üzerinden senkronlar."
           }
         }
       }

@@ -18,7 +18,10 @@ struct RevoxaApp: App {
 
     private let modelContainer: ModelContainer = {
         do {
-            return try ScreenshotFixtures.makeModelContainer()
+            let container = try RevoxaPersistence.makeModelContainer()
+            RevoxaSyncedPreferences.start()
+            RevoxaCloudSyncMonitor.shared.start(isUsingCloudKitStore: RevoxaPersistence.isCloudKitEnabled)
+            return container
         } catch {
             fatalError("Failed to create SwiftData container: \(error)")
         }

@@ -5,8 +5,8 @@ struct SubscriptionFormView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @AppStorage(PreferenceKey.defaultCurrencyCode) private var defaultCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
-    @AppStorage(PreferenceKey.defaultReminderDays) private var defaultReminderDays = 3
+    @SyncedStringStorage(PreferenceKey.defaultCurrencyCode) private var defaultCurrencyCode = PreferenceKey.defaultCurrencyCodeValue
+    @SyncedIntStorage(PreferenceKey.defaultReminderDays) private var defaultReminderDays = 3
     @AppStorage(PreferenceKey.notificationsEnabled) private var notificationsEnabled = false
 
     let subscription: Subscription?
