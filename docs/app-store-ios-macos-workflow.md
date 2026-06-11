@@ -31,6 +31,7 @@ Revoxa'yı macOS uygulaması olarak korurken iOS sürümünü hazırlamak, iki p
 | iOS minimum hedef | iOS 17 |
 | iOS simulator doğrulaması | Başarılı |
 | Generic iOS/device build | `CODE_SIGNING_ALLOWED=NO` ile başarılı |
+| Xcode Cloud build numarası | `ci_scripts/ci_post_clone.sh` → `CI_BUILD_NUMBER` değerini `CURRENT_PROJECT_VERSION` olarak yazar |
 | Signing | Apple Developer hesabı onayı ve Team ID bekliyor |
 | Capabilities | Şu an özel capability yok; ihtiyaç çıkarsa App Store öncesi netleştirilecek |
 | Privacy manifest | `Sources/Revoxa/Resources/PrivacyInfo.xcprivacy` mevcut |
@@ -95,16 +96,31 @@ Eklenmeyen / gerekmediği doğrulananlar:
 Doğrulama:
 
 ```bash
-./script/package_app.sh --release --app-store
-./script/verify_mac_app_store_entitlements.sh dist/Revoxa.app
+xcodebuild -project Revoxa.xcodeproj \
+  -scheme 'Revoxa macOS' \
+  -configuration Debug \
+  -destination 'platform=macOS' \
+  CODE_SIGNING_ALLOWED=NO \
+  build
 ```
 
-Not: Yerel `/Applications` kurulumu da sandbox ile imzalanır; uygulama davranışı Store build ile aynı kalır. Apple Developer onayı sonrası Mac App Store upload için Xcode archive + `Apple Distribution` imzası gerekir; bu adım hesap onayına bağlıdır.
+Not: Yerel `/Applications` kurulumu `script/package_app.sh` akışını kullanır. Mac App Store/TestFlight paketi ise `Revoxa macOS` Xcode target'ından `script/prepare_macos_xcode_app_store_upload.sh` ile archive/export edilmelidir; bu akış `Apple Distribution`, Mac App Store provisioning profile ve Mac Installer Distribution sertifikasını birlikte kullanır.
+
+### Xcode Cloud / GitHub push akışı
+
+App Store Connect'te GitHub bağlıysa push sonrası otomatik TestFlight build için Xcode Cloud workflow şu şekilde kalmalı:
+
+- Branch tetikleyicisi kullanılan ana branch'i izlemeli.
+- Archive scheme'i `Revoxa macOS` olmalı.
+- Distribution hedefi App Store Connect / TestFlight olmalı.
+- Internal testing grubu yeni build'leri alacak şekilde bağlı olmalı.
+
+`VERSION` dosyası görünen sürümü (`MARKETING_VERSION`) belirler. Xcode Cloud'da `ci_scripts/ci_post_clone.sh` çalıştığında Apple'ın `CI_BUILD_NUMBER` ortam değişkeni build numarası (`CURRENT_PROJECT_VERSION`) olarak yazılır. Bu sayede aynı görünen sürüm altında birden fazla TestFlight build gönderilebilir.
 
 7. Lokal doğrulama yap.
    - `swift build`
    - `swift test`
-   - `./script/build_and_run.sh --package-only` uygulama kodunda anlamlı değişiklik varsa.
+   - İstenirse `./script/build_and_run.sh --package-only` ile macOS paketini doğrula.
    - iOS simulator build: `Revoxa.xcodeproj` / `Revoxa iOS`.
    - iOS generic/device build: `CODE_SIGNING_ALLOWED=NO`.
    - iPhone ve iPad simulator üzerinde ana ekran akışları.
@@ -119,7 +135,7 @@ Not: Yerel `/Applications` kurulumu da sandbox ile imzalanır; uygulama davranı
    - Automatic signing veya manuel provisioning stratejisi netleşmeli.
    - Gerekirse entitlement dosyaları App Store gereksinimlerine göre güncellenmeli.
 5. TestFlight için ilk iOS build'i yükle.
-6. macOS build'i Mac App Store gereksinimleriyle doğrula.
+6. macOS build'i Mac App Store gereksinimleriyle doğrula. Adım adım macOS TestFlight rehberi: `docs/macos-testflight-setup.md`.
 7. Store metadata, privacy bilgileri, ekran görüntüleri ve review notlarını gir.
 8. Son kontrol listesinden sonra App Review'a gönder.
 
@@ -133,7 +149,7 @@ Not: Yerel `/Applications` kurulumu da sandbox ile imzalanır; uygulama davranı
 ## Geri Dönüş Planı
 
 - iOS hazırlığı mümkünse ayrı branch veya küçük commitler halinde ilerletilir.
-- Ortak kod ayrımı yapılırken macOS build her anlamlı değişiklikten sonra doğrulanır.
+- Ortak kod ayrımı yapılırken macOS build PR veya manuel doğrulamada kontrol edilir.
 - Platforma özel değişiklikler `#if os(macOS)` ve `#if os(iOS)` bloklarıyla izole edilir.
 - Store metadata ve görsel dosyaları koddan ayrı tutulur; gerekirse kolayca revize edilir.
 

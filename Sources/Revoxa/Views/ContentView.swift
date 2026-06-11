@@ -32,6 +32,9 @@ struct ContentView: View {
             DetailView(section: detailSection)
         }
         .background(RevoxaColor.appBackground)
+        #if os(macOS)
+        .modifier(HideMacOSToolbarTitleModifier())
+        #endif
         .toolbar {
             ToolbarItem(placement: .principal) {
                 RevoxaBrandMark()
@@ -116,3 +119,15 @@ struct ContentView: View {
         }
     }
 }
+
+#if os(macOS)
+private struct HideMacOSToolbarTitleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.toolbar(removing: .title)
+        } else {
+            content.navigationTitle("")
+        }
+    }
+}
+#endif

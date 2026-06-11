@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// Donut chart with contiguous filled slices separated by visible border strokes (no angular gaps).
+/// Donut chart with separated slices and hover / touch percentage labels.
 struct CategoryDonutChartView: View {
     let totals: [CategoryPaymentTotal]
 
     @Environment(\.colorScheme) private var colorScheme
     @State private var hoveredCategoryID: String?
+    @State private var isInteracting = false
 
     private var displayTotals: [CategoryPaymentTotal] {
         totals.filter { $0.amount > .zero }
@@ -57,37 +58,47 @@ struct CategoryDonutChartView: View {
                 let side = min(geometry.size.width, geometry.size.height)
                 let originX = (geometry.size.width - side) / 2
                 let originY = (geometry.size.height - side) / 2
+                let geo = DonutGeometry(side: side)
 
                 ZStack {
                     Canvas { context, size in
-                        let geo = DonutGeometry(side: min(size.width, size.height))
-                        draw(in: &context, geo: geo)
+                        let canvasGeo = DonutGeometry(side: min(size.width, size.height))
+                        draw(in: &context, geo: canvasGeo)
                     }
                     .frame(width: side, height: side)
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+
+                    if isInteracting {
+                        ForEach(Array(slices.enumerated()), id: \.element.id) { index, slice in
+                            sliceLabel(for: slice, geo: geo, index: index)
+                                .position(
+                                    x: originX + geo.labelPoint(for: slice, index: index).x,
+                                    y: originY + geo.labelPoint(for: slice, index: index).y
+                                )
+                        }
+                    }
 
                     centerLabel
                         .frame(width: side * 0.52)
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 }
                 .contentShape(Rectangle())
-                .onContinuousHover { phase in
-                    switch phase {
-                    case .active(let location):
-                        let geo = DonutGeometry(side: side)
-                        let point = CGPoint(x: location.x - originX, y: location.y - originY)
-                        let id = geo.sliceID(at: point, slices: slices)
-                        if id != hoveredCategoryID {
-                            withAnimation(.spring(response: 0.28, dampingFraction: 0.76)) {
-                                hoveredCategoryID = id
-                            }
-                        }
-                    case .ended:
+                .applyChartInteraction(
+                    onActive: { location in
+                        handlePointer(
+                            at: location,
+                            geo: geo,
+                            originX: originX,
+                            originY: originY
+                        )
+                    },
+                    onEnded: {
                         withAnimation(.spring(response: 0.28, dampingFraction: 0.8)) {
+                            isInteracting = false
                             hoveredCategoryID = nil
                         }
                     }
-                }
+                )
             }
             .aspectRatio(1, contentMode: .fit)
             .frame(maxWidth: .infinity)
@@ -96,9 +107,41 @@ struct CategoryDonutChartView: View {
     }
 
     @ViewBuilder
+    private func sliceLabel(for slice: DonutSlice, geo: DonutGeometry, index: Int) -> some View {
+        let percentage = slice.total.amount.sharePercentage(of: totalAmount)
+        let showsTitle = slice.sweep >= geo.minimumLabelSweep
+
+        VStack(spacing: 2) {
+            if showsTitle {
+                Text(slice.total.category.title)
+                    .font(.system(size: 11, weight: .semibold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+            }
+
+            Text("\(percentage)%")
+                .font(.system(size: showsTitle ? 12 : 11, weight: .bold, design: .rounded))
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 8)
+        .padding(.vertical, showsTitle ? 5 : 4)
+        .background(
+            Capsule(style: .continuous)
+                .fill(slice.fillColor.opacity(colorScheme == .dark ? 0.92 : 0.96))
+        )
+        .overlay {
+            Capsule(style: .continuous)
+                .stroke(Color.white.opacity(colorScheme == .dark ? 0.18 : 0.35), lineWidth: 1)
+        }
+        .shadow(color: slice.fillColor.opacity(0.28), radius: 6, y: 2)
+        .allowsHitTesting(false)
+        .transition(.scale(scale: 0.85).combined(with: .opacity))
+    }
+
+    @ViewBuilder
     private var centerLabel: some View {
         VStack(spacing: 8) {
-            if let hovered = slices.first(where: { $0.id == hoveredCategoryID }) {
+            if isInteracting, let hovered = slices.first(where: { $0.id == hoveredCategoryID }) {
                 Text(hovered.total.category.title)
                     .font(.system(size: 23, weight: .bold, design: .rounded))
                     .foregroundStyle(RevoxaColor.textPrimary)
@@ -124,6 +167,7 @@ struct CategoryDonutChartView: View {
         }
         .allowsHitTesting(false)
         .animation(.easeInOut(duration: 0.16), value: hoveredCategoryID)
+        .animation(.easeInOut(duration: 0.16), value: isInteracting)
     }
 
     private var centerCurrencyCode: String {
@@ -135,60 +179,102 @@ struct CategoryDonutChartView: View {
         return "\(amount) · \(total.amount.sharePercentage(of: totalAmount))%"
     }
 
-    private func draw(in context: inout GraphicsContext, geo: DonutGeometry) {
-        let separatorColor = separatorLineColor
-        let separatorWidth = geo.separatorWidth
+    private func handlePointer(
+        at location: CGPoint,
+        geo: DonutGeometry,
+        originX: CGFloat,
+        originY: CGFloat
+    ) {
+        let point = CGPoint(x: location.x - originX, y: location.y - originY)
 
+        guard geo.isInRing(at: point) else {
+            if isInteracting || hoveredCategoryID != nil {
+                withAnimation(.spring(response: 0.28, dampingFraction: 0.8)) {
+                    isInteracting = false
+                    hoveredCategoryID = nil
+                }
+            }
+            return
+        }
+
+        let sliceID = geo.sliceID(at: point, slices: slices)
+        if isInteracting == false || sliceID != hoveredCategoryID {
+            withAnimation(.spring(response: 0.28, dampingFraction: 0.76)) {
+                isInteracting = true
+                hoveredCategoryID = sliceID
+            }
+        }
+    }
+
+    private func draw(in context: inout GraphicsContext, geo: DonutGeometry) {
         for slice in slices {
             let isHovered = hoveredCategoryID == slice.id
             let accent = slice.fillColor
 
             let fill: Color = {
-                if hoveredCategoryID == nil || isHovered { return accent }
-                return accent.opacity(colorScheme == .dark ? 0.38 : 0.48)
+                guard isInteracting else { return accent }
+                if isHovered { return accent }
+                return accent.opacity(colorScheme == .dark ? 0.42 : 0.52)
             }()
 
             let slicePath = geo.annulusSectorPath(start: slice.start, end: slice.end)
 
-            if isHovered {
+            if isInteracting && isHovered {
                 var glow = context
-                glow.addFilter(.shadow(color: accent.opacity(0.55), radius: 16, x: 0, y: 0))
-                glow.fill(slicePath, with: .color(accent.opacity(0.45)))
+                glow.addFilter(.shadow(color: accent.opacity(0.5), radius: 14, x: 0, y: 0))
+                glow.fill(slicePath, with: .color(accent.opacity(0.4)))
             }
 
             context.fill(slicePath, with: .color(fill))
-            context.stroke(
-                slicePath,
-                with: .color(separatorColor),
-                style: StrokeStyle(lineWidth: separatorWidth, lineJoin: .miter)
-            )
         }
 
-        strokeRingOutlines(in: &context, geo: geo, separatorColor: separatorColor, separatorWidth: separatorWidth)
-    }
-
-    private func strokeRingOutlines(
-        in context: inout GraphicsContext,
-        geo: DonutGeometry,
-        separatorColor: Color,
-        separatorWidth: CGFloat
-    ) {
         context.stroke(
             Path(ellipseIn: geo.innerHoleRect),
-            with: .color(separatorColor),
-            style: StrokeStyle(lineWidth: separatorWidth)
+            with: .color(ringOutlineColor),
+            style: StrokeStyle(lineWidth: 1.5)
         )
         context.stroke(
             Path(ellipseIn: geo.outerRingRect),
-            with: .color(separatorColor.opacity(0.85)),
-            style: StrokeStyle(lineWidth: 1)
+            with: .color(ringOutlineColor.opacity(0.9)),
+            style: StrokeStyle(lineWidth: 1.5)
         )
     }
 
-    private var separatorLineColor: Color {
+    private var ringOutlineColor: Color {
         colorScheme == .dark
-            ? Color.black.opacity(0.55)
-            : Color.white.opacity(0.95)
+            ? Color.white.opacity(0.14)
+            : Color.black.opacity(0.08)
+    }
+}
+
+// MARK: - Interaction
+
+private extension View {
+    @ViewBuilder
+    func applyChartInteraction(
+        onActive: @escaping (CGPoint) -> Void,
+        onEnded: @escaping () -> Void
+    ) -> some View {
+        #if os(macOS)
+        self.onContinuousHover { phase in
+            switch phase {
+            case .active(let location):
+                onActive(location)
+            case .ended:
+                onEnded()
+            }
+        }
+        #else
+        self.simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    onActive(value.location)
+                }
+                .onEnded { _ in
+                    onEnded()
+                }
+        )
+        #endif
     }
 }
 
@@ -203,6 +289,8 @@ private struct DonutSlice: Identifiable, Equatable {
 
     var id: String { total.id }
 
+    var sweep: Double { end - start }
+
     static func make(
         from totals: [CategoryPaymentTotal],
         totalAmount: Decimal,
@@ -211,14 +299,18 @@ private struct DonutSlice: Identifiable, Equatable {
         guard totalAmount > .zero, totals.isEmpty == false else { return [] }
 
         let fallback = RevoxaColor.textSecondary.opacity(0.4)
-        var cursor = 0.0
+        let gapRadians = totals.count > 1 ? DonutGeometry.sliceGapRadians : 0
+        let totalGap = gapRadians * Double(totals.count)
+        let usableSweep = (2 * Double.pi) - totalGap
+
+        var cursor = gapRadians / 2
         var result: [DonutSlice] = []
 
         for total in totals {
             let share = (total.amount as NSDecimalNumber)
                 .dividing(by: totalAmount as NSDecimalNumber)
                 .doubleValue
-            let sweep = share * (2 * Double.pi)
+            let sweep = share * usableSweep
             result.append(
                 DonutSlice(
                     total: total,
@@ -227,7 +319,7 @@ private struct DonutSlice: Identifiable, Equatable {
                     end: cursor + sweep
                 )
             )
-            cursor += sweep
+            cursor += sweep + gapRadians
         }
 
         return result
@@ -237,20 +329,22 @@ private struct DonutSlice: Identifiable, Equatable {
 // MARK: - Geometry
 
 private struct DonutGeometry {
+    static let sliceGapRadians = Double.pi / 180 * 2.2
+
     let side: CGFloat
     let center: CGPoint
     let outerRadius: CGFloat
     let innerRadius: CGFloat
-    let separatorWidth: CGFloat
     let innerHoleRect: CGRect
     let outerRingRect: CGRect
+    let minimumLabelSweep: Double
 
     init(side: CGFloat) {
         self.side = side
         center = CGPoint(x: side / 2, y: side / 2)
-        outerRadius = side * 0.40
-        innerRadius = side * 0.26
-        separatorWidth = max(side * 0.014, 2)
+        outerRadius = side * 0.38
+        innerRadius = side * 0.245
+        minimumLabelSweep = Double.pi / 180 * 14
 
         innerHoleRect = CGRect(
             x: center.x - innerRadius,
@@ -264,13 +358,6 @@ private struct DonutGeometry {
             width: outerRadius * 2,
             height: outerRadius * 2
         )
-    }
-
-    func fullAnnulusPath() -> Path {
-        var path = Path()
-        path.addEllipse(in: outerRingRect)
-        path.addEllipse(in: innerHoleRect)
-        return path
     }
 
     /// Filled annulus sector from `start` to `end` (clockwise from top).
@@ -298,6 +385,13 @@ private struct DonutGeometry {
         return path
     }
 
+    func labelPoint(for slice: DonutSlice, index: Int) -> CGPoint {
+        let midAngle = (slice.start + slice.end) / 2
+        let layerOffset: CGFloat = index.isMultiple(of: 2) ? 0 : 14
+        let radius = outerRadius + side * 0.11 + layerOffset
+        return point(atClockAngle: midAngle, radius: radius)
+    }
+
     /// Clock angle (0 at top) → SwiftUI `Angle` (0 at east).
     private func swiftUIAngle(_ clockAngle: Double) -> Angle {
         .radians(clockAngle - Double.pi / 2)
@@ -310,15 +404,20 @@ private struct DonutGeometry {
         )
     }
 
-    func sliceID(at point: CGPoint, slices: [DonutSlice]) -> String? {
+    func isInRing(at point: CGPoint) -> Bool {
         let dx = point.x - center.x
         let dy = point.y - center.y
         let distance = hypot(dx, dy)
+        return distance >= innerRadius * 0.94 && distance <= outerRadius * 1.04
+    }
 
-        guard distance >= innerRadius * 0.98, distance <= outerRadius * 1.02 else {
+    func sliceID(at point: CGPoint, slices: [DonutSlice]) -> String? {
+        guard isInRing(at: point) else {
             return nil
         }
 
+        let dx = point.x - center.x
+        let dy = point.y - center.y
         var angle = atan2(Double(dx), Double(-dy))
         if angle < 0 {
             angle += 2 * Double.pi

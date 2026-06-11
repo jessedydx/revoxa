@@ -93,6 +93,7 @@ Open `Revoxa.xcodeproj` in Xcode to run on a simulator or device once signing is
 | `script/capture_app_store_screenshots.sh` | Capture raw screenshots + marketing frames |
 | `script/generate_app_store_screenshots.swift` | Compose App Store marketing PNGs from raw shots |
 | `script/verify_app_bundle.sh` | Validate `dist/Revoxa.app` icons and plist |
+| `script/prepare_macos_app_store_upload.sh` | Sign + `.pkg` for Mac TestFlight (Transporter) |
 
 ## Project layout
 

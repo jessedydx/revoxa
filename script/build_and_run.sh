@@ -11,6 +11,23 @@ SKIP_APPLICATIONS_SYNC=false
 SYNC_ARGS=()
 MODE="run"
 
+usage() {
+  cat <<EOF
+usage: $0 [options] [run|--debug|--logs|--telemetry|--verify|--package-only]
+
+Build dist/Revoxa.app, sync to /Applications/Revoxa.app, and optionally launch it.
+
+  $0                        Debug build, update Applications, open app
+  $0 --release              Release build, update Applications, open app
+  $0 --package-only         Build + sync only (no open)
+  $0 --skip-applications-sync
+                            Do not copy to /Applications
+  $0 --verify               Build, sync, open, confirm process is running
+
+Full Release install: ./script/install-local.sh
+EOF
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --release|release)
@@ -38,7 +55,6 @@ while [[ $# -gt 0 ]]; do
       [[ "$1" == "debug" || "$1" == "release" ]] && MODE="$1"
       [[ "$MODE" == "help" ]] && MODE="--help"
       shift
-      break
       ;;
     *)
       echo "error: unknown argument: $1" >&2
@@ -46,6 +62,11 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+if [[ "$MODE" == "--help" ]]; then
+  usage
+  exit 0
+fi
 
 pkill -x "$APP_NAME" >/dev/null 2>&1 || true
 
@@ -97,25 +118,14 @@ case "$MODE" in
     ;;
   package-only)
     echo "Packaged: $APP_BUNDLE"
-    if [[ -d "$APPLICATIONS_APP" ]]; then
+    if [[ "$SKIP_APPLICATIONS_SYNC" == true ]]; then
+      echo "Applications sync skipped"
+    elif [[ -d "$APPLICATIONS_APP" ]]; then
       echo "Applications: $APPLICATIONS_APP"
     fi
     ;;
   -h|--help)
-    cat <<EOF
-usage: $0 [options] [run|--debug|--logs|--telemetry|--verify|--package-only]
-
-Build dist/Revoxa.app, sync to /Applications/Revoxa.app, and optionally launch it.
-
-  $0                        Debug build, update Applications, open app
-  $0 --release              Release build, update Applications, open app
-  $0 --package-only         Build + sync only (no open)
-  $0 --skip-applications-sync
-                            Do not copy to /Applications
-  $0 --verify               Build, sync, open, confirm process is running
-
-Full Release install: ./script/install-local.sh
-EOF
+    usage
     ;;
   *)
     echo "usage: $0 [--release] [--skip-applications-sync] [run|--package-only|...]" >&2

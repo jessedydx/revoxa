@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Legacy manual packager. Prefer prepare_macos_xcode_app_store_upload.sh for
+# macOS TestFlight / Mac App Store uploads.
 # Sign dist/Revoxa.app for Mac App Store and build an uploadable .pkg.
 set -euo pipefail
 
@@ -8,6 +10,10 @@ PKG_PATH="$ROOT_DIR/dist/Revoxa-macOS.pkg"
 ENTITLEMENTS_FILE="$ROOT_DIR/Configurations/Revoxa-macOS/Revoxa-macOS.entitlements"
 EMBEDDED_PROFILE="$APP_BUNDLE/Contents/embedded.provisionprofile"
 SIGNING_ENTITLEMENTS="$(mktemp "${TMPDIR:-/tmp}/revoxa-signing-entitlements-XXXXXX.plist")"
+STAGING_DIR="$(mktemp -d "${TMPDIR:-/tmp}/revoxa-productbuild-XXXXXX")"
+EXPANDED_PKG_DIR="$(mktemp -d "${TMPDIR:-/tmp}/revoxa-expanded-pkg-XXXXXX")"
+INSTALLER_CERT_PEM="$(mktemp "${TMPDIR:-/tmp}/revoxa-installer-cert-XXXXXX.pem")"
+STAGED_APP="$STAGING_DIR/Revoxa.app"
 BUNDLE_ID="com.revoxa.app"
 RESOURCE_BUNDLE_ID="$BUNDLE_ID.resources"
 SIGN_IDENTITY="${REVOXA_SIGN_IDENTITY:-}"
@@ -16,8 +22,21 @@ TEAM_ID="${REVOXA_TEAM_ID:-}"
 
 cleanup() {
   rm -f "$SIGNING_ENTITLEMENTS"
+  rm -f "$INSTALLER_CERT_PEM"
+  rm -rf "$STAGING_DIR"
+  rm -rf "$EXPANDED_PKG_DIR"
 }
 trap cleanup EXIT
+
+clean_bundle_metadata() {
+  local target="$1"
+
+  if command -v xattr >/dev/null 2>&1; then
+    xattr -cr "$target" >/dev/null 2>&1 || true
+  fi
+
+  find "$target" \( -name '._*' -o -name '.DS_Store' \) -print -delete
+}
 
 usage() {
   cat <<EOF
@@ -26,10 +45,11 @@ usage: REVOXA_SIGN_IDENTITY='Apple Distribution: Name (TEAMID)' $0
 Prepares dist/Revoxa.app for Mac App Store / TestFlight upload:
   1. Ensures a release App Store sandbox build exists
   2. Embeds a Mac App Store provisioning profile
-  3. Signs the app with Apple Distribution
+  3. Signs the app with an App Store distribution identity
   4. Creates dist/Revoxa-macOS.pkg for Transporter
 
 List signing identities:
+  security find-identity -v -p codesigning | grep '3rd Party Mac Developer Application'
   security find-identity -v -p codesigning | grep 'Apple Distribution'
 
 Installer package signing (optional override):
@@ -96,24 +116,53 @@ resolve_installer_identity() {
     return 0
   fi
 
-  security find-identity -v -p codesigning \
+  security find-identity -v -p basic \
     | grep -iE 'Mac Installer Distribution|3rd Party Mac Developer Installer' \
+    | grep -v 'CSSMERR_TP_CERT_REVOKED' \
     | head -1 \
     | cut -d'"' -f2
 }
 
-if [[ ! -d "$APP_BUNDLE" ]]; then
-  echo "Building release Mac App Store app bundle..." >&2
-  "$ROOT_DIR/script/package_app.sh" --release --app-store >/dev/null
-fi
+write_installer_certificate_pem() {
+  local identity="$1"
+  local output="$2"
+
+  if [[ "$identity" =~ ^[[:xdigit:]]{40}$ ]]; then
+    local target_hash
+    target_hash="$(printf '%s' "$identity" | tr '[:lower:]' '[:upper:]')"
+    security find-certificate -a -Z -p | awk -v target_hash="$target_hash" -v output="$output" '
+      /^SHA-1 hash: / {
+        capture = ($3 == target_hash)
+        next
+      }
+      capture {
+        print > output
+        if ($0 == "-----END CERTIFICATE-----") {
+          found = 1
+          capture = 0
+        }
+      }
+      END {
+        exit(found ? 0 : 1)
+      }
+    '
+    return
+  fi
+
+  security find-certificate -c "$identity" -p >"$output"
+}
+
+echo "Building release Mac App Store app bundle..." >&2
+"$ROOT_DIR/script/package_app.sh" --release --app-store >/dev/null
+
+echo "Cleaning bundle metadata before signing..." >&2
+clean_bundle_metadata "$APP_BUNDLE" >/dev/null
 
 "$ROOT_DIR/script/verify_mac_app_store_entitlements.sh" "$APP_BUNDLE"
 
 echo "Embedding provisioning profile..." >&2
 cp "$PROVISIONING_PROFILE" "$EMBEDDED_PROFILE"
-if command -v xattr >/dev/null 2>&1; then
-  xattr -d com.apple.quarantine "$EMBEDDED_PROFILE" >/dev/null 2>&1 || true
-fi
+clean_bundle_metadata "$APP_BUNDLE" >/dev/null
 
 cat >"$SIGNING_ENTITLEMENTS" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -153,24 +202,30 @@ sign_path() {
     "$target"
 }
 
+sign_app_path() {
+  local target="$1"
+  codesign --force --options runtime --timestamp \
+    --sign "$SIGN_IDENTITY" \
+    --identifier "$BUNDLE_ID" \
+    --entitlements "$SIGNING_ENTITLEMENTS" \
+    "$target"
+}
+
 echo "Signing resource bundle (if present)..." >&2
 if [[ -d "$RESOURCE_BUNDLE" ]]; then
   sign_path "$RESOURCE_BUNDLE" "$RESOURCE_BUNDLE_ID"
 fi
 
-echo "Signing app binary..." >&2
-sign_path "$APP_BUNDLE/Contents/MacOS/Revoxa"
+echo "Signing app binary with entitlements..." >&2
+sign_app_path "$APP_BUNDLE/Contents/MacOS/Revoxa"
 
 echo "Signing app bundle with entitlements..." >&2
-codesign --force --deep --options runtime --timestamp \
-  --sign "$SIGN_IDENTITY" \
-  --identifier "$BUNDLE_ID" \
-  --entitlements "$SIGNING_ENTITLEMENTS" \
-  "$APP_BUNDLE"
+sign_app_path "$APP_BUNDLE"
 
 codesign --verify --deep --strict --verbose=2 "$APP_BUNDLE" >&2
 
 embedded_entitlements="$(codesign -d --entitlements :- "$APP_BUNDLE" 2>/dev/null || true)"
+binary_entitlements="$(codesign -d --entitlements :- "$APP_BUNDLE/Contents/MacOS/Revoxa" 2>/dev/null || true)"
 echo "$embedded_entitlements" | grep -q "<key>com.apple.application-identifier</key>" \
   || {
     echo "error: signed app is missing com.apple.application-identifier entitlement" >&2
@@ -181,11 +236,24 @@ echo "$embedded_entitlements" | grep -q "<string>$TEAM_ID.$BUNDLE_ID</string>" \
     echo "error: signed app application identifier does not match $TEAM_ID.$BUNDLE_ID" >&2
     exit 4
   }
+echo "$binary_entitlements" | grep -q "<key>com.apple.application-identifier</key>" \
+  || {
+    echo "error: signed app binary is missing com.apple.application-identifier entitlement" >&2
+    exit 4
+  }
+echo "$binary_entitlements" | grep -q "<string>$TEAM_ID.$BUNDLE_ID</string>" \
+  || {
+    echo "error: signed app binary application identifier does not match $TEAM_ID.$BUNDLE_ID" >&2
+    exit 4
+  }
 
 if command -v xattr >/dev/null 2>&1; then
   echo "Removing quarantine attributes..." >&2
   xattr -dr com.apple.quarantine "$APP_BUNDLE" >/dev/null 2>&1 || true
 fi
+
+echo "Checking signed app bundle..." >&2
+codesign --verify --deep --strict --verbose=2 "$APP_BUNDLE" >&2
 
 if ! command -v productbuild >/dev/null 2>&1; then
   echo "error: productbuild not found (install Xcode command line tools)" >&2
@@ -208,13 +276,45 @@ if [[ -z "$INSTALLER_IDENTITY" ]]; then
 fi
 
 echo "Using installer identity: $INSTALLER_IDENTITY" >&2
+if ! write_installer_certificate_pem "$INSTALLER_IDENTITY" "$INSTALLER_CERT_PEM"; then
+  echo "error: installer signing certificate not found in Keychain: $INSTALLER_IDENTITY" >&2
+  exit 3
+fi
+
+if ! security verify-cert -c "$INSTALLER_CERT_PEM" -p basic -R ocsp -R require >/dev/null 2>&1; then
+  echo "error: installer signing certificate failed revocation validation." >&2
+  echo "Create a new Mac Installer Distribution / 3rd Party Mac Developer Installer certificate in Xcode," >&2
+  echo "then re-run this script with REVOXA_INSTALLER_IDENTITY set to the new certificate name." >&2
+  exit 3
+fi
+
 rm -f "$PKG_PATH"
 
+echo "Preparing clean package staging bundle..." >&2
+ditto --norsrc --noqtn "$APP_BUNDLE" "$STAGED_APP"
+codesign --verify --deep --strict --verbose=2 "$STAGED_APP" >&2
+
 echo "Creating installer package..." >&2
-productbuild \
-  --component "$APP_BUNDLE" /Applications \
+COPYFILE_DISABLE=1 productbuild \
+  --component "$STAGED_APP" /Applications \
   --sign "$INSTALLER_IDENTITY" \
   "$PKG_PATH"
+
+echo "Verifying packaged app payload..." >&2
+rm -rf "$EXPANDED_PKG_DIR"
+pkgutil --expand-full "$PKG_PATH" "$EXPANDED_PKG_DIR" >/dev/null
+EXPANDED_APP="$(find "$EXPANDED_PKG_DIR" -path '*/Payload/Revoxa.app' -type d -print -quit)"
+if [[ -z "$EXPANDED_APP" ]]; then
+  echo "error: package payload is missing Revoxa.app" >&2
+  rm -f "$PKG_PATH"
+  exit 5
+fi
+
+if ! codesign --verify --deep --strict --verbose=2 "$EXPANDED_APP" >&2; then
+  echo "error: packaged Revoxa.app failed codesign verification" >&2
+  rm -f "$PKG_PATH"
+  exit 5
+fi
 
 echo ""
 echo "Ready for upload:"
